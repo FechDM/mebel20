@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Мебель 20 — вариант 2 «Производство»</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23100E0C'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23C9A227'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#100E0C; --bg-2:#171412; --bg-3:#1F1B17; --line:#2C2723;
+  --ink:#EFE9E0; --ink-2:#B9AFA2; --ink-3:#857A6C;
+  --brass:#C9A227; --brass-2:#E3C463; --brass-dim:rgba(201,162,39,.14);
+  --f:'Manrope',-apple-system,'Segoe UI',Roboto,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --pad:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--pad)}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+p{margin:0 0 1em}
+
+/* ————— панель прототипа ————— */
+.bar{position:sticky;top:0;z-index:80;background:rgba(16,14,12,.94);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:14px;padding:9px var(--pad);flex-wrap:wrap;
+  font-size:13px}
+.bar b{font-weight:600;letter-spacing:.02em}
+.bar .back{color:var(--ink-3);font-size:12px}
+.bar .back:hover{color:var(--brass-2)}
+.toggle{display:inline-flex;align-items:center;gap:7px;color:var(--ink-2);cursor:pointer;
+  user-select:none;white-space:nowrap}
+.toggle input{accent-color:var(--brass);width:15px;height:15px}
+.tabs{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.tab{padding:6px 13px;border-radius:999px;color:var(--ink-2);font-size:13px;
+  border:1px solid transparent;transition:.18s}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--brass-dim);border-color:rgba(201,162,39,.35);color:var(--brass-2)}
+
+/* ————— подписи структуры ————— */
+.note{display:none}
+body.notes .note{display:block;position:relative;margin:0 0 -6px;
+  font:500 11px/1.5 var(--fm);letter-spacing:.04em;text-transform:uppercase;
+  color:#0F0D0B;background:var(--brass-2);padding:5px 11px;border-radius:0 8px 8px 0;
+  width:fit-content;max-width:min(94%,760px);z-index:6}
+body.notes .note em{font-style:normal;opacity:.72;text-transform:none;letter-spacing:0}
+body.notes section{outline:1px dashed rgba(201,162,39,.3);outline-offset:-1px}
+
+/* ————— шапка сайта ————— */
+.nav{position:relative;z-index:40;display:flex;align-items:center;gap:28px;
+  padding:20px var(--pad);border-bottom:1px solid rgba(255,255,255,.07)}
+.logo{display:flex;align-items:baseline;gap:9px;font-weight:700;letter-spacing:.14em;font-size:15px}
+.logo span{width:7px;height:7px;background:var(--brass);border-radius:50%;transform:translateY(-2px)}
+.menu{display:flex;gap:22px;font-size:14px;color:var(--ink-2);margin-left:16px;flex-wrap:wrap}
+.menu a:hover{color:var(--brass-2)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:18px}
+.tel{font:500 15px/1 var(--fm);letter-spacing:.02em;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:12px 22px;border-radius:2px;font-weight:600;font-size:14px;letter-spacing:.01em;
+  background:var(--brass);color:#100E0C;transition:.2s;border:1px solid var(--brass)}
+.btn:hover{background:var(--brass-2);border-color:var(--brass-2)}
+.btn.ghost{background:none;color:var(--ink);border-color:rgba(255,255,255,.22)}
+.btn.ghost:hover{border-color:var(--brass);color:var(--brass-2);background:none}
+.burger{display:none}
+
+/* ————— hero ————— */
+.hero{position:relative;padding:0;min-height:min(86vh,760px);display:flex;align-items:flex-end;
+  overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:52% 42%}
+.hero-bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(16,14,12,.72) 0%,rgba(16,14,12,.42) 38%,rgba(16,14,12,.93) 100%)}
+.hero-in{position:relative;z-index:2;width:100%;padding:0 0 clamp(30px,5vw,58px)}
+.kicker{font:500 11px/1 var(--fm);letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brass-2);margin:0 0 20px;display:flex;align-items:center;gap:12px}
+.kicker::before{content:"";width:34px;height:1px;background:var(--brass)}
+.hero h1{font-size:clamp(30px,5.2vw,62px);max-width:15ch;font-weight:600}
+.hero h1 i{font-style:normal;color:var(--brass-2)}
+.hero .lead{margin:22px 0 30px;font-size:clamp(15px,1.9vw,19px);color:var(--ink-2);
+  max-width:56ch;font-weight:300}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ————— цифры ————— */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);
+  background:var(--bg-2)}
+.num{padding:clamp(20px,3vw,34px) clamp(14px,2.4vw,30px);border-right:1px solid var(--line)}
+.num:last-child{border-right:0}
+.num b{display:block;font-size:clamp(26px,3.6vw,44px);font-weight:600;letter-spacing:-.03em;
+  line-height:1;color:var(--ink)}
+.num b i{font-style:normal;font-size:.5em;color:var(--brass);margin-left:3px;letter-spacing:0}
+.num span{display:block;margin-top:9px;font-size:13px;color:var(--ink-3);line-height:1.35}
+
+/* ————— общие секции ————— */
+section{position:relative;padding:clamp(56px,8vw,116px) 0}
+section.tight{padding:clamp(40px,5.5vw,72px) 0}
+.alt{background:var(--bg-2)}
+.head{max-width:64ch;margin:0 0 clamp(30px,4.5vw,56px)}
+.head h2{font-size:clamp(24px,3.9vw,44px)}
+.head p{margin:18px 0 0;color:var(--ink-2);font-size:clamp(15px,1.7vw,17px);font-weight:300}
+.head.center{margin-left:auto;margin-right:auto;text-align:center}
+.eyebrow{font:500 11px/1 var(--fm);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--brass);margin:0 0 16px}
+
+/* ————— приветствие ————— */
+.greet{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,72px);align-items:start}
+.greet h2{font-size:clamp(23px,3.4vw,38px);font-weight:500;line-height:1.22;letter-spacing:-.02em}
+.greet h2 b{font-weight:600;color:var(--brass-2)}
+.greet .body{color:var(--ink-2);font-weight:300;font-size:16.5px}
+.greet .body p+p{margin-top:1em}
+.claims{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:1px;background:var(--line);
+  border:1px solid var(--line)}
+.claims li{background:var(--bg);padding:15px 18px 15px 36px;position:relative;font-size:15px;
+  color:var(--ink-2)}
+.alt .claims li{background:var(--bg-2)}
+.claims li::before{content:"—";color:var(--brass);position:absolute;left:17px;top:15px}
+.claims b{font-weight:600;color:var(--ink)}
+
+/* ————— каталог ————— */
+.cat{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line)}
+.cell{position:relative;background:var(--bg);display:block;overflow:hidden}
+.cell .ph{aspect-ratio:4/3;overflow:hidden;background:var(--bg-3)}
+.ph.empty{display:grid;place-items:center;text-align:center;padding:16px;
+  background:
+    repeating-linear-gradient(135deg,rgba(201,162,39,.05) 0 2px,transparent 2px 9px),
+    linear-gradient(160deg,#221D18,#171412)}
+.ph.empty span{font:400 11.5px/1.5 var(--fm);letter-spacing:.06em;color:var(--ink-3);
+  text-transform:uppercase}
+.ph.empty span b{display:block;font-size:22px;color:rgba(201,162,39,.5);margin-bottom:9px;
+  font-weight:400;letter-spacing:.1em}
+.cell .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.3,1)}
+.cell:hover .ph img{transform:scale(1.05)}
+.cell .tx{padding:17px 19px 20px}
+.cell h3{font-size:17px;font-weight:600}
+.cell p{margin:7px 0 0;font-size:13.5px;color:var(--ink-3);line-height:1.5}
+.cell .go{position:absolute;top:13px;right:13px;width:31px;height:31px;border-radius:50%;
+  background:rgba(16,14,12,.72);display:grid;place-items:center;color:var(--brass-2);
+  font-size:14px;opacity:0;transform:translateY(-4px);transition:.25s}
+.cell:hover .go{opacity:1;transform:none}
+
+/* ————— производство ————— */
+.prod{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(26px,4.5vw,64px);align-items:center}
+.prod-img{position:relative;border:1px solid var(--line)}
+.prod-img img{width:100%}
+.prod-img figcaption{position:absolute;left:0;bottom:0;right:0;padding:12px 15px;
+  background:linear-gradient(0deg,rgba(16,14,12,.92),transparent);
+  font:400 12px/1.4 var(--fm);color:var(--ink-2)}
+.specs{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--line);
+  border:1px solid var(--line)}
+.specs li{background:var(--bg-2);padding:15px 18px;display:flex;gap:16px;align-items:baseline;
+  font-size:15px}
+.specs li:hover{background:var(--bg-3)}
+.specs .k{font:500 12px/1.4 var(--fm);color:var(--brass);flex:none;width:52px;letter-spacing:.02em}
+.specs .v b{font-weight:600}
+.specs .v span{display:block;color:var(--ink-3);font-size:13.5px;margin-top:3px}
+
+/* ————— объекты ————— */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 26px}
+.fl{padding:7px 15px;border:1px solid var(--line);border-radius:999px;font-size:13.5px;
+  color:var(--ink-2);transition:.18s}
+.fl:hover{border-color:var(--ink-3);color:var(--ink)}
+.fl.on{background:var(--brass-dim);border-color:rgba(201,162,39,.45);color:var(--brass-2)}
+.objs{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:clamp(14px,2vw,24px)}
+.obj{border:1px solid var(--line);background:var(--bg-2);display:flex;flex-direction:column;
+  transition:.25s}
+.obj:hover{border-color:rgba(201,162,39,.42);transform:translateY(-3px)}
+.obj .ph{aspect-ratio:3/2;overflow:hidden;background:var(--bg-3);cursor:zoom-in}
+.obj .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.3,1)}
+.obj:hover .ph img{transform:scale(1.045)}
+.obj .tx{padding:17px 19px 19px;display:flex;flex-direction:column;gap:10px;flex:1}
+.obj h3{font-size:16.5px;font-weight:600;line-height:1.28}
+.obj .place{font:400 12px/1 var(--fm);color:var(--brass);letter-spacing:.04em;text-transform:uppercase}
+.obj .mat{margin:0;font-size:13.5px;color:var(--ink-3);line-height:1.55}
+.obj .mat b{color:var(--ink-2);font-weight:500}
+
+/* ————— материалы ————— */
+.mats{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line)}
+.mat-c{background:var(--bg);padding:0}
+.alt .mat-c{background:var(--bg-2)}
+.mat-c .ph{aspect-ratio:16/10;overflow:hidden}
+.mat-c .ph img{width:100%;height:100%;object-fit:cover}
+.mat-c .tx{padding:20px 21px 24px}
+.mat-c h3{font-size:17.5px;margin-bottom:9px}
+.mat-c ul{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.mat-c li{font:400 12px/1 var(--fm);padding:6px 10px;border:1px solid var(--line);
+  color:var(--ink-2);border-radius:2px}
+.mat-c p{margin:0;font-size:14.5px;color:var(--ink-3);line-height:1.55}
+
+/* ————— отделка: свотчи ————— */
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);margin-top:26px}
+.sw div{background:var(--bg-2);padding:16px 15px;display:flex;flex-direction:column;gap:10px}
+.sw i{display:block;height:44px;border-radius:2px}
+.sw b{font-size:14px;font-weight:500}
+.sw span{font-size:12.5px;color:var(--ink-3);line-height:1.4}
+
+/* ————— этапы ————— */
+.steps{border:1px solid var(--line);display:grid;gap:1px;background:var(--line)}
+.step{background:var(--bg)}
+.alt .step{background:var(--bg-2)}
+.step>button{width:100%;display:flex;align-items:center;gap:clamp(14px,2.5vw,26px);
+  padding:19px clamp(16px,2.4vw,24px);text-align:left}
+.step .n{font:500 12px/1 var(--fm);color:var(--brass);flex:none;letter-spacing:.06em}
+.step .t{font-size:clamp(15.5px,1.9vw,18px);font-weight:500;flex:1}
+.step .pm{flex:none;width:26px;height:26px;border:1px solid var(--line);display:grid;
+  place-items:center;color:var(--ink-2);font-size:15px;transition:.2s}
+.step[open] .pm,.step.open .pm{background:var(--brass);border-color:var(--brass);color:#100E0C}
+.step .c{padding:0 clamp(16px,2.4vw,24px) 22px;color:var(--ink-2);font-size:15px;
+  max-width:88ch;font-weight:300}
+.step .c[hidden]{display:none}
+
+/* ————— гарантия ————— */
+.guar{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(18px,3vw,36px)}
+.guar div h3{font-size:clamp(19px,2.4vw,25px);margin-bottom:10px}
+.guar div h3 i{font-style:normal;color:var(--brass-2)}
+.guar div p{margin:0;color:var(--ink-2);font-size:15px;font-weight:300}
+
+/* ————— форма ————— */
+.form-w{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,5vw,72px);align-items:start}
+.form{display:grid;gap:14px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f{display:block}
+.f span{display:block;font:500 11px/1 var(--fm);letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 8px}
+.f input,.f textarea{width:100%;background:var(--bg);border:1px solid var(--line);
+  color:var(--ink);padding:13px 15px;font:400 15px var(--f);border-radius:2px;transition:.18s}
+.alt .f input,.alt .f textarea{background:var(--bg-3)}
+.f input:focus,.f textarea:focus{outline:none;border-color:var(--brass)}
+.f textarea{min-height:104px;resize:vertical}
+.hint{font-size:13px;color:var(--ink-3);margin:2px 0 0}
+.contacts{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.contacts div{background:var(--bg-2);padding:17px 19px}
+.contacts .k{font:500 11px/1 var(--fm);letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.contacts .v{margin-top:7px;font-size:16px}
+.contacts .v small{display:block;color:var(--ink-3);font-size:13.5px;margin-top:4px}
+
+/* ————— футер ————— */
+footer{border-top:1px solid var(--line);background:var(--bg-2);padding:clamp(34px,5vw,60px) 0 30px}
+.f-top{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;
+  padding-bottom:26px;border-bottom:1px solid var(--line)}
+.f-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:26px;margin-top:26px;font-size:14px}
+.f-cols h4{margin:0 0 13px;font-size:11px;font-family:var(--fm);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.f-cols a,.f-cols p{display:block;color:var(--ink-2);margin:0 0 8px}
+.f-cols a:hover{color:var(--brass-2)}
+.f-bot{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink-3)}
+
+/* ————— лайтбокс ————— */
+.lb{position:fixed;inset:0;z-index:120;background:rgba(8,7,6,.94);display:none;
+  align-items:center;justify-content:center;padding:26px}
+.lb.on{display:flex}
+.lb img{max-width:min(1100px,94vw);max-height:82vh;object-fit:contain}
+.lb .cap{position:absolute;left:0;right:0;bottom:22px;text-align:center;color:var(--ink-2);
+  font:400 13.5px/1.5 var(--fm);padding:0 26px}
+.lb .cl{position:absolute;top:18px;right:22px;font-size:30px;color:var(--ink-2);line-height:1}
+
+/* ————— анимация появления ————— */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ————— мобильные ————— */
+@media (max-width:900px){
+  .greet,.prod,.form-w{grid-template-columns:1fr}
+  .nums{grid-template-columns:1fr 1fr}
+  .num:nth-child(2n){border-right:0}
+  .num:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .menu{display:none}
+  .prod-img{order:-1}
+}
+@media (max-width:620px){
+  .nav{gap:14px;padding:14px var(--pad)}
+  .tel{display:none}
+  .nav-r .btn{padding:10px 15px;font-size:13px}
+  .hero{min-height:auto;padding-top:clamp(150px,42vw,260px)}
+  .fr{grid-template-columns:1fr}
+  .kicker{letter-spacing:.13em;font-size:10px;gap:8px}
+  .kicker::before{width:20px}
+  .bar{gap:10px;padding:8px var(--pad)}
+  .bar b{font-size:12px}
+  .tabs{width:100%;margin-left:0;justify-content:flex-start}
+  .tab{padding:5px 11px;font-size:12.5px}
+}
+</style>
+
+<div class="bar">
+  <b>Вариант 2 · Производство</b>
+  <a class="back" href="../">← к выбору</a>
+  <label class="toggle"><input type="checkbox" id="notes"> показать структуру</label>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-s="home">Главная</button>
+    <button class="tab" role="tab" aria-selected="false" data-s="obj">Объекты</button>
+    <button class="tab" role="tab" aria-selected="false" data-s="sec">Гардеробные</button>
+  </div>
+</div>
+
+<header class="nav">
+  <a class="logo" href="#"><span></span>МЕБЕЛЬ&nbsp;20</a>
+  <nav class="menu">
+    <a href="#catalog">Изготовление</a>
+    <a href="#objects">Объекты</a>
+    <a href="#materials">Материалы</a>
+    <a href="#process">Как работаем</a>
+    <a href="#contact">Контакты</a>
+  </nav>
+  <div class="nav-r">
+    <span class="tel">+7 495 000-00-00</span>
+    <a class="btn" href="#contact">Заявка на просчёт</a>
+  </div>
+</header>
+
+<main id="screen"></main>
+
+<div class="lb" id="lb"><button class="cl" aria-label="Закрыть">&times;</button><img src="" alt=""><div class="cap"></div></div>
+
+<script>
+/* ============ данные ============ */
+const CAT = [
+  [null,'Кухни','Корпус, фасады и столешница по проекту. Шпон, эмаль, массив.'],
+  ['garderob-oreh','Гардеробные','Проектирование под аудит гардероба: штанги, брючницы, обувь, подсветка.'],
+  [null,'Двери на заказ','Межкомнатные, входные, раздвижные. Скрытые петли и доводчики.'],
+  ['shkafy','Шкафы','Встроенные и корпусные, под потолок, с интеграцией в стеновые панели.'],
+  ['paneli','Стеновые панели','Шпон, 3D-фрезеровка, латунные профили, интеграция ТВ и света.'],
+  ['konsol-steklo','Столы','Обеденные, письменные, консоли. Массив, шпон, стекло, металл.'],
+  ['komod-ardeko','Комоды и тумбы','Штучные предметы: стёганая кожа, латунь, глянцевый лак.'],
+  ['kabinet','Библиотеки и кабинеты','Комплексно: стеллажи, стол, панели, двери — в одном материале.'],
+  ['stul','Резная мебель','Ручная резьба по массиву, стулья и кресла с каретной стяжкой.'],
+  ['vitrina','Резные панно и 3D-панели','Резьба, золочение, патина. Штучная декоративная работа.'],
+  ['kopii','Копии и реплики','Повторяем итальянские модели по фото и каталогу — с точной геометрией.'],
+  ['spalnya','Мебель на заказ','Кровати, гардеробные, тумбы — комплектом под один дизайн-проект.'],
+];
+
+const OBJ = [
+  ['garderob-oreh','Гардеробная с островом','ЖК ЗилАрт','гардеробные','МДФ, шпон орех американский фризе, алькантара, массив орех, вставки анодированный алюминий'],
+  ['tv-zona','Тумба под ТВ длиной более 4,5 м','Частная квартира','гостиные','МДФ, шпон, латунный профиль. Отделка — глянцевый лак, полировка'],
+  ['kabinet','Кабинет руководителя','Росрезерв','кабинеты','Столярная плита, МДФ, шпон бубинга, массив сапели'],
+  ['paneli','Стеновые панели из натурального шпона','Офис «Башнефть»','панели','Шпон, столярная плита. 3D-фрезеровка, интеграция ТВ'],
+  ['konsol-detalno','Консоль по эскизам студии Detalno','Выставка','штучное','Массив, гипс, поталь. Изготовлена специально для выставки'],
+  ['vitrina','Витрина с резьбой и золочением','Частный интерьер','штучное','Массив, МДФ. Отделка — эмаль, патина, золочение, ручная роспись'],
+  ['stolovaya','Обеденная группа','Загородный дом','гостиные','Массив дуб, шпон. Отделка — тонировка, полуматовый лак'],
+  ['spalnya','Мебель для спальни комплектом','ЖК бизнес-класса','спальни','МДФ, шпон, ткань. Отделка — шелковисто-матовая эмаль'],
+  ['tv-zona-2','ТВ-зона в стиле ар-деко','Частная квартира','гостиные','МДФ, шпон, латунь, стекло. Отделка — глянцевый лак'],
+  ['komod-ardeko','Комод из термоясеня и ореха','Частный заказ','штучное','Массив орех, термоясень, кожа стёганая, латунные ручки'],
+  ['kopii','Реплика итальянской консоли Roberta Ventura','Частный заказ','штучное','Массив, МДФ. Золочение, чёрный глянцевый лак'],
+  [null,'Двери ЖК «Итальянский квартал»','ЖК Итальянский квартал','двери','МДФ, столярная плита, шпон корень тополя. Отделка — поталь, тонировка, полуглянцевый лак'],
+  [null,'Межкомнатные двери ЖК «Триумф Палас»','ЖК Триумф Палас','двери','МДФ, массив бук'],
+];
+
+const STEPS = [
+  ['Заявка на просчёт','Пришлите заявку на почту, в WhatsApp, Telegram или через форму. Мы перезвоним и уточним детали — габаритные размеры, желаемые материалы, тип отделки. Фото, эскиз или визуализация очень помогут. Оценим работу и в кратчайшие сроки пришлём коммерческое предложение.'],
+  ['Договор','Окончательная цена, сроки изготовления и монтажа фиксируются в договоре и спецификациях. Гарантийные обязательства и условия оплаты прописываются там же. Работаем по предоплате, возможна рассрочка платежей.'],
+  ['Проектирование и 3D-модель','Конструктор при необходимости выезжает на замер и приступает к проектированию. На этом этапе возникает основная масса вопросов — будьте на связи, и мы пройдём его максимально быстро. В результате вы получаете 3D-модель будущего изделия, а на производство уходят чертежи и спецификации, согласованные с вами.'],
+  ['Изготовление и покраска','По согласованным чертежам и материалам идёт изготовление. Для шпона и массива изготавливаем выкрасы именно на материале вашего изделия — цвет согласовывается вживую, а не по экрану. Если отделка эмалями, цвет согласуем раньше: работаем по каталогам RAL, NCS или по вашему образцу.'],
+  ['Доставка и монтаж','Изделия бережно упаковываются и доставляются в согласованное время. При необходимости поднимем негабарит по лестнице. Доставка в регионы обсуждается отдельно. Профессиональные сборщики соберут и установят мебель — вам останется принять работу.'],
+  ['Гарантия и обслуживание','Стандартная гарантия на все изделия — 24 месяца. Но мы не бросаем своих клиентов и после. Что бы ни случилось, реагируем оперативно. Мы в Москве, а не в Италии: собственное производство позволяет исправить любую неприятность в кратчайшие сроки.'],
+];
+
+const I = k => 'i/' + k + '.webp';
+
+function note(t, sub){ return `<div class="note">${t}${sub?` <em>— ${sub}</em>`:''}</div>`; }
+
+/* ============ блоки ============ */
+const hero = `
+<section class="hero">
+  <div class="hero-bg"><img src="${I('garderob-oreh')}" alt="Гардеробная из ореха с подсветкой" fetchpriority="high"></div>
+  <div class="hero-in wrap">
+    ${note('Первый экран','кто мы, что делаем, чем отличаемся — за 5 секунд')}
+    <p class="kicker">Столярное производство · Москва · с 2005 года</p>
+    <h1>Мебель для дизайн-проектов<br>полного цикла. <i>Без ЛДСП</i></h1>
+    <p class="lead">Проектируем, производим и монтируем двери, гардеробные, кухни, стеновые
+      панели и корпусную мебель по индивидуальным размерам. Собственный цех 1500 м² —
+      от конструкторского отдела до покрасочных камер и бригад монтажа.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#contact">Заявка на просчёт</a>
+      <a class="btn ghost" href="#objects">Смотреть объекты</a>
+    </div>
+  </div>
+</section>
+<div class="nums">
+  <div class="num"><b>1500<i>м²</i></b><span>собственное производство в Москве</span></div>
+  <div class="num"><b>20<i>лет</i></b><span>на рынке мебели для дизайн-проектов</span></div>
+  <div class="num"><b>24<i>мес</i></b><span>гарантия на все изделия</span></div>
+  <div class="num"><b>100<i>+сортов</i></b><span>натурального шпона в подборе под изделие</span></div>
+</div>`;
+
+const greet = `
+<section class="tight">
+  <div class="wrap">
+    ${note('Приветственный текст','кто перед вами и почему с вами будут разговаривать')}
+    <div class="greet">
+      <div>
+        <p class="eyebrow">О компании</p>
+        <h2>Мы — производство,<br>а не посредник.<br>
+          <b>Комплексное изготовление столярных изделий</b> для дизайн-проектов.</h2>
+      </div>
+      <div class="body">
+        <p>Делаем межкомнатные двери, встроенные шкафы, стеновые панели, гардеробные, кухни,
+          витрины, комоды, тумбы, столы, стулья, кресла, диваны и кровати — любой формы и размера.</p>
+        <p>В портфолио — десятки реализованных объектов премиального уровня под ключ:
+          от квартир в ЖК бизнес- и премиум-класса до кабинетов руководителей и офисов.
+          Работаем с архитекторами и дизайн-студиями: понимаем чертёж, спецификацию и сроки проекта.</p>
+      </div>
+    </div>
+    <ul class="claims">
+      <li><b>Не работаем с ЛДСП.</b> МДФ, натуральный шпон, массив, столярная плита, стекло, латунь, кожа.</li>
+      <li><b>Комплексно под один проект.</b> Двери, панели и встроенные шкафы — в одном материале и одной отделке.</li>
+      <li><b>Выкрасы до запуска в работу.</b> Цвет согласуется на вашем материале, а не по картинке на экране.</li>
+      <li><b>Свои монтажники.</b> Не подрядчики: те же люди, что отвечают за изделие, его и ставят.</li>
+    </ul>
+  </div>
+</section>`;
+
+const catalog = `
+<section class="alt" id="catalog">
+  <div class="wrap">
+    ${note('Каталог направлений','карточки товаров — то, с чем к вам приходят')}
+    <div class="head">
+      <p class="eyebrow">Изготовление</p>
+      <h2>Что мы производим</h2>
+      <p>Каждое направление — отдельная страница с проектами, материалами и ценовым ориентиром.
+        Чаще всего заказывают комплектом: двери и панели, гардеробная и шкафы.</p>
+    </div>
+    <div class="cat">
+      ${CAT.map(([k,t,d])=>`
+      <a class="cell" href="#" data-open="sec">
+        ${k ? `<div class="ph"><img src="${I(k)}" alt="${t}" loading="lazy"></div>`
+            : `<div class="ph empty"><span><b>◈</b>фото раздела<br>подставим при наполнении</span></div>`}
+        <span class="go">→</span>
+        <div class="tx"><h3>${t}</h3><p>${d}</p></div>
+      </a>`).join('')}
+    </div>
+  </div>
+</section>`;
+
+const prod = `
+<section id="production">
+  <div class="wrap">
+    ${note('Уникальный блок об особенностях','то, чего нет у конкурентов — доказательство, а не обещание')}
+    <div class="head">
+      <p class="eyebrow">Производство</p>
+      <h2>Цех, а не шоурум</h2>
+      <p>Большинство «производителей мебели на заказ» размещают заказы на стороне. Мы делаем всё
+        у себя — поэтому можем взять нестандарт, поправить деталь за день и отвечать за сроки.</p>
+    </div>
+    <div class="prod">
+      <figure class="prod-img" style="margin:0">
+        <img src="${I('masterskaya')}" alt="Столярная мастерская" loading="lazy">
+        <figcaption>Москва · 1500 м² · полный цикл от конструктора до монтажа</figcaption>
+      </figure>
+      <ul class="specs">
+        <li><span class="k">01</span><span class="v"><b>Конструкторский отдел</b>
+          <span>Чертежи, 3D-модель и спецификации — до запуска в работу</span></span></li>
+        <li><span class="k">02</span><span class="v"><b>Собственный участок фанеровки</b>
+          <span>Облицовка шпоном на своём прессе: рисунок подбираем под изделие</span></span></li>
+        <li><span class="k">03</span><span class="v"><b>2 фрезерных станка с ЧПУ</b>
+          <span>Резные панно, 3D-панели, точная геометрия радиусных деталей</span></span></li>
+        <li><span class="k">04</span><span class="v"><b>3 покрасочные камеры</b>
+          <span>Эмали, лаки, патина, поталь. Выкрасы по RAL, NCS или вашему образцу</span></span></li>
+        <li><span class="k">05</span><span class="v"><b>Собственные бригады монтажа</b>
+          <span>Замер, доставка, сборка и установка — одной командой</span></span></li>
+        <li><span class="k">06</span><span class="v"><b>Штатный реставратор</b>
+          <span>Ручная резьба, сложная отделка, восстановление и доработка на объекте</span></span></li>
+      </ul>
+    </div>
+  </div>
+</section>`;
+
+const objects = `
+<section class="alt" id="objects">
+  <div class="wrap">
+    ${note('Объекты','реальные проекты со спецификацией — главный аргумент профессионализма')}
+    <div class="head">
+      <p class="eyebrow">Портфолио</p>
+      <h2>Реализованные объекты</h2>
+      <p>Мебель для дизайн-проектов в жилых комплексах Москвы, загородных домах и офисах.
+        У каждой позиции — материалы и отделка, как в спецификации к договору.</p>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="objs" id="objgrid"></div>
+    <div style="margin-top:clamp(24px,3.5vw,40px)">
+      <a class="btn ghost" href="#" data-open="obj">Все объекты →</a>
+    </div>
+  </div>
+</section>`;
+
+const materials = `
+<section id="materials">
+  <div class="wrap">
+    ${note('Материалы','стандартный блок, но с конкретикой вместо общих слов')}
+    <div class="head">
+      <p class="eyebrow">Материалы</p>
+      <h2>Из чего мы делаем</h2>
+      <p>Только экологичные и стабильные материалы. Породу, рисунок шпона и толщину подбираем
+        под конкретное изделие и условия помещения.</p>
+    </div>
+    <div class="mats">
+      <div class="mat-c">
+        <div class="ph"><img src="${I('shpon')}" alt="Натуральный шпон" loading="lazy"></div>
+        <div class="tx">
+          <h3>Шпон ценных пород</h3>
+          <p>Более 100 сортов: экзотика, корневые срезы, файн-лайн. Рисунок подбираем
+            в раскладку, чтобы двери и панели читались как одно изделие.</p>
+          <ul><li>орех</li><li>дуб</li><li>эбен-макасар</li><li>бубинга</li><li>сикамора</li><li>корень тополя</li><li>анегри</li><li>файн-лайн</li></ul>
+        </div>
+      </div>
+      <div class="mat-c">
+        <div class="ph"><img src="${I('stolovaya')}" alt="Массив дерева" loading="lazy"></div>
+        <div class="tx">
+          <h3>Массив дерева</h3>
+          <p>Дуб, бук, ясень, орех, ольха, сапели и ещё десятки пород. Изделия по канонам
+            столярного дела плюс свои наработки против деформации полотна и коробки.</p>
+          <ul><li>дуб</li><li>бук</li><li>ясень</li><li>орех</li><li>термоясень</li><li>ольха</li></ul>
+        </div>
+      </div>
+      <div class="mat-c">
+        <div class="ph"><img src="${I('eskiz-komod')}" alt="Чертёж изделия" loading="lazy"></div>
+        <div class="tx">
+          <h3>МДФ, столярная плита, фанера</h3>
+          <p>Влагостойкий и огнеупорный МДФ, гибкий и облегчённый. Столярная плита и фанера —
+            там, где нужна стабильность конструкции. ЛДСП не используем.</p>
+          <ul><li>МДФ влагостойкий</li><li>огнеупорный</li><li>гибкий</li><li>столярная плита</li><li>фанера</li></ul>
+        </div>
+      </div>
+      <div class="mat-c">
+        <div class="ph"><img src="${I('konsol-steklo')}" alt="Декоративные материалы" loading="lazy"></div>
+        <div class="tx">
+          <h3>Декор и вставки</h3>
+          <p>Металл, стекло и зеркала — для современных акцентов. Ткани, кожа и алькантара —
+            в обивке, стёганых фасадах и внутренней отделке гардеробных.</p>
+          <ul><li>латунь</li><li>анодированный алюминий</li><li>нержавеющая сталь</li><li>стекло</li><li>кожа</li><li>алькантара</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>`;
+
+const furn = `
+<section class="alt" id="furniture">
+  <div class="wrap">
+    ${note('Фурнитура','клиент просил отдельным блоком')}
+    <div class="prod">
+      <div>
+        <p class="eyebrow">Фурнитура</p>
+        <h2 style="font-size:clamp(23px,3.4vw,38px)">Механика, которую не видно,<br>но которой пользуются каждый день</h2>
+        <p style="color:var(--ink-2);font-weight:300;margin-top:18px">Ставим фурнитуру ведущих мировых
+          производителей. Она дороже китайских аналогов и на неё есть заводская гарантия — на дверях
+          и ящиках экономить нельзя, именно они изнашиваются первыми.</p>
+        <ul class="claims" style="margin-top:22px">
+          <li><b>Blum, Häfele, Hettich</b> — доводчики, направляющие, подъёмники, петли</li>
+          <li><b>Скрытые петли и доводчики</b> — дверь без видимой механики</li>
+          <li><b>Выпадающие пороги</b> — тишина и отсутствие щели без порога на полу</li>
+          <li><b>Наполнение гардеробных</b> — брючницы, обувницы, выдвижные штанги, подсветка с датчиком движения</li>
+        </ul>
+      </div>
+      <figure class="prod-img" style="margin:0">
+        <img src="${I('furnitura')}" alt="Фурнитура Blum, Häfele, Hettich" loading="lazy">
+        <figcaption>Blum · Häfele · Hettich — заводская гарантия на механизмы</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>`;
+
+const finish = `
+<section id="finish">
+  <div class="wrap">
+    ${note('Отделка','где особенно виден уровень мастерской')}
+    <div class="head">
+      <p class="eyebrow">Отделка</p>
+      <h2>Десяток видов отделки и спецэффектов</h2>
+      <p>Работаем по каталогам RAL и NCS или по вашему образцу. Для шпона и массива делаем выкрасы
+        на материале вашего изделия — цвет согласуете вживую, до запуска в производство.</p>
+    </div>
+    <div class="prod">
+      <figure class="prod-img" style="margin:0">
+        <img src="${I('otdelka')}" alt="Глянцевая отделка шпона" loading="lazy">
+        <figcaption>Полировка глянца до зеркала · шпон корень, тонировка</figcaption>
+      </figure>
+      <div>
+        <div class="sw">
+          <div><i style="background:linear-gradient(135deg,#F3EFE8,#D9D2C6)"></i><b>Матовая эмаль</b><span>шелковисто-матовая, по RAL и NCS</span></div>
+          <div><i style="background:linear-gradient(135deg,#1E1A17,#3B322A)"></i><b>Глянцевый лак</b><span>с полировкой до зеркала</span></div>
+          <div><i style="background:linear-gradient(135deg,#8C6A3F,#C9A227)"></i><b>Золочение, поталь</b><span>золото и серебро, вручную</span></div>
+          <div><i style="background:linear-gradient(135deg,#6E5B45,#A99377)"></i><b>Патина</b><span>серебро, золото, тёмная</span></div>
+          <div><i style="background:linear-gradient(135deg,#B9A88C,#7E6A50)"></i><b>Браширование</b><span>подчёркнутая текстура</span></div>
+          <div><i style="background:linear-gradient(135deg,#DDD6E2,#B4A8BE)"></i><b>Перламутр</b><span>и металлик, хамелеон</span></div>
+          <div><i style="background:linear-gradient(135deg,#E8DCC8,#C4A883)"></i><b>Кракелюр</b><span>эффект старения</span></div>
+          <div><i style="background:linear-gradient(135deg,#7E3B3B,#C9A227)"></i><b>Ручная роспись</b><span>по эскизу дизайнера</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>`;
+
+const process = `
+<section class="alt" id="process">
+  <div class="wrap">
+    ${note('Как заказать','снимает страх «а как это вообще происходит»')}
+    <div class="head">
+      <p class="eyebrow">Порядок работы</p>
+      <h2>Как заказать мебель индивидуального изготовления</h2>
+      <p>Шесть этапов — от заявки до гарантийного обслуживания. На каждом понятно, что от вас
+        нужно и что вы получаете на выходе.</p>
+    </div>
+    <div class="steps">
+      ${STEPS.map(([t,c],i)=>`
+      <div class="step${i===0?' open':''}">
+        <button aria-expanded="${i===0}"><span class="n">0${i+1}</span><span class="t">${t}</span><span class="pm">${i===0?'–':'+'}</span></button>
+        <div class="c"${i===0?'':' hidden'}>${c}</div>
+      </div>`).join('')}
+    </div>
+  </div>
+</section>`;
+
+const guar = `
+<section class="tight">
+  <div class="wrap">
+    ${note('Гарантия и доверие','закрывает последнее возражение перед заявкой')}
+    <div class="guar">
+      <div><h3><i>24</i> месяца гарантии</h3><p>Стандартная гарантия на все изделия. Гарантийные
+        обязательства прописаны в договоре, а не «на словах».</p></div>
+      <div><h3>Мы в Москве,<br>а не в Италии</h3><p>Собственное производство позволяет исправить
+        любую неприятность в кратчайшие сроки — деталь переделываем у себя.</p></div>
+      <div><h3>Работаем<br>с дизайнерами</h3><p>Проекты студий и архитекторов: читаем чертёж
+        и спецификацию, держим сроки объекта, ведём авторский надзор по мебели.</p></div>
+      <div><h3>Участники<br>i Saloni</h3><p>Показывали работы на i Saloni Worldwide Moscow.
+        Делаем штучные предметы по эскизам дизайн-студий.</p></div>
+    </div>
+  </div>
+</section>`;
+
+const form = `
+<section class="alt" id="contact">
+  <div class="wrap">
+    ${note('Форма заявки','короткая: чем меньше полей, тем больше заявок')}
+    <div class="form-w">
+      <div>
+        <p class="eyebrow">Заявка на просчёт</p>
+        <h2 style="font-size:clamp(23px,3.4vw,38px)">Пришлите проект — посчитаем</h2>
+        <p style="color:var(--ink-2);font-weight:300;margin:18px 0 26px">Чертёж, визуализация,
+          фото из интернета или просто размеры — этого достаточно, чтобы назвать порядок цены.
+          Перезвоним, уточним детали и пришлём коммерческое предложение.</p>
+        <div class="contacts">
+          <div><div class="k">Телефон и мессенджеры</div><div class="v">+7 495 000-00-00
+            <small>WhatsApp и Telegram — по этому же номеру</small></div></div>
+          <div><div class="k">Почта</div><div class="v">info@mebel20.ru
+            <small>Пришлите чертежи и спецификацию — ответим с расчётом</small></div></div>
+          <div><div class="k">Производство</div><div class="v">Москва, 1500 м²
+            <small>Приезжайте посмотреть цех и образцы отделки</small></div></div>
+        </div>
+      </div>
+      <form class="form" onsubmit="return false">
+        <div class="fr">
+          <label class="f"><span>Как к вам обращаться</span><input type="text" placeholder="Имя"></label>
+          <label class="f"><span>Телефон</span><input type="tel" placeholder="+7 ___ ___-__-__"></label>
+        </div>
+        <label class="f"><span>Что нужно изготовить</span>
+          <textarea placeholder="Например: гардеробная 4 м в ЖК, шпон орех, к марту"></textarea></label>
+        <label class="f"><span>Файлы</span><input type="text" placeholder="Чертёж, визуализация, фото — перетащите сюда"></label>
+        <button class="btn" type="submit" style="justify-self:start;margin-top:4px">Отправить заявку</button>
+        <p class="hint">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.
+          Это прототип — форма ничего не отправляет.</p>
+      </form>
+    </div>
+  </div>
+</section>`;
+
+const foot = `
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <a class="logo" href="#"><span></span>МЕБЕЛЬ&nbsp;20</a>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn ghost" href="#contact">Заявка на просчёт</a>
+        <a class="btn" href="#objects">Портфолио</a>
+      </div>
+    </div>
+    <div class="f-cols">
+      <div><h4>Изготовление</h4>
+        <a href="#catalog">Кухни</a><a href="#catalog">Гардеробные</a><a href="#catalog">Двери на заказ</a>
+        <a href="#catalog">Шкафы</a><a href="#catalog">Стеновые панели</a></div>
+      <div><h4>Ещё</h4>
+        <a href="#catalog">Столы</a><a href="#catalog">Комоды и тумбы</a><a href="#catalog">Библиотеки</a>
+        <a href="#catalog">Резная мебель</a><a href="#catalog">Копии и реплики</a></div>
+      <div><h4>О компании</h4>
+        <a href="#production">Производство</a><a href="#materials">Материалы</a>
+        <a href="#finish">Отделка</a><a href="#process">Как работаем</a></div>
+      <div><h4>Контакты</h4>
+        <p>+7 495 000-00-00</p><p>info@mebel20.ru</p><p>Москва, производство 1500 м²</p></div>
+    </div>
+    <div class="f-bot">
+      <span>© 2026 Мебель 20 — мебель на заказ для дизайн-проектов</span>
+      <span>Прототип нового сайта · вариант 2</span>
+    </div>
+  </div>
+</footer>`;
+
+/* ============ экран «Гардеробные» ============ */
+const GARD = [
+  ['garderob-oreh','Гардеробная с островом «ЗилАрт»','МДФ, шпон орех американский фризе, алькантара, массив орех, вставки анодированный алюминий'],
+  ['shkafy','Гардеробная «Ильинка»','МДФ, массив бук. Классика с элементами резьбы. Эмаль, патина, лак'],
+  [null,'Гардеробная Москва-Сити «Око»','МДФ + шпон бук, массив бук. Тонировка, полуглянцевый лак. Проект дизайнера Анастасии Федосеевой'],
+  [null,'Гардеробная «Ленинский проспект»','МДФ + шпон анегри. Отделка — тонировка, матовый лак'],
+  [null,'Гардеробная «Пилюгина»','МДФ. Отделка — шелковисто-матовая эмаль. Гардеробная с островом'],
+  [null,'Гардеробная «Континенталь»','МДФ. Эмаль, патина серебро, шелковисто-матовый лак'],
+];
+
+const sec = `
+<section class="hero" style="min-height:min(58vh,520px)">
+  <div class="hero-bg"><img src="${I('garderob-oreh')}" alt="Гардеробная" style="object-position:60% 45%"></div>
+  <div class="hero-in wrap">
+    ${note('Страница раздела','пример: так выглядит любое направление изнутри')}
+    <p class="kicker">Изготовление / Гардеробные</p>
+    <h1 style="font-size:clamp(28px,5vw,54px)">Гардеробные комнаты<br>по дизайн-проектам</h1>
+    <p class="lead">Проектируем, производим и устанавливаем премиальные гардеробные по индивидуальным
+      размерам — с учётом всех нюансов помещения и ваших вещей.</p>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    ${note('Приветственный текст раздела','о чём страница, коротко')}
+    <div class="greet">
+      <div>
+        <p class="eyebrow">Коротко</p>
+        <h2>Гардеробная — не шкаф,<br>а <b>инженерно продуманное пространство</b> хранения.</h2>
+      </div>
+      <div class="body">
+        <p>От того, насколько грамотно спроектирована система, зависит удобство, срок службы
+          и сохранность вещей. Поэтому мы начинаем не с фасадов, а с аудита гардероба.</p>
+        <p>Не работаем с ДСП. МДФ, натуральный шпон, массив, столярная плита, стекло, латунь, кожа.
+          Премиальная фурнитура, эксклюзивные отделки, подбор цвета по вашему образцу.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    ${note('Каталог проектов раздела','карточки с материалами — как в спецификации')}
+    <div class="head">
+      <p class="eyebrow">Наши работы</p>
+      <h2>Гардеробные, изготовленные для дизайн-проектов</h2>
+    </div>
+    <div class="objs">
+      ${GARD.map(([k,t,m])=>`
+      <article class="obj">
+        ${k ? `<div class="ph" data-lb="${I(k)}" data-cap="${t}"><img src="${I(k)}" alt="${t}" loading="lazy"></div>`
+            : `<div class="ph empty"><span><b>◈</b>фото объекта<br>из архива производства</span></div>`}
+        <div class="tx"><h3>${t}</h3><p class="mat">${m}</p></div>
+      </article>`).join('')}
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    ${note('Уникальный блок раздела','экспертиза, которой нет у конкурентов — это и есть «больше смыслов»')}
+    <div class="head">
+      <p class="eyebrow">Проектирование</p>
+      <h2>Эргономика: что мы считаем до эскиза</h2>
+      <p>Перед заказом проводим аудит гардероба — считаем количество вещей каждого типа:
+        длинная верхняя одежда, пиджаки, брюки, свитера, рубашки, обувь, аксессуары.
+        Дальше цифры определяют конструкцию.</p>
+    </div>
+    <ul class="specs">
+      <li><span class="k">170<br>190</span><span class="v"><b>Высота штанг для повседневной одежды</b>
+        <span>Доступ без стремянки. Для платьев и пальто — 140–150 см, чтобы низ не касался пола. Для брюк и юбок — 100–120 см</span></span></li>
+      <li><span class="k">125</span><span class="v"><b>Максимальная удобная высота ящиков</b>
+        <span>Ящики — удобное хранение, но заполнять ими шкаф до потолка нельзя</span></span></li>
+      <li><span class="k">50<br>60</span><span class="v"><b>Глубина полок под плечики</b>
+        <span>Для обуви — 35–45 см, чтобы шкаф не был слишком глубоким</span></span></li>
+      <li><span class="k">12<br>15</span><span class="v"><b>Высота ящиков с перегородками</b>
+        <span>Под нижнее бельё и носки. Для джинсов — полки под стопку, для брюк — выдвижная брючница</span></span></li>
+      <li><span class="k">зоны</span><span class="v"><b>Зонирование по частоте использования</b>
+        <span>«Сегодня» — на уровне глаз и рук. Сезонное и редкое — на верхних и нижних полках</span></span></li>
+      <li><span class="k">свет</span><span class="v"><b>Освещение с датчиком движения</b>
+        <span>Светодиодные ленты на каждую секцию — свет включается, когда открываете дверь</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    ${note('Материалы, фурнитура, отделка','стандартные блоки раздела — клиент просил их явно')}
+    <div class="mats">
+      <div class="mat-c">
+        <div class="ph"><img src="${I('shpon')}" alt="Шпон" loading="lazy"></div>
+        <div class="tx"><h3>Материалы корпуса и фасадов</h3>
+          <p>МДФ под эмаль, шпон ценных пород, массив. Для внутреннего наполнения —
+            стабильные материалы, которые не поведёт от перепада влажности.</p>
+          <ul><li>МДФ</li><li>шпон орех</li><li>шпон анегри</li><li>массив бук</li><li>алькантара</li><li>зеркало</li></ul></div>
+      </div>
+      <div class="mat-c">
+        <div class="ph"><img src="${I('furnitura')}" alt="Фурнитура" loading="lazy"></div>
+        <div class="tx"><h3>Наполнение и фурнитура</h3>
+          <p>Blum, Häfele, Hettich. Выдвижные штанги, брючницы, обувницы, доводчики
+            и подсветка с датчиком движения на каждую секцию.</p>
+          <ul><li>доводчики</li><li>брючницы</li><li>обувницы</li><li>подсветка</li><li>скрытые петли</li></ul></div>
+      </div>
+      <div class="mat-c">
+        <div class="ph"><img src="${I('otdelka')}" alt="Отделка" loading="lazy"></div>
+        <div class="tx"><h3>Отделка шкафов</h3>
+          <p>Шелковисто-матовая эмаль, патина серебро и золото, тонировка, полуглянцевый
+            и матовый лак. Цвет — по RAL, NCS или вашему образцу.</p>
+          <ul><li>эмаль</li><li>патина</li><li>тонировка</li><li>лак</li><li>браширование</li></ul></div>
+      </div>
+      <div class="mat-c">
+        <div class="ph"><img src="${I('vitrina')}" alt="Декор" loading="lazy"></div>
+        <div class="tx"><h3>Декоративные элементы</h3>
+          <p>Резьба, стёганые вставки из кожи и алькантары, латунные и алюминиевые профили,
+            осветлённое зеркало, стекло с фацетом.</p>
+          <ul><li>резьба</li><li>кожа</li><li>латунь</li><li>алюминий</li><li>зеркало</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>` + process + form + foot;
+
+/* ============ экран «Объекты» ============ */
+const objScreen = `
+<section class="tight">
+  <div class="wrap">
+    ${note('Каталог объектов','фильтр по типу — чтобы дизайнер быстро нашёл похожее')}
+    <div class="head">
+      <p class="eyebrow">Портфолио</p>
+      <h2>Объекты</h2>
+      <p>Десятки реализованных проектов премиального уровня под ключ. Фильтр — по типу изделия;
+        у каждой карточки материалы и отделка, как в спецификации к договору.</p>
+    </div>
+    <div class="filters" id="filters2"></div>
+    <div class="objs" id="objgrid2"></div>
+  </div>
+</section>` + form + foot;
+
+/* ============ экраны ============ */
+const SCREENS = {
+  home: hero + greet + catalog + prod + objects + materials + furn + finish + process + guar + form + foot,
+  obj: objScreen,
+  sec: sec,
+};
+
+/* ============ логика ============ */
+const host = document.getElementById('screen');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function renderObjects(gridId, filtersId, limit){
+  const grid = document.getElementById(gridId), fbox = document.getElementById(filtersId);
+  if (!grid) return;
+  const tags = ['все', ...new Set(OBJ.map(o => o[3]))];
+  let active = 'все';
+  if (fbox) fbox.innerHTML = tags.map(t =>
+    `<button class="fl${t==='все'?' on':''}" data-t="${t}">${t}</button>`).join('');
+  function draw(){
+    const list = OBJ.filter(o => active==='все' || o[3]===active).slice(0, limit || 99);
+    grid.innerHTML = list.map(([k,t,p,,m]) => `
+      <article class="obj">
+        ${k ? `<div class="ph" data-lb="${I(k)}" data-cap="${t} — ${p}"><img src="${I(k)}" alt="${t}" loading="lazy"></div>`
+            : `<div class="ph empty"><span><b>◈</b>фото объекта<br>из архива производства</span></div>`}
+        <div class="tx">
+          <span class="place">${p}</span>
+          <h3>${t}</h3>
+          <p class="mat"><b>Материалы:</b> ${m}</p>
+        </div>
+      </article>`).join('');
+    reveal();
+  }
+  if (fbox) fbox.onclick = e => {
+    const b = e.target.closest('.fl'); if (!b) return;
+    active = b.dataset.t;
+    fbox.querySelectorAll('.fl').forEach(x => x.classList.toggle('on', x === b));
+    draw();
+  };
+  draw();
+}
+
+function reveal(){
+  if (reduced || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.style.transitionDelay = (e.target.dataset.d || 0) + 's';
+    e.target.classList.add('in'); io.unobserve(e.target);
+  }), {rootMargin:'0px 0px -6% 0px', threshold:.05});
+  host.querySelectorAll('section > .wrap > *').forEach(el => {
+    if (el.closest('.hero') || el.classList.contains('rv')) return;
+    el.classList.add('rv'); io.observe(el);
+  });
+  host.querySelectorAll('.cell, .obj, .mat-c, .sw div').forEach((el,i) => {
+    if (el.classList.contains('rv')) return;
+    el.classList.add('rv'); el.dataset.d = Math.min(i*.05,.4); io.observe(el);
+  });
+  setTimeout(() => host.querySelectorAll('.rv:not(.in)').forEach(el => {
+    if (el.getBoundingClientRect().top < innerHeight) el.classList.add('in');
+  }), 40);
+}
+
+function show(name){
+  host.innerHTML = SCREENS[name];
+  document.querySelectorAll('.tab').forEach(t =>
+    t.setAttribute('aria-selected', String(t.dataset.s === name)));
+  if (name === 'home') renderObjects('objgrid','filters',6);
+  if (name === 'obj') renderObjects('objgrid2','filters2');
+  scrollTo({top:0});
+  reveal();
+}
+
+document.querySelector('.tabs').onclick = e => {
+  const t = e.target.closest('.tab'); if (t) show(t.dataset.s);
+};
+
+document.getElementById('notes').onchange = e =>
+  document.body.classList.toggle('notes', e.target.checked);
+
+/* аккордеон + карточки каталога + лайтбокс */
+const lb = document.getElementById('lb');
+host.addEventListener('click', e => {
+  const st = e.target.closest('.step > button');
+  if (st){
+    const step = st.parentElement, c = step.querySelector('.c'), open = !c.hidden;
+    c.hidden = open; step.classList.toggle('open', !open);
+    st.setAttribute('aria-expanded', String(!open));
+    st.querySelector('.pm').textContent = open ? '+' : '–';
+    return;
+  }
+  const cell = e.target.closest('[data-open]');
+  if (cell){ e.preventDefault(); show(cell.dataset.open); return; }
+  const ph = e.target.closest('[data-lb]');
+  if (ph){
+    lb.querySelector('img').src = ph.dataset.lb;
+    lb.querySelector('.cap').textContent = ph.dataset.cap || '';
+    lb.classList.add('on');
+  }
+});
+lb.onclick = () => lb.classList.remove('on');
+addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('on'); });
+
+show('home');
+</script>
+</html>
