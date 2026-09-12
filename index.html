@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Мебель 20 — варианты нового сайта</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F6F2EA; --paper-2:#EFE9DE; --ink:#221B16; --ink-soft:#4A3F37;
+  --muted:#736657; --line:#DCD3C4; --wood:#A9743F;
+  --f-display:'Lora',Georgia,'Times New Roman',serif;
+  --f-text:'IBM Plex Sans',-apple-system,Segoe UI,Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-text);
+  font-weight:300;-webkit-font-smoothing:antialiased;line-height:1.6}
+.wrap{max-width:940px;margin:0 auto;padding:clamp(32px,7vw,80px) clamp(20px,5vw,40px)}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 18px}
+h1{font-family:var(--f-display);font-weight:500;font-size:clamp(30px,5.5vw,46px);
+  line-height:1.15;margin:0 0 20px;letter-spacing:-.01em}
+.lead{font-size:clamp(15px,2.2vw,18px);color:var(--ink-soft);max-width:62ch;margin:0 0 12px}
+.rule{height:1px;background:var(--line);margin:clamp(32px,6vw,56px) 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(16px,3vw,28px)}
+.card{display:block;text-decoration:none;color:inherit;background:var(--paper-2);
+  border:1px solid var(--line);border-radius:2px;padding:clamp(24px,4vw,34px);
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(34,27,22,.10);border-color:var(--wood)}
+.card .num{font-family:var(--f-display);font-size:13px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--wood);display:block;margin-bottom:14px}
+.card h2{font-family:var(--f-display);font-weight:500;font-size:clamp(21px,3vw,26px);margin:0 0 12px;line-height:1.25}
+.card p{margin:0 0 18px;color:var(--ink-soft);font-size:15px}
+.card ul{margin:0 0 22px;padding-left:18px;color:var(--muted);font-size:14px}
+.card li{margin-bottom:5px}
+.go{font-size:14px;letter-spacing:.04em;color:var(--ink);border-bottom:1px solid var(--wood);padding-bottom:2px}
+.card.soon{opacity:.55;pointer-events:none}
+.card.soon .go{color:var(--muted);border-bottom-style:dashed;border-color:var(--line)}
+.note{margin-top:clamp(32px,6vw,56px);padding:22px 24px;border-left:2px solid var(--wood);
+  background:var(--paper-2);font-size:14px;color:var(--ink-soft);max-width:64ch}
+.note strong{font-weight:500;color:var(--ink)}
+footer{margin-top:clamp(40px,7vw,72px);padding-top:22px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 22px}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Мебель 20 · мебель на заказ</p>
+  <h1>Два варианта нового сайта</h1>
+  <p class="lead">Кликабельные макеты — открываются как настоящий сайт, можно листать,
+     нажимать, смотреть с телефона. Это черновики структуры и подачи, а не финальный
+     дизайн: цвета, шрифты и любые блоки правятся под вас.</p>
+  <p class="lead">В каждом варианте есть галочка <strong>«показать структуру»</strong> —
+     она подписывает каждый блок: что это и зачем он нужен.</p>
+
+  <div class="rule"></div>
+
+  <div class="cards">
+    <a class="card" href="v1/">
+      <span class="num">Вариант 1</span>
+      <h2>Мастерская</h2>
+      <p>Спокойная бумажная подача, крупная типографика, акцент на ручной работе
+         и на пути «от эскиза к изделию».</p>
+      <ul>
+        <li>Сравнение эскиз ↔ готовое изделие, тянется мышкой</li>
+        <li>Каталог проектов с фильтром</li>
+        <li>Пример страницы раздела «Двери на заказ»</li>
+      </ul>
+      <span class="go">Смотреть вариант 1 →</span>
+    </a>
+
+    <div class="card soon">
+      <span class="num">Вариант 2</span>
+      <h2>Готовится</h2>
+      <p>Второй вариант подачи — другая структура первого экрана и другой способ
+         показать каталог.</p>
+      <ul>
+        <li>Появится в этом же окне</li>
+        <li>Ссылка не изменится</li>
+      </ul>
+      <span class="go">Скоро</span>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Как смотреть.</strong> Пролистайте страницу целиком, потом включите
+    «показать структуру» и пройдите ещё раз — так видно логику: почему блоки
+    стоят в таком порядке и что каждый из них должен сделать для посетителя.
+    Замечания удобно писать по названиям блоков.
+  </div>
+
+  <footer>
+    <span>Фотографии взяты с текущего сайта — в работе заменим на съёмку.</span>
+    <span>Черновик, страница закрыта от поисковиков.</span>
+  </footer>
+</div>
