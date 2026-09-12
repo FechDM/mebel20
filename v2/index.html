@@ -3,18 +3,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Мебель 20 — вариант 2 «Производство»</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23100E0C'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23C9A227'/%3E%3C/svg%3E">
+<title>Мебель 20 — вариант 2 «Каталог»</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FBFAF8'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%2333503F'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{
-  --bg:#100E0C; --bg-2:#171412; --bg-3:#1F1B17; --line:#2C2723;
-  --ink:#EFE9E0; --ink-2:#B9AFA2; --ink-3:#857A6C;
-  --brass:#C9A227; --brass-2:#E3C463; --brass-dim:rgba(201,162,39,.14);
-  --f:'Manrope',-apple-system,'Segoe UI',Roboto,sans-serif;
+  --bg:#FBFAF8; --bg-2:#F3F1EC; --bg-3:#EAE7E0; --ink:#17181A; --ink-2:#4B4E52;
+  --ink-3:#84878C; --line:#E0DDD5; --acc:#33503F; --acc-2:#4A6B55;
+  --f:'Golos Text',-apple-system,'Segoe UI',Roboto,sans-serif;
   --fm:'IBM Plex Mono',ui-monospace,Menlo,monospace;
-  --pad:clamp(20px,5vw,64px);
+  --pad:clamp(20px,3vw,52px);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -23,279 +22,286 @@ body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f);
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-.wrap{max-width:1280px;margin:0 auto;padding:0 var(--pad)}
-h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.wrap{width:min(1680px,94vw);margin:0 auto;padding:0 var(--pad)}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.025em;line-height:1.08}
 p{margin:0 0 1em}
 
-/* ————— панель прототипа ————— */
-.bar{position:sticky;top:0;z-index:80;background:rgba(16,14,12,.94);
+/* ——— панель прототипа ——— */
+.bar{position:sticky;top:0;z-index:80;background:rgba(251,250,248,.95);
   backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
-  display:flex;align-items:center;gap:14px;padding:9px var(--pad);flex-wrap:wrap;
-  font-size:13px}
-.bar b{font-weight:600;letter-spacing:.02em}
+  display:flex;align-items:center;gap:14px;padding:9px var(--pad);flex-wrap:wrap;font-size:13px}
+.bar b{font:500 12px/1 var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .bar .back{color:var(--ink-3);font-size:12px}
-.bar .back:hover{color:var(--brass-2)}
+.bar .back:hover{color:var(--acc)}
 .toggle{display:inline-flex;align-items:center;gap:7px;color:var(--ink-2);cursor:pointer;
-  user-select:none;white-space:nowrap}
-.toggle input{accent-color:var(--brass);width:15px;height:15px}
-.tabs{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
-.tab{padding:6px 13px;border-radius:999px;color:var(--ink-2);font-size:13px;
-  border:1px solid transparent;transition:.18s}
+  user-select:none;white-space:nowrap;font-size:12.5px}
+.toggle input{accent-color:var(--acc);width:15px;height:15px}
+.tabs{display:flex;gap:3px;margin-left:auto;flex-wrap:wrap}
+.tab{padding:7px 14px;font-size:13px;color:var(--ink-3);border:1px solid transparent;transition:.16s}
 .tab:hover{color:var(--ink)}
-.tab[aria-selected="true"]{background:var(--brass-dim);border-color:rgba(201,162,39,.35);color:var(--brass-2)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
 
-/* ————— подписи структуры ————— */
+/* ——— подписи структуры ——— */
 .note{display:none}
-body.notes .note{display:block;position:relative;margin:0 0 -6px;
-  font:500 11px/1.5 var(--fm);letter-spacing:.04em;text-transform:uppercase;
-  color:#0F0D0B;background:var(--brass-2);padding:5px 11px;border-radius:0 8px 8px 0;
-  width:fit-content;max-width:min(94%,760px);z-index:6}
-body.notes .note em{font-style:normal;opacity:.72;text-transform:none;letter-spacing:0}
-body.notes section{outline:1px dashed rgba(201,162,39,.3);outline-offset:-1px}
+body.notes .note{display:block;position:relative;margin:0 0 10px;
+  font:500 10.5px/1.5 var(--fm);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--acc);border-left:2px solid var(--acc);padding:2px 0 2px 10px;
+  width:fit-content;max-width:min(94%,780px);z-index:6}
+body.notes .note em{font-style:normal;color:var(--ink-3);text-transform:none;letter-spacing:0}
+body.notes section{outline:1px dashed rgba(51,80,63,.22);outline-offset:-1px}
 
-/* ————— шапка сайта ————— */
-.nav{position:relative;z-index:40;display:flex;align-items:center;gap:28px;
-  padding:20px var(--pad);border-bottom:1px solid rgba(255,255,255,.07)}
-.logo{display:flex;align-items:baseline;gap:9px;font-weight:700;letter-spacing:.14em;font-size:15px}
-.logo span{width:7px;height:7px;background:var(--brass);border-radius:50%;transform:translateY(-2px)}
-.menu{display:flex;gap:22px;font-size:14px;color:var(--ink-2);margin-left:16px;flex-wrap:wrap}
-.menu a:hover{color:var(--brass-2)}
-.nav-r{margin-left:auto;display:flex;align-items:center;gap:18px}
-.tel{font:500 15px/1 var(--fm);letter-spacing:.02em;white-space:nowrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  padding:12px 22px;border-radius:2px;font-weight:600;font-size:14px;letter-spacing:.01em;
-  background:var(--brass);color:#100E0C;transition:.2s;border:1px solid var(--brass)}
-.btn:hover{background:var(--brass-2);border-color:var(--brass-2)}
-.btn.ghost{background:none;color:var(--ink);border-color:rgba(255,255,255,.22)}
-.btn.ghost:hover{border-color:var(--brass);color:var(--brass-2);background:none}
-.burger{display:none}
+/* ——— шапка ——— */
+.nav{position:relative;z-index:40;display:flex;align-items:center;gap:clamp(20px,2.6vw,44px);
+  padding:clamp(16px,1.6vw,26px) var(--pad);border-bottom:1px solid var(--line)}
+.logo{font-weight:700;font-size:clamp(17px,1.3vw,22px);letter-spacing:-.03em;line-height:1}
+.logo i{font-style:normal;color:var(--acc)}
+.logo span{display:block;font:400 9.5px/1.4 var(--fm);letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);margin-top:5px}
+.menu{display:flex;gap:clamp(16px,1.5vw,28px);font-size:14.5px;color:var(--ink-2);flex-wrap:wrap}
+.menu a{padding-bottom:2px;border-bottom:1px solid transparent}
+.menu a:hover{color:var(--ink);border-color:var(--acc)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:clamp(14px,1.4vw,24px)}
+.tel{font:500 15px/1.3 var(--f);white-space:nowrap;text-align:right}
+.tel span{display:block;font:400 11.5px/1.3 var(--f);color:var(--ink-3)}
+.btn{display:inline-flex;align-items:center;justify-content:center;
+  padding:14px 26px;font-weight:500;font-size:14px;letter-spacing:.01em;
+  background:var(--ink);color:var(--bg);border:1px solid var(--ink);transition:.2s}
+.btn:hover{background:var(--acc);border-color:var(--acc)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.lg{padding:17px 34px;font-size:15px}
 
-/* ————— hero ————— */
-.hero{position:relative;padding:0;min-height:min(86vh,760px);display:flex;align-items:flex-end;
-  overflow:hidden;border-bottom:1px solid var(--line)}
-.hero-bg{position:absolute;inset:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:52% 42%}
-.hero-bg::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(16,14,12,.72) 0%,rgba(16,14,12,.42) 38%,rgba(16,14,12,.93) 100%)}
-.hero-in{position:relative;z-index:2;width:100%;padding:0 0 clamp(30px,5vw,58px)}
-.kicker{font:500 11px/1 var(--fm);letter-spacing:.22em;text-transform:uppercase;
-  color:var(--brass-2);margin:0 0 20px;display:flex;align-items:center;gap:12px}
-.kicker::before{content:"";width:34px;height:1px;background:var(--brass)}
-.hero h1{font-size:clamp(30px,5.2vw,62px);max-width:15ch;font-weight:600}
-.hero h1 i{font-style:normal;color:var(--brass-2)}
-.hero .lead{margin:22px 0 30px;font-size:clamp(15px,1.9vw,19px);color:var(--ink-2);
-  max-width:56ch;font-weight:300}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+/* ——— hero: фото во всю ширину, текст под ним ——— */
+.hero{position:relative}
+.hero-ph{position:relative;height:clamp(340px,54vh,640px);overflow:hidden;background:var(--bg-3)}
+.hero-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+.hero-tag{position:absolute;left:0;bottom:0;background:var(--bg);
+  padding:clamp(14px,1.5vw,22px) clamp(18px,2vw,30px);max-width:min(92vw,440px)}
+.hero-tag b{display:block;font:500 11px/1 var(--fm);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--acc);margin-bottom:9px}
+.hero-tag span{font-size:14px;color:var(--ink-2);line-height:1.5}
+.hero-txt{display:grid;grid-template-columns:1.35fr .65fr;gap:clamp(24px,3.5vw,64px);
+  align-items:end;padding:clamp(34px,4vw,64px) 0 clamp(30px,3.5vw,52px)}
+.hero h1{font-size:clamp(30px,4.6vw,80px);letter-spacing:-.035em;max-width:19ch}
+.hero h1 i{font-style:normal;color:var(--acc)}
+.hero-side p{margin:0 0 20px;font-size:clamp(15px,1.05vw,18px);color:var(--ink-2)}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap}
 
-/* ————— цифры ————— */
-.nums{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);
-  background:var(--bg-2)}
-.num{padding:clamp(20px,3vw,34px) clamp(14px,2.4vw,30px);border-right:1px solid var(--line)}
-.num:last-child{border-right:0}
-.num b{display:block;font-size:clamp(26px,3.6vw,44px);font-weight:600;letter-spacing:-.03em;
-  line-height:1;color:var(--ink)}
-.num b i{font-style:normal;font-size:.5em;color:var(--brass);margin-left:3px;letter-spacing:0}
-.num span{display:block;margin-top:9px;font-size:13px;color:var(--ink-3);line-height:1.35}
+/* ——— строка цифр ——— */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line)}
+.fact{padding:clamp(18px,2.2vw,34px) clamp(14px,1.6vw,28px);border-right:1px solid var(--line)}
+.fact:last-child{border-right:0}
+.fact b{display:block;font-size:clamp(24px,2.6vw,46px);font-weight:600;letter-spacing:-.04em;line-height:1}
+.fact b i{font-style:normal;font-size:.46em;color:var(--acc);margin-left:4px;letter-spacing:-.01em}
+.fact span{display:block;margin-top:10px;font-size:13.5px;color:var(--ink-3);line-height:1.4}
 
-/* ————— общие секции ————— */
-section{position:relative;padding:clamp(56px,8vw,116px) 0}
-section.tight{padding:clamp(40px,5.5vw,72px) 0}
+/* ——— секции ——— */
+section{padding:clamp(52px,5.6vw,110px) 0}
+section.tight{padding:clamp(38px,4vw,72px) 0}
 .alt{background:var(--bg-2)}
-.head{max-width:64ch;margin:0 0 clamp(30px,4.5vw,56px)}
-.head h2{font-size:clamp(24px,3.9vw,44px)}
-.head p{margin:18px 0 0;color:var(--ink-2);font-size:clamp(15px,1.7vw,17px);font-weight:300}
-.head.center{margin-left:auto;margin-right:auto;text-align:center}
-.eyebrow{font:500 11px/1 var(--fm);letter-spacing:.2em;text-transform:uppercase;
-  color:var(--brass);margin:0 0 16px}
+.dark{background:var(--ink);color:#F2F1EE}
+.dark .kicker{color:#9FBBA9}
+.dark .lead,.dark p{color:#B9B9B6}
+.kicker{font:500 11px/1 var(--fm);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--acc);margin:0 0 18px}
+.h-row{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(20px,3vw,60px);
+  align-items:end;margin-bottom:clamp(28px,3.2vw,52px)}
+.h-row h2{font-size:clamp(24px,3vw,54px)}
+.h-row .lead{margin:0;color:var(--ink-2);font-size:clamp(15px,1.05vw,18px);max-width:52ch}
+.more{font:500 12.5px/1 var(--f);letter-spacing:.03em;color:var(--acc);
+  border-bottom:1px solid currentColor;padding-bottom:4px;white-space:nowrap;
+  justify-self:start;align-self:end}
 
-/* ————— приветствие ————— */
-.greet{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,72px);align-items:start}
-.greet h2{font-size:clamp(23px,3.4vw,38px);font-weight:500;line-height:1.22;letter-spacing:-.02em}
-.greet h2 b{font-weight:600;color:var(--brass-2)}
-.greet .body{color:var(--ink-2);font-weight:300;font-size:16.5px}
-.greet .body p+p{margin-top:1em}
-.claims{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:1px;background:var(--line);
+/* ——— приветствие ——— */
+.intro{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(26px,4vw,80px)}
+.intro h2{font-size:clamp(22px,2.5vw,44px);font-weight:500;line-height:1.2;letter-spacing:-.028em}
+.intro h2 b{font-weight:600;color:var(--acc)}
+.intro .col p{color:var(--ink-2);font-size:clamp(15px,1vw,17px)}
+.tenets{list-style:none;margin:clamp(26px,3vw,44px) 0 0;padding:0;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
   border:1px solid var(--line)}
-.claims li{background:var(--bg);padding:15px 18px 15px 36px;position:relative;font-size:15px;
-  color:var(--ink-2)}
-.alt .claims li{background:var(--bg-2)}
-.claims li::before{content:"—";color:var(--brass);position:absolute;left:17px;top:15px}
-.claims b{font-weight:600;color:var(--ink)}
+.tenets li{background:var(--bg);padding:clamp(18px,1.8vw,26px)}
+.alt .tenets li{background:var(--bg-2)}
+.tenets b{display:block;font-size:15.5px;margin-bottom:8px}
+.tenets span{font-size:13.5px;color:var(--ink-3);line-height:1.55}
+.tenets .n{display:block;font:500 10.5px/1 var(--fm);color:var(--acc);
+  letter-spacing:.1em;margin-bottom:14px}
 
-/* ————— каталог ————— */
-.cat{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:1px;
-  background:var(--line);border:1px solid var(--line)}
-.cell{position:relative;background:var(--bg);display:block;overflow:hidden}
-.cell .ph{aspect-ratio:4/3;overflow:hidden;background:var(--bg-3)}
-.ph.empty{display:grid;place-items:center;text-align:center;padding:16px;
-  background:
-    repeating-linear-gradient(135deg,rgba(201,162,39,.05) 0 2px,transparent 2px 9px),
-    linear-gradient(160deg,#221D18,#171412)}
-.ph.empty span{font:400 11.5px/1.5 var(--fm);letter-spacing:.06em;color:var(--ink-3);
-  text-transform:uppercase}
-.ph.empty span b{display:block;font-size:22px;color:rgba(201,162,39,.5);margin-bottom:9px;
-  font-weight:400;letter-spacing:.1em}
-.cell .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.3,1)}
-.cell:hover .ph img{transform:scale(1.05)}
-.cell .tx{padding:17px 19px 20px}
-.cell h3{font-size:17px;font-weight:600}
-.cell p{margin:7px 0 0;font-size:13.5px;color:var(--ink-3);line-height:1.5}
-.cell .go{position:absolute;top:13px;right:13px;width:31px;height:31px;border-radius:50%;
-  background:rgba(16,14,12,.72);display:grid;place-items:center;color:var(--brass-2);
-  font-size:14px;opacity:0;transform:translateY(-4px);transition:.25s}
-.cell:hover .go{opacity:1;transform:none}
+/* ——— каталог ——— */
+.cat{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.7vw,32px)}
+.cell{display:block;position:relative}
+.cell .ph{aspect-ratio:4/3;overflow:hidden;background:var(--bg-3);position:relative}
+.cell .ph img{width:100%;height:100%;object-fit:cover;
+  transition:transform .8s cubic-bezier(.2,.7,.25,1)}
+.cell:hover .ph img{transform:scale(1.045)}
+.cell .ph.empty{display:grid;place-items:center;
+  background:linear-gradient(150deg,#EFEDE7,#E4E1D9)}
+.cell .ph.empty span{font:400 11px/1.6 var(--fm);letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-3);text-align:center}
+.cell .ph.empty span b{display:block;font-size:20px;color:rgba(51,80,63,.35);
+  font-weight:400;margin-bottom:8px}
+.cell .cap{display:flex;align-items:baseline;gap:12px;padding:16px 2px 0}
+.cell .num{font:500 11px/1 var(--fm);color:var(--acc);letter-spacing:.08em;flex:none}
+.cell h3{font-size:clamp(17px,1.25vw,22px);font-weight:600;letter-spacing:-.02em}
+.cell p{margin:6px 0 0;font-size:14px;color:var(--ink-3);line-height:1.5;padding-left:29px}
+@media (max-width:1000px){.cat{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.cat{grid-template-columns:1fr}}
 
-/* ————— производство ————— */
-.prod{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(26px,4.5vw,64px);align-items:center}
-.prod-img{position:relative;border:1px solid var(--line)}
-.prod-img img{width:100%}
-.prod-img figcaption{position:absolute;left:0;bottom:0;right:0;padding:12px 15px;
-  background:linear-gradient(0deg,rgba(16,14,12,.92),transparent);
-  font:400 12px/1.4 var(--fm);color:var(--ink-2)}
-.specs{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--line);
+/* ——— производство ——— */
+.prod{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,3vw,64px);align-items:center}
+.prod-ph{position:relative;overflow:hidden;background:var(--bg-3)}
+.prod-ph img{width:100%;aspect-ratio:16/11;object-fit:cover}
+.lines{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.dark .lines{border-color:#33353A}
+.lines li{display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,2vw,34px);
+  padding:clamp(15px,1.5vw,22px) 0;border-bottom:1px solid var(--line);align-items:baseline}
+.dark .lines li{border-color:#33353A}
+.lines .k{font:500 11px/1 var(--fm);color:var(--acc);letter-spacing:.08em}
+.dark .lines .k{color:#9FBBA9}
+.lines b{display:block;font-size:clamp(16px,1.15vw,19px);font-weight:600;margin-bottom:5px;
+  letter-spacing:-.015em}
+.lines span{font-size:14px;color:var(--ink-3);line-height:1.5}
+.dark .lines span{color:#9A9A98}
+
+/* ——— объекты ——— */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 clamp(22px,2.4vw,34px)}
+.fl{padding:9px 17px;border:1px solid var(--line);font-size:13.5px;color:var(--ink-2);
+  border-radius:100px;transition:.16s}
+.fl:hover{border-color:var(--acc);color:var(--ink)}
+.fl.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.objs{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2vw,34px)}
+@media (max-width:1100px){.objs{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.objs{grid-template-columns:1fr}}
+.obj{display:flex;flex-direction:column}
+.obj .ph{aspect-ratio:3/2;overflow:hidden;background:var(--bg-3);cursor:zoom-in;position:relative}
+.obj .ph img{width:100%;height:100%;object-fit:cover;
+  transition:transform .8s cubic-bezier(.2,.7,.25,1)}
+.obj:hover .ph img{transform:scale(1.04)}
+.obj .ph.empty{display:grid;place-items:center;cursor:default;
+  background:linear-gradient(150deg,#EFEDE7,#E4E1D9)}
+.obj .ph.empty span{font:400 11px/1.6 var(--fm);letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-3);text-align:center}
+.obj .ph.empty span b{display:block;font-size:20px;color:rgba(51,80,63,.35);
+  font-weight:400;margin-bottom:8px}
+.obj .tx{padding:16px 0 0}
+.obj .place{font:500 10.5px/1 var(--fm);color:var(--acc);letter-spacing:.1em;text-transform:uppercase}
+.obj h3{margin:10px 0 8px;font-size:clamp(17px,1.25vw,22px);font-weight:600;letter-spacing:-.02em}
+.obj .spec{margin:0;font-size:13.5px;color:var(--ink-3);line-height:1.55;
+  padding-top:11px;border-top:1px solid var(--line)}
+.obj .spec b{color:var(--ink-2);font-weight:500}
+
+/* ——— три блока: материалы, фурнитура, отделка ——— */
+.trio{display:grid;gap:clamp(34px,4vw,80px)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,3vw,64px);align-items:center}
+.duo.rev .duo-ph{order:2}
+.duo-ph{overflow:hidden;background:var(--bg-3)}
+.duo-ph img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.duo h3{font-size:clamp(21px,2.1vw,38px);margin-bottom:16px}
+.duo p{color:var(--ink-2);font-size:clamp(15px,1vw,17px);max-width:52ch}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;padding:0;list-style:none}
+.tags li{font:400 12.5px/1 var(--fm);padding:8px 12px;border:1px solid var(--line);color:var(--ink-2)}
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);margin-top:24px}
+.swatches div{background:var(--bg);padding:14px 14px 16px}
+.alt .swatches div{background:var(--bg-2)}
+.swatches i{display:block;height:38px;margin-bottom:11px}
+.swatches b{display:block;font-size:13.5px;font-weight:500}
+.swatches span{font-size:12px;color:var(--ink-3);line-height:1.4}
+
+/* ——— лента ——— */
+.strip{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:var(--bg-2)}
+.strip-in{display:flex;gap:3px;width:max-content;animation:slide 62s linear infinite}
+.strip:hover .strip-in{animation-play-state:paused}
+.strip figure{margin:0;flex:none;width:clamp(230px,20vw,380px);height:clamp(170px,14.5vw,270px);
+  overflow:hidden}
+.strip img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.strip figure:hover img{transform:scale(1.06)}
+@keyframes slide{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+/* ——— этапы ——— */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
   border:1px solid var(--line)}
-.specs li{background:var(--bg-2);padding:15px 18px;display:flex;gap:16px;align-items:baseline;
-  font-size:15px}
-.specs li:hover{background:var(--bg-3)}
-.specs .k{font:500 12px/1.4 var(--fm);color:var(--brass);flex:none;width:52px;letter-spacing:.02em}
-.specs .v b{font-weight:600}
-.specs .v span{display:block;color:var(--ink-3);font-size:13.5px;margin-top:3px}
-
-/* ————— объекты ————— */
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 26px}
-.fl{padding:7px 15px;border:1px solid var(--line);border-radius:999px;font-size:13.5px;
-  color:var(--ink-2);transition:.18s}
-.fl:hover{border-color:var(--ink-3);color:var(--ink)}
-.fl.on{background:var(--brass-dim);border-color:rgba(201,162,39,.45);color:var(--brass-2)}
-.objs{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:clamp(14px,2vw,24px)}
-.obj{border:1px solid var(--line);background:var(--bg-2);display:flex;flex-direction:column;
-  transition:.25s}
-.obj:hover{border-color:rgba(201,162,39,.42);transform:translateY(-3px)}
-.obj .ph{aspect-ratio:3/2;overflow:hidden;background:var(--bg-3);cursor:zoom-in}
-.obj .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.3,1)}
-.obj:hover .ph img{transform:scale(1.045)}
-.obj .tx{padding:17px 19px 19px;display:flex;flex-direction:column;gap:10px;flex:1}
-.obj h3{font-size:16.5px;font-weight:600;line-height:1.28}
-.obj .place{font:400 12px/1 var(--fm);color:var(--brass);letter-spacing:.04em;text-transform:uppercase}
-.obj .mat{margin:0;font-size:13.5px;color:var(--ink-3);line-height:1.55}
-.obj .mat b{color:var(--ink-2);font-weight:500}
-
-/* ————— материалы ————— */
-.mats{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1px;
-  background:var(--line);border:1px solid var(--line)}
-.mat-c{background:var(--bg);padding:0}
-.alt .mat-c{background:var(--bg-2)}
-.mat-c .ph{aspect-ratio:16/10;overflow:hidden}
-.mat-c .ph img{width:100%;height:100%;object-fit:cover}
-.mat-c .tx{padding:20px 21px 24px}
-.mat-c h3{font-size:17.5px;margin-bottom:9px}
-.mat-c ul{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
-.mat-c li{font:400 12px/1 var(--fm);padding:6px 10px;border:1px solid var(--line);
-  color:var(--ink-2);border-radius:2px}
-.mat-c p{margin:0;font-size:14.5px;color:var(--ink-3);line-height:1.55}
-
-/* ————— отделка: свотчи ————— */
-.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:1px;
-  background:var(--line);border:1px solid var(--line);margin-top:26px}
-.sw div{background:var(--bg-2);padding:16px 15px;display:flex;flex-direction:column;gap:10px}
-.sw i{display:block;height:44px;border-radius:2px}
-.sw b{font-size:14px;font-weight:500}
-.sw span{font-size:12.5px;color:var(--ink-3);line-height:1.4}
-
-/* ————— этапы ————— */
-.steps{border:1px solid var(--line);display:grid;gap:1px;background:var(--line)}
-.step{background:var(--bg)}
+@media (max-width:1000px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.steps{grid-template-columns:1fr}}
+.step{background:var(--bg);padding:clamp(20px,2vw,32px)}
 .alt .step{background:var(--bg-2)}
-.step>button{width:100%;display:flex;align-items:center;gap:clamp(14px,2.5vw,26px);
-  padding:19px clamp(16px,2.4vw,24px);text-align:left}
-.step .n{font:500 12px/1 var(--fm);color:var(--brass);flex:none;letter-spacing:.06em}
-.step .t{font-size:clamp(15.5px,1.9vw,18px);font-weight:500;flex:1}
-.step .pm{flex:none;width:26px;height:26px;border:1px solid var(--line);display:grid;
-  place-items:center;color:var(--ink-2);font-size:15px;transition:.2s}
-.step[open] .pm,.step.open .pm{background:var(--brass);border-color:var(--brass);color:#100E0C}
-.step .c{padding:0 clamp(16px,2.4vw,24px) 22px;color:var(--ink-2);font-size:15px;
-  max-width:88ch;font-weight:300}
-.step .c[hidden]{display:none}
+.step .n{font:500 11px/1 var(--fm);color:var(--acc);letter-spacing:.1em}
+.step h3{margin:16px 0 10px;font-size:clamp(17px,1.2vw,21px);font-weight:600;letter-spacing:-.02em}
+.step p{margin:0;font-size:14px;color:var(--ink-3);line-height:1.6}
 
-/* ————— гарантия ————— */
-.guar{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(18px,3vw,36px)}
-.guar div h3{font-size:clamp(19px,2.4vw,25px);margin-bottom:10px}
-.guar div h3 i{font-style:normal;color:var(--brass-2)}
-.guar div p{margin:0;color:var(--ink-2);font-size:15px;font-weight:300}
-
-/* ————— форма ————— */
-.form-w{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,5vw,72px);align-items:start}
+/* ——— форма ——— */
+.form-w{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,3.5vw,80px);align-items:start}
 .form{display:grid;gap:14px}
 .fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.f{display:block}
-.f span{display:block;font:500 11px/1 var(--fm);letter-spacing:.13em;text-transform:uppercase;
-  color:var(--ink-3);margin:0 0 8px}
-.f input,.f textarea{width:100%;background:var(--bg);border:1px solid var(--line);
-  color:var(--ink);padding:13px 15px;font:400 15px var(--f);border-radius:2px;transition:.18s}
-.alt .f input,.alt .f textarea{background:var(--bg-3)}
-.f input:focus,.f textarea:focus{outline:none;border-color:var(--brass)}
-.f textarea{min-height:104px;resize:vertical}
-.hint{font-size:13px;color:var(--ink-3);margin:2px 0 0}
-.contacts{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
-.contacts div{background:var(--bg-2);padding:17px 19px}
-.contacts .k{font:500 11px/1 var(--fm);letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
-.contacts .v{margin-top:7px;font-size:16px}
-.contacts .v small{display:block;color:var(--ink-3);font-size:13.5px;margin-top:4px}
+.f span{display:block;font:500 10.5px/1 var(--fm);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:9px}
+.f input,.f textarea,.f select{width:100%;background:var(--bg);border:1px solid var(--line);
+  color:var(--ink);padding:14px 15px;font:400 15px var(--f);transition:.16s}
+.dark .f input,.dark .f textarea,.dark .f select{background:#212327;border-color:#33353A;color:#F2F1EE}
+.f input:focus,.f textarea:focus,.f select:focus{outline:none;border-color:var(--acc)}
+.f textarea{min-height:108px;resize:vertical}
+.hint{font-size:12.5px;color:var(--ink-3);margin:0}
+.dark .hint{color:#84868A}
+.cts{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:26px}
+.dark .cts{background:#33353A;border-color:#33353A}
+.cts div{background:var(--bg);padding:16px 18px}
+.dark .cts div{background:var(--ink)}
+.cts .k{font:500 10.5px/1 var(--fm);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.cts .v{margin-top:8px;font-size:16px}
+.cts .v small{display:block;color:var(--ink-3);font-size:13px;margin-top:4px}
 
-/* ————— футер ————— */
-footer{border-top:1px solid var(--line);background:var(--bg-2);padding:clamp(34px,5vw,60px) 0 30px}
-.f-top{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;
-  padding-bottom:26px;border-bottom:1px solid var(--line)}
-.f-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:26px;margin-top:26px;font-size:14px}
-.f-cols h4{margin:0 0 13px;font-size:11px;font-family:var(--fm);letter-spacing:.14em;
+/* ——— футер ——— */
+footer{border-top:1px solid var(--line);padding:clamp(34px,3.5vw,60px) 0 28px}
+.f-cols{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:clamp(20px,2.5vw,44px)}
+.f-cols h4{margin:0 0 14px;font:500 10.5px/1 var(--fm);letter-spacing:.12em;
   text-transform:uppercase;color:var(--ink-3);font-weight:500}
-.f-cols a,.f-cols p{display:block;color:var(--ink-2);margin:0 0 8px}
-.f-cols a:hover{color:var(--brass-2)}
-.f-bot{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);
+.f-cols a,.f-cols p{display:block;color:var(--ink-2);margin:0 0 9px;font-size:14.5px}
+.f-cols a:hover{color:var(--acc)}
+.f-bot{margin-top:clamp(28px,3vw,48px);padding-top:20px;border-top:1px solid var(--line);
   display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   font-size:12.5px;color:var(--ink-3)}
 
-/* ————— лайтбокс ————— */
-.lb{position:fixed;inset:0;z-index:120;background:rgba(8,7,6,.94);display:none;
+/* ——— лайтбокс ——— */
+.lb{position:fixed;inset:0;z-index:120;background:rgba(23,24,26,.95);display:none;
   align-items:center;justify-content:center;padding:26px}
 .lb.on{display:flex}
-.lb img{max-width:min(1100px,94vw);max-height:82vh;object-fit:contain}
-.lb .cap{position:absolute;left:0;right:0;bottom:22px;text-align:center;color:var(--ink-2);
-  font:400 13.5px/1.5 var(--fm);padding:0 26px}
-.lb .cl{position:absolute;top:18px;right:22px;font-size:30px;color:var(--ink-2);line-height:1}
+.lb img{max-width:min(1200px,94vw);max-height:82vh;object-fit:contain}
+.lb .cap{position:absolute;left:0;right:0;bottom:24px;text-align:center;color:#C9C8C5;
+  font:400 13px/1.5 var(--fm);padding:0 26px}
+.lb .cl{position:absolute;top:18px;right:24px;font-size:30px;color:#C9C8C5;line-height:1}
 
-/* ————— анимация появления ————— */
-.rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+/* ——— появление ——— */
+.rv{opacity:0;transform:translateY(18px);
+  transition:opacity .75s ease,transform .75s cubic-bezier(.2,.7,.25,1)}
 .rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}
+  .strip-in{animation:none}}
 
-/* ————— мобильные ————— */
-@media (max-width:900px){
-  .greet,.prod,.form-w{grid-template-columns:1fr}
-  .nums{grid-template-columns:1fr 1fr}
-  .num:nth-child(2n){border-right:0}
-  .num:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .menu{display:none}
-  .prod-img{order:-1}
+/* ——— мобильные ——— */
+@media (max-width:1000px){
+  .hero-txt,.intro,.prod,.duo,.form-w{grid-template-columns:1fr}
+  .duo.rev .duo-ph{order:0}
+  .h-row{grid-template-columns:1fr;align-items:start}
+  .tenets{grid-template-columns:repeat(2,1fr)}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .fact:nth-child(2n){border-right:0}
+  .fact:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .menu,.tel{display:none}
+  .f-cols{grid-template-columns:1fr 1fr}
 }
 @media (max-width:620px){
-  .nav{gap:14px;padding:14px var(--pad)}
-  .tel{display:none}
-  .nav-r .btn{padding:10px 15px;font-size:13px}
-  .hero{min-height:auto;padding-top:clamp(150px,42vw,260px)}
+  .tenets,.swatches{grid-template-columns:1fr}
   .fr{grid-template-columns:1fr}
-  .kicker{letter-spacing:.13em;font-size:10px;gap:8px}
-  .kicker::before{width:20px}
-  .bar{gap:10px;padding:8px var(--pad)}
-  .bar b{font-size:12px}
-  .tabs{width:100%;margin-left:0;justify-content:flex-start}
-  .tab{padding:5px 11px;font-size:12.5px}
+  .tabs{width:100%;margin-left:0}
+  .kicker{font-size:10px;letter-spacing:.12em}
+  .cell p{padding-left:0}
 }
 </style>
 
 <div class="bar">
-  <b>Вариант 2 · Производство</b>
+  <b>Вариант 2 · Каталог</b>
   <a class="back" href="../">← к выбору</a>
   <label class="toggle"><input type="checkbox" id="notes"> показать структуру</label>
   <div class="tabs" role="tablist">
@@ -306,7 +312,7 @@ footer{border-top:1px solid var(--line);background:var(--bg-2);padding:clamp(34p
 </div>
 
 <header class="nav">
-  <a class="logo" href="#"><span></span>МЕБЕЛЬ&nbsp;20</a>
+  <a class="logo" href="#">Мебель<i>20</i><span>столярное производство</span></a>
   <nav class="menu">
     <a href="#catalog">Изготовление</a>
     <a href="#objects">Объекты</a>
@@ -315,7 +321,7 @@ footer{border-top:1px solid var(--line);background:var(--bg-2);padding:clamp(34p
     <a href="#contact">Контакты</a>
   </nav>
   <div class="nav-r">
-    <span class="tel">+7 495 000-00-00</span>
+    <span class="tel">+7 (925) 794-39-10<span>Москва, ул. Иркутская 17с4</span></span>
     <a class="btn" href="#contact">Заявка на просчёт</a>
   </div>
 </header>
@@ -327,18 +333,18 @@ footer{border-top:1px solid var(--line);background:var(--bg-2);padding:clamp(34p
 <script>
 /* ============ данные ============ */
 const CAT = [
-  [null,'Кухни','Корпус, фасады и столешница по проекту. Шпон, эмаль, массив.'],
-  ['garderob-oreh','Гардеробные','Проектирование под аудит гардероба: штанги, брючницы, обувь, подсветка.'],
+  [null,'Кухни','Корпус, фасады, столешница по проекту. Шпон, эмаль, массив.'],
+  ['garderob-oreh','Гардеробные','Проектируем под аудит гардероба: штанги, брючницы, обувь, свет.'],
   [null,'Двери на заказ','Межкомнатные, входные, раздвижные. Скрытые петли и доводчики.'],
-  ['shkafy','Шкафы','Встроенные и корпусные, под потолок, с интеграцией в стеновые панели.'],
+  ['shkafy','Шкафы','Встроенные и корпусные, под потолок, заодно со стеновыми панелями.'],
   ['paneli','Стеновые панели','Шпон, 3D-фрезеровка, латунные профили, интеграция ТВ и света.'],
-  ['konsol-steklo','Столы','Обеденные, письменные, консоли. Массив, шпон, стекло, металл.'],
+  ['konsol-steklo','Столы и консоли','Обеденные, письменные, консоли. Массив, шпон, стекло, металл.'],
   ['komod-ardeko','Комоды и тумбы','Штучные предметы: стёганая кожа, латунь, глянцевый лак.'],
-  ['kabinet','Библиотеки и кабинеты','Комплексно: стеллажи, стол, панели, двери — в одном материале.'],
+  ['kabinet','Библиотеки и кабинеты','Стеллажи, стол, панели и двери — в одном материале.'],
   ['stul','Резная мебель','Ручная резьба по массиву, стулья и кресла с каретной стяжкой.'],
   ['vitrina','Резные панно и 3D-панели','Резьба, золочение, патина. Штучная декоративная работа.'],
-  ['kopii','Копии и реплики','Повторяем итальянские модели по фото и каталогу — с точной геометрией.'],
-  ['spalnya','Мебель на заказ','Кровати, гардеробные, тумбы — комплектом под один дизайн-проект.'],
+  ['kopii','Копии и реплики','Повторяем итальянские модели по фото и каталогу.'],
+  ['spalnya','Мебель на заказ','Кровати, тумбы, гардеробные — комплектом под один проект.'],
 ];
 
 const OBJ = [
@@ -347,76 +353,103 @@ const OBJ = [
   ['kabinet','Кабинет руководителя','Росрезерв','кабинеты','Столярная плита, МДФ, шпон бубинга, массив сапели'],
   ['paneli','Стеновые панели из натурального шпона','Офис «Башнефть»','панели','Шпон, столярная плита. 3D-фрезеровка, интеграция ТВ'],
   ['konsol-detalno','Консоль по эскизам студии Detalno','Выставка','штучное','Массив, гипс, поталь. Изготовлена специально для выставки'],
-  ['vitrina','Витрина с резьбой и золочением','Частный интерьер','штучное','Массив, МДФ. Отделка — эмаль, патина, золочение, ручная роспись'],
+  ['vitrina','Витрина с резьбой и золочением','Частный интерьер','штучное','Массив, МДФ. Эмаль, патина, золочение, ручная роспись'],
   ['stolovaya','Обеденная группа','Загородный дом','гостиные','Массив дуб, шпон. Отделка — тонировка, полуматовый лак'],
   ['spalnya','Мебель для спальни комплектом','ЖК бизнес-класса','спальни','МДФ, шпон, ткань. Отделка — шелковисто-матовая эмаль'],
   ['tv-zona-2','ТВ-зона в стиле ар-деко','Частная квартира','гостиные','МДФ, шпон, латунь, стекло. Отделка — глянцевый лак'],
   ['komod-ardeko','Комод из термоясеня и ореха','Частный заказ','штучное','Массив орех, термоясень, кожа стёганая, латунные ручки'],
-  ['kopii','Реплика итальянской консоли Roberta Ventura','Частный заказ','штучное','Массив, МДФ. Золочение, чёрный глянцевый лак'],
-  [null,'Двери ЖК «Итальянский квартал»','ЖК Итальянский квартал','двери','МДФ, столярная плита, шпон корень тополя. Отделка — поталь, тонировка, полуглянцевый лак'],
-  [null,'Межкомнатные двери ЖК «Триумф Палас»','ЖК Триумф Палас','двери','МДФ, массив бук'],
+  ['kopii','Реплика консоли Roberta Ventura','Частный заказ','штучное','Массив, МДФ. Золочение, чёрный глянцевый лак'],
+  [null,'Двери ЖК «Итальянский квартал»','ЖК Итальянский квартал','двери','МДФ, столярная плита, шпон корень тополя. Поталь, тонировка, полуглянцевый лак'],
 ];
 
 const STEPS = [
-  ['Заявка на просчёт','Пришлите заявку на почту, в WhatsApp, Telegram или через форму. Мы перезвоним и уточним детали — габаритные размеры, желаемые материалы, тип отделки. Фото, эскиз или визуализация очень помогут. Оценим работу и в кратчайшие сроки пришлём коммерческое предложение.'],
-  ['Договор','Окончательная цена, сроки изготовления и монтажа фиксируются в договоре и спецификациях. Гарантийные обязательства и условия оплаты прописываются там же. Работаем по предоплате, возможна рассрочка платежей.'],
-  ['Проектирование и 3D-модель','Конструктор при необходимости выезжает на замер и приступает к проектированию. На этом этапе возникает основная масса вопросов — будьте на связи, и мы пройдём его максимально быстро. В результате вы получаете 3D-модель будущего изделия, а на производство уходят чертежи и спецификации, согласованные с вами.'],
-  ['Изготовление и покраска','По согласованным чертежам и материалам идёт изготовление. Для шпона и массива изготавливаем выкрасы именно на материале вашего изделия — цвет согласовывается вживую, а не по экрану. Если отделка эмалями, цвет согласуем раньше: работаем по каталогам RAL, NCS или по вашему образцу.'],
-  ['Доставка и монтаж','Изделия бережно упаковываются и доставляются в согласованное время. При необходимости поднимем негабарит по лестнице. Доставка в регионы обсуждается отдельно. Профессиональные сборщики соберут и установят мебель — вам останется принять работу.'],
-  ['Гарантия и обслуживание','Стандартная гарантия на все изделия — 24 месяца. Но мы не бросаем своих клиентов и после. Что бы ни случилось, реагируем оперативно. Мы в Москве, а не в Италии: собственное производство позволяет исправить любую неприятность в кратчайшие сроки.'],
+  ['Заявка на просчёт','Пришлите заявку на почту, в WhatsApp или Telegram. Перезвоним, уточним размеры, материалы и тип отделки. Фото, эскиз или визуализация ускорят расчёт.'],
+  ['Договор','Цена, сроки изготовления и монтажа фиксируются в договоре и спецификациях. Работаем по предоплате, возможна рассрочка платежей.'],
+  ['Проектирование и 3D','Конструктор выезжает на замер и проектирует. На выходе — 3D-модель изделия, а в цех уходят чертежи и спецификации, согласованные с вами.'],
+  ['Изготовление и покраска','Для шпона и массива делаем выкрасы на материале вашего изделия — цвет согласуете вживую. Эмали подбираем по RAL, NCS или вашему образцу.'],
+  ['Доставка и монтаж','Упаковка, доставка в согласованное время, подъём негабарита. Собирают и устанавливают наши сборщики, а не сторонняя бригада.'],
+  ['Гарантия 24 месяца','Гарантия на все изделия. Мы в Москве, а не в Италии: своё производство позволяет исправить любую неприятность быстро.'],
 ];
 
+const GARD = [
+  ['garderob-oreh','Гардеробная с островом «ЗилАрт»','МДФ, шпон орех американский фризе, алькантара, массив орех, вставки анодированный алюминий'],
+  ['shkafy','Гардеробная «Ильинка»','МДФ, массив бук. Классика с элементами резьбы. Эмаль, патина, лак'],
+  [null,'Гардеробная Москва-Сити «Око»','МДФ + шпон бук, массив бук. Тонировка, полуглянцевый лак. Проект дизайнера Анастасии Федосеевой'],
+  [null,'Гардеробная «Ленинский проспект»','МДФ + шпон анегри. Отделка — тонировка, матовый лак'],
+  [null,'Гардеробная «Пилюгина»','МДФ. Отделка — шелковисто-матовая эмаль. Гардеробная с островом'],
+  [null,'Гардеробная «Континенталь»','МДФ. Эмаль, патина серебро, шелковисто-матовый лак'],
+];
+
+const STRIP = ['garderob-oreh','tv-zona','stolovaya','komod-ardeko','paneli','vitrina',
+  'kabinet','spalnya','konsol-steklo','shkafy','kopii','stul'];
+
 const I = k => 'i/' + k + '.webp';
+const note = (t,s) => `<div class="note">${t}${s?` <em>— ${s}</em>`:''}</div>`;
+const ph = (k,alt,cap) => k
+  ? `<div class="ph"${cap?` data-lb="${I(k)}" data-cap="${cap}"`:''}><img src="${I(k)}" alt="${alt}" loading="lazy"></div>`
+  : `<div class="ph empty"><span><b>[ ]</b>фото<br>добавим при наполнении</span></div>`;
 
-function note(t, sub){ return `<div class="note">${t}${sub?` <em>— ${sub}</em>`:''}</div>`; }
-
-/* ============ блоки ============ */
+/* ============ главная ============ */
 const hero = `
-<section class="hero">
-  <div class="hero-bg"><img src="${I('garderob-oreh')}" alt="Гардеробная из ореха с подсветкой" fetchpriority="high"></div>
-  <div class="hero-in wrap">
-    ${note('Первый экран','кто мы, что делаем, чем отличаемся — за 5 секунд')}
-    <p class="kicker">Столярное производство · Москва · с 2005 года</p>
-    <h1>Мебель для дизайн-проектов<br>полного цикла. <i>Без ЛДСП</i></h1>
-    <p class="lead">Проектируем, производим и монтируем двери, гардеробные, кухни, стеновые
-      панели и корпусную мебель по индивидуальным размерам. Собственный цех 1500 м² —
-      от конструкторского отдела до покрасочных камер и бригад монтажа.</p>
-    <div class="hero-cta">
-      <a class="btn" href="#contact">Заявка на просчёт</a>
-      <a class="btn ghost" href="#objects">Смотреть объекты</a>
+<section class="hero" style="padding:0">
+  <div class="hero-ph">
+    <img src="${I('garderob-oreh')}" alt="Гардеробная из ореха с подсветкой" fetchpriority="high">
+    <div class="hero-tag">
+      <b>Объект в работе</b>
+      <span>Гардеробная с островом, ЖК ЗилАрт — шпон ореха, алькантара, анодированный алюминий</span>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="hero-txt">
+      <div>
+        ${note('Первый экран','что за компания и что она делает')}
+        <p class="kicker">Столярное производство · Москва · 20 лет</p>
+        <h1>Мебель под дизайн-проект: <i>от чертежа до монтажа</i></h1>
+      </div>
+      <div class="hero-side">
+        <p>Двери, гардеробные, кухни, стеновые панели и корпусная мебель по индивидуальным
+          размерам. Свой цех 1500 м², свои монтажники, гарантия 24 месяца.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#contact">Прислать проект</a>
+          <a class="btn ghost" href="#" data-open="obj">Смотреть объекты</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-<div class="nums">
-  <div class="num"><b>1500<i>м²</i></b><span>собственное производство в Москве</span></div>
-  <div class="num"><b>20<i>лет</i></b><span>на рынке мебели для дизайн-проектов</span></div>
-  <div class="num"><b>24<i>мес</i></b><span>гарантия на все изделия</span></div>
-  <div class="num"><b>100<i>+сортов</i></b><span>натурального шпона в подборе под изделие</span></div>
+<div class="facts">
+  <div class="fact"><b>1500<i>м²</i></b><span>собственное производство в Москве</span></div>
+  <div class="fact"><b>20<i>лет</i></b><span>работаем с архитекторами и студиями</span></div>
+  <div class="fact"><b>100<i>+сортов</i></b><span>натурального шпона в подборе</span></div>
+  <div class="fact"><b>24<i>мес</i></b><span>гарантия на каждое изделие</span></div>
 </div>`;
 
-const greet = `
+const intro = `
 <section class="tight">
   <div class="wrap">
-    ${note('Приветственный текст','кто перед вами и почему с вами будут разговаривать')}
-    <div class="greet">
+    ${note('Приветственный текст','кто перед вами, коротко и по делу')}
+    <div class="intro">
       <div>
-        <p class="eyebrow">О компании</p>
-        <h2>Мы — производство,<br>а не посредник.<br>
-          <b>Комплексное изготовление столярных изделий</b> для дизайн-проектов.</h2>
+        <p class="kicker">О компании</p>
+        <h2>Комплексное изготовление столярных изделий для дизайн-проектов.
+          <b>Не работаем с ЛДСП.</b></h2>
       </div>
-      <div class="body">
-        <p>Делаем межкомнатные двери, встроенные шкафы, стеновые панели, гардеробные, кухни,
-          витрины, комоды, тумбы, столы, стулья, кресла, диваны и кровати — любой формы и размера.</p>
-        <p>В портфолио — десятки реализованных объектов премиального уровня под ключ:
-          от квартир в ЖК бизнес- и премиум-класса до кабинетов руководителей и офисов.
-          Работаем с архитекторами и дизайн-студиями: понимаем чертёж, спецификацию и сроки проекта.</p>
+      <div class="col">
+        <p>Межкомнатные двери, встроенные шкафы, стеновые панели, гардеробные, кухни, витрины,
+          комоды, столы, стулья, кресла и кровати — любой формы и размера.</p>
+        <p>В портфолио десятки объектов премиального уровня под ключ: квартиры в московских ЖК,
+          загородные дома, кабинеты руководителей, офисы.</p>
       </div>
     </div>
-    <ul class="claims">
-      <li><b>Не работаем с ЛДСП.</b> МДФ, натуральный шпон, массив, столярная плита, стекло, латунь, кожа.</li>
-      <li><b>Комплексно под один проект.</b> Двери, панели и встроенные шкафы — в одном материале и одной отделке.</li>
-      <li><b>Выкрасы до запуска в работу.</b> Цвет согласуется на вашем материале, а не по картинке на экране.</li>
-      <li><b>Свои монтажники.</b> Не подрядчики: те же люди, что отвечают за изделие, его и ставят.</li>
+    <ul class="tenets">
+      <li><span class="n">01</span><b>Своё производство</b>
+        <span>Цех 1500 м²: конструкторы, фанеровка, ЧПУ, покраска, монтаж. Ничего не отдаём на сторону.</span></li>
+      <li><span class="n">02</span><b>Комплект под проект</b>
+        <span>Двери, панели и шкафы делаем вместе — в одном материале, с совпадением рисунка шпона.</span></li>
+      <li><span class="n">03</span><b>Выкрасы до запуска</b>
+        <span>Цвет согласуете на материале своего изделия, а не по картинке на экране.</span></li>
+      <li><span class="n">04</span><b>Свои монтажники</b>
+        <span>Ставят те же люди, что отвечают за изделие. Не подрядчик подрядчика.</span></li>
     </ul>
   </div>
 </section>`;
@@ -425,177 +458,137 @@ const catalog = `
 <section class="alt" id="catalog">
   <div class="wrap">
     ${note('Каталог направлений','карточки товаров — то, с чем к вам приходят')}
-    <div class="head">
-      <p class="eyebrow">Изготовление</p>
-      <h2>Что мы производим</h2>
-      <p>Каждое направление — отдельная страница с проектами, материалами и ценовым ориентиром.
-        Чаще всего заказывают комплектом: двери и панели, гардеробная и шкафы.</p>
+    <div class="h-row">
+      <div>
+        <p class="kicker">Изготовление</p>
+        <h2>Что мы производим</h2>
+      </div>
+      <p class="lead">Каждое направление — своя страница с проектами, материалами и ориентиром
+        по цене. Чаще всего заказывают комплектом: двери с панелями, гардеробная со шкафами.</p>
     </div>
     <div class="cat">
-      ${CAT.map(([k,t,d])=>`
+      ${CAT.map(([k,t,d],i)=>`
       <a class="cell" href="#" data-open="sec">
-        ${k ? `<div class="ph"><img src="${I(k)}" alt="${t}" loading="lazy"></div>`
-            : `<div class="ph empty"><span><b>◈</b>фото раздела<br>подставим при наполнении</span></div>`}
-        <span class="go">→</span>
-        <div class="tx"><h3>${t}</h3><p>${d}</p></div>
+        ${ph(k,t)}
+        <div class="cap"><span class="num">${String(i+1).padStart(2,'0')}</span><h3>${t}</h3></div>
+        <p>${d}</p>
       </a>`).join('')}
     </div>
   </div>
 </section>`;
 
 const prod = `
-<section id="production">
+<section class="dark" id="production">
   <div class="wrap">
-    ${note('Уникальный блок об особенностях','то, чего нет у конкурентов — доказательство, а не обещание')}
-    <div class="head">
-      <p class="eyebrow">Производство</p>
-      <h2>Цех, а не шоурум</h2>
-      <p>Большинство «производителей мебели на заказ» размещают заказы на стороне. Мы делаем всё
-        у себя — поэтому можем взять нестандарт, поправить деталь за день и отвечать за сроки.</p>
+    ${note('Уникальный блок','чем отличаетесь — доказательство, а не обещание')}
+    <div class="h-row">
+      <div>
+        <p class="kicker">Производство</p>
+        <h2>Цех, а не шоурум</h2>
+      </div>
+      <p class="lead">Большинство «производителей мебели на заказ» размещают заказы на стороне.
+        Мы делаем всё у себя — поэтому берём нестандарт и отвечаем за сроки.</p>
     </div>
     <div class="prod">
-      <figure class="prod-img" style="margin:0">
-        <img src="${I('masterskaya')}" alt="Столярная мастерская" loading="lazy">
-        <figcaption>Москва · 1500 м² · полный цикл от конструктора до монтажа</figcaption>
-      </figure>
-      <ul class="specs">
-        <li><span class="k">01</span><span class="v"><b>Конструкторский отдел</b>
-          <span>Чертежи, 3D-модель и спецификации — до запуска в работу</span></span></li>
-        <li><span class="k">02</span><span class="v"><b>Собственный участок фанеровки</b>
-          <span>Облицовка шпоном на своём прессе: рисунок подбираем под изделие</span></span></li>
-        <li><span class="k">03</span><span class="v"><b>2 фрезерных станка с ЧПУ</b>
+      <div class="prod-ph"><img src="${I('masterskaya')}" alt="Столярная мастерская" loading="lazy"></div>
+      <ul class="lines">
+        <li><span class="k">01</span><span><b>Конструкторский отдел</b>
+          <span>Чертежи, 3D-модель и спецификации до запуска в работу</span></span></li>
+        <li><span class="k">02</span><span><b>Свой участок фанеровки</b>
+          <span>Облицовка шпоном на своём прессе, подбор рисунка под изделие</span></span></li>
+        <li><span class="k">03</span><span><b>2 фрезерных станка с ЧПУ</b>
           <span>Резные панно, 3D-панели, точная геометрия радиусных деталей</span></span></li>
-        <li><span class="k">04</span><span class="v"><b>3 покрасочные камеры</b>
-          <span>Эмали, лаки, патина, поталь. Выкрасы по RAL, NCS или вашему образцу</span></span></li>
-        <li><span class="k">05</span><span class="v"><b>Собственные бригады монтажа</b>
-          <span>Замер, доставка, сборка и установка — одной командой</span></span></li>
-        <li><span class="k">06</span><span class="v"><b>Штатный реставратор</b>
-          <span>Ручная резьба, сложная отделка, восстановление и доработка на объекте</span></span></li>
+        <li><span class="k">04</span><span><b>3 покрасочные камеры</b>
+          <span>Эмали, лаки, патина, поталь. Работаем по RAL, NCS и вашему образцу</span></span></li>
+        <li><span class="k">05</span><span><b>Свои бригады монтажа</b>
+          <span>Замер, доставка, сборка и установка одной командой</span></span></li>
+        <li><span class="k">06</span><span><b>Штатный реставратор</b>
+          <span>Ручная резьба, сложная отделка, доработка на объекте</span></span></li>
       </ul>
     </div>
   </div>
 </section>`;
 
 const objects = `
-<section class="alt" id="objects">
+<section id="objects">
   <div class="wrap">
-    ${note('Объекты','реальные проекты со спецификацией — главный аргумент профессионализма')}
-    <div class="head">
-      <p class="eyebrow">Портфолио</p>
-      <h2>Реализованные объекты</h2>
-      <p>Мебель для дизайн-проектов в жилых комплексах Москвы, загородных домах и офисах.
-        У каждой позиции — материалы и отделка, как в спецификации к договору.</p>
+    ${note('Объекты','реальные работы со спецификацией материалов')}
+    <div class="h-row">
+      <div>
+        <p class="kicker">Портфолио</p>
+        <h2>Реализованные объекты</h2>
+      </div>
+      <p class="lead">Мебель для дизайн-проектов в московских ЖК, загородных домах и офисах.
+        У каждой позиции — состав материалов, как в спецификации к договору.</p>
     </div>
     <div class="filters" id="filters"></div>
     <div class="objs" id="objgrid"></div>
-    <div style="margin-top:clamp(24px,3.5vw,40px)">
+    <div style="margin-top:clamp(26px,3vw,44px)">
       <a class="btn ghost" href="#" data-open="obj">Все объекты →</a>
     </div>
   </div>
 </section>`;
 
+const strip = `
+<div class="strip">
+  ${note('Лента работ','живая полоса, останавливается при наведении')}
+  <div class="strip-in">
+    ${[...STRIP,...STRIP].map(k=>`<figure><img src="${I(k)}" alt="" loading="lazy"></figure>`).join('')}
+  </div>
+</div>`;
+
 const materials = `
 <section id="materials">
   <div class="wrap">
-    ${note('Материалы','стандартный блок, но с конкретикой вместо общих слов')}
-    <div class="head">
-      <p class="eyebrow">Материалы</p>
-      <h2>Из чего мы делаем</h2>
-      <p>Только экологичные и стабильные материалы. Породу, рисунок шпона и толщину подбираем
-        под конкретное изделие и условия помещения.</p>
-    </div>
-    <div class="mats">
-      <div class="mat-c">
-        <div class="ph"><img src="${I('shpon')}" alt="Натуральный шпон" loading="lazy"></div>
-        <div class="tx">
-          <h3>Шпон ценных пород</h3>
-          <p>Более 100 сортов: экзотика, корневые срезы, файн-лайн. Рисунок подбираем
-            в раскладку, чтобы двери и панели читались как одно изделие.</p>
-          <ul><li>орех</li><li>дуб</li><li>эбен-макасар</li><li>бубинга</li><li>сикамора</li><li>корень тополя</li><li>анегри</li><li>файн-лайн</li></ul>
+    ${note('Материалы, фурнитура, отделка','стандартные блоки — но с конкретикой')}
+    <div class="trio">
+      <div class="duo">
+        <div class="duo-ph"><img src="${I('shpon')}" alt="Натуральный шпон" loading="lazy"></div>
+        <div>
+          <p class="kicker">Материалы</p>
+          <h3>Шпон, массив, МДФ<br>и столярная плита</h3>
+          <p>Более 100 сортов шпона: экзотика, корневые срезы, файн-лайн. Рисунок подбираем
+            в раскладку, чтобы двери и панели читались как одно изделие. Массив — по канонам
+            столярного дела, со своими наработками против деформации полотна.</p>
+          <ul class="tags">
+            <li>орех</li><li>дуб</li><li>бук</li><li>ясень</li><li>эбен-макасар</li>
+            <li>бубинга</li><li>сикамора</li><li>корень тополя</li><li>анегри</li>
+            <li>термоясень</li><li>файн-лайн</li>
+          </ul>
         </div>
       </div>
-      <div class="mat-c">
-        <div class="ph"><img src="${I('stolovaya')}" alt="Массив дерева" loading="lazy"></div>
-        <div class="tx">
-          <h3>Массив дерева</h3>
-          <p>Дуб, бук, ясень, орех, ольха, сапели и ещё десятки пород. Изделия по канонам
-            столярного дела плюс свои наработки против деформации полотна и коробки.</p>
-          <ul><li>дуб</li><li>бук</li><li>ясень</li><li>орех</li><li>термоясень</li><li>ольха</li></ul>
+      <div class="duo rev">
+        <div class="duo-ph"><img src="${I('furnitura')}" alt="Фурнитура Blum, Häfele, Hettich" loading="lazy"></div>
+        <div>
+          <p class="kicker">Фурнитура</p>
+          <h3>Механика, которой<br>пользуются каждый день</h3>
+          <p>Ставим фурнитуру ведущих производителей — на дверях и ящиках экономить нельзя,
+            именно они изнашиваются первыми. Скрытые петли и доводчики, выпадающие пороги,
+            выдвижные штанги и подсветка с датчиком движения.</p>
+          <ul class="tags">
+            <li>Blum</li><li>Häfele</li><li>Hettich</li><li>скрытые петли</li>
+            <li>доводчики</li><li>выпадающие пороги</li><li>брючницы</li><li>обувницы</li>
+          </ul>
         </div>
       </div>
-      <div class="mat-c">
-        <div class="ph"><img src="${I('eskiz-komod')}" alt="Чертёж изделия" loading="lazy"></div>
-        <div class="tx">
-          <h3>МДФ, столярная плита, фанера</h3>
-          <p>Влагостойкий и огнеупорный МДФ, гибкий и облегчённый. Столярная плита и фанера —
-            там, где нужна стабильность конструкции. ЛДСП не используем.</p>
-          <ul><li>МДФ влагостойкий</li><li>огнеупорный</li><li>гибкий</li><li>столярная плита</li><li>фанера</li></ul>
-        </div>
-      </div>
-      <div class="mat-c">
-        <div class="ph"><img src="${I('konsol-steklo')}" alt="Декоративные материалы" loading="lazy"></div>
-        <div class="tx">
-          <h3>Декор и вставки</h3>
-          <p>Металл, стекло и зеркала — для современных акцентов. Ткани, кожа и алькантара —
-            в обивке, стёганых фасадах и внутренней отделке гардеробных.</p>
-          <ul><li>латунь</li><li>анодированный алюминий</li><li>нержавеющая сталь</li><li>стекло</li><li>кожа</li><li>алькантара</li></ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>`;
-
-const furn = `
-<section class="alt" id="furniture">
-  <div class="wrap">
-    ${note('Фурнитура','клиент просил отдельным блоком')}
-    <div class="prod">
-      <div>
-        <p class="eyebrow">Фурнитура</p>
-        <h2 style="font-size:clamp(23px,3.4vw,38px)">Механика, которую не видно,<br>но которой пользуются каждый день</h2>
-        <p style="color:var(--ink-2);font-weight:300;margin-top:18px">Ставим фурнитуру ведущих мировых
-          производителей. Она дороже китайских аналогов и на неё есть заводская гарантия — на дверях
-          и ящиках экономить нельзя, именно они изнашиваются первыми.</p>
-        <ul class="claims" style="margin-top:22px">
-          <li><b>Blum, Häfele, Hettich</b> — доводчики, направляющие, подъёмники, петли</li>
-          <li><b>Скрытые петли и доводчики</b> — дверь без видимой механики</li>
-          <li><b>Выпадающие пороги</b> — тишина и отсутствие щели без порога на полу</li>
-          <li><b>Наполнение гардеробных</b> — брючницы, обувницы, выдвижные штанги, подсветка с датчиком движения</li>
-        </ul>
-      </div>
-      <figure class="prod-img" style="margin:0">
-        <img src="${I('furnitura')}" alt="Фурнитура Blum, Häfele, Hettich" loading="lazy">
-        <figcaption>Blum · Häfele · Hettich — заводская гарантия на механизмы</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>`;
-
-const finish = `
-<section id="finish">
-  <div class="wrap">
-    ${note('Отделка','где особенно виден уровень мастерской')}
-    <div class="head">
-      <p class="eyebrow">Отделка</p>
-      <h2>Десяток видов отделки и спецэффектов</h2>
-      <p>Работаем по каталогам RAL и NCS или по вашему образцу. Для шпона и массива делаем выкрасы
-        на материале вашего изделия — цвет согласуете вживую, до запуска в производство.</p>
-    </div>
-    <div class="prod">
-      <figure class="prod-img" style="margin:0">
-        <img src="${I('otdelka')}" alt="Глянцевая отделка шпона" loading="lazy">
-        <figcaption>Полировка глянца до зеркала · шпон корень, тонировка</figcaption>
-      </figure>
-      <div>
-        <div class="sw">
-          <div><i style="background:linear-gradient(135deg,#F3EFE8,#D9D2C6)"></i><b>Матовая эмаль</b><span>шелковисто-матовая, по RAL и NCS</span></div>
-          <div><i style="background:linear-gradient(135deg,#1E1A17,#3B322A)"></i><b>Глянцевый лак</b><span>с полировкой до зеркала</span></div>
-          <div><i style="background:linear-gradient(135deg,#8C6A3F,#C9A227)"></i><b>Золочение, поталь</b><span>золото и серебро, вручную</span></div>
-          <div><i style="background:linear-gradient(135deg,#6E5B45,#A99377)"></i><b>Патина</b><span>серебро, золото, тёмная</span></div>
-          <div><i style="background:linear-gradient(135deg,#B9A88C,#7E6A50)"></i><b>Браширование</b><span>подчёркнутая текстура</span></div>
-          <div><i style="background:linear-gradient(135deg,#DDD6E2,#B4A8BE)"></i><b>Перламутр</b><span>и металлик, хамелеон</span></div>
-          <div><i style="background:linear-gradient(135deg,#E8DCC8,#C4A883)"></i><b>Кракелюр</b><span>эффект старения</span></div>
-          <div><i style="background:linear-gradient(135deg,#7E3B3B,#C9A227)"></i><b>Ручная роспись</b><span>по эскизу дизайнера</span></div>
+      <div class="duo">
+        <div class="duo-ph"><img src="${I('otdelka')}" alt="Отделка" loading="lazy"></div>
+        <div>
+          <p class="kicker">Отделка</p>
+          <h3>Десяток видов отделки<br>и спецэффектов</h3>
+          <p>Работаем по каталогам RAL и NCS или по вашему образцу. Для шпона и массива
+            изготавливаем выкрасы на материале вашего изделия — цвет согласуете до запуска
+            в производство.</p>
+          <div class="swatches">
+            <div><i style="background:linear-gradient(140deg,#F4F1EA,#DCD6C9)"></i><b>Матовая эмаль</b><span>шелковисто-матовая, RAL и NCS</span></div>
+            <div><i style="background:linear-gradient(140deg,#2A2622,#4A423A)"></i><b>Глянцевый лак</b><span>с полировкой до зеркала</span></div>
+            <div><i style="background:linear-gradient(140deg,#B08D4C,#E0C583)"></i><b>Золочение, поталь</b><span>золото и серебро, вручную</span></div>
+            <div><i style="background:linear-gradient(140deg,#7C6A54,#A99377)"></i><b>Патина</b><span>серебро, золото, тёмная</span></div>
+            <div><i style="background:linear-gradient(140deg,#C3B49A,#8A7658)"></i><b>Браширование</b><span>подчёркнутая текстура</span></div>
+            <div><i style="background:linear-gradient(140deg,#E2DCE6,#BCB1C4)"></i><b>Перламутр</b><span>металлик, хамелеон</span></div>
+            <div><i style="background:linear-gradient(140deg,#EDE3D2,#CBAE88)"></i><b>Кракелюр</b><span>эффект старения</span></div>
+            <div><i style="background:linear-gradient(140deg,#7E3B3B,#C9A227)"></i><b>Ручная роспись</b><span>по эскизу дизайнера</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -606,70 +599,52 @@ const process = `
 <section class="alt" id="process">
   <div class="wrap">
     ${note('Как заказать','снимает страх «а как это вообще происходит»')}
-    <div class="head">
-      <p class="eyebrow">Порядок работы</p>
-      <h2>Как заказать мебель индивидуального изготовления</h2>
-      <p>Шесть этапов — от заявки до гарантийного обслуживания. На каждом понятно, что от вас
-        нужно и что вы получаете на выходе.</p>
+    <div class="h-row">
+      <div>
+        <p class="kicker">Порядок работы</p>
+        <h2>Шесть шагов до готовой мебели</h2>
+      </div>
+      <p class="lead">На каждом этапе понятно, что нужно от вас и что вы получаете на выходе.
+        Сроки и обязательства зафиксированы в договоре.</p>
     </div>
     <div class="steps">
       ${STEPS.map(([t,c],i)=>`
-      <div class="step${i===0?' open':''}">
-        <button aria-expanded="${i===0}"><span class="n">0${i+1}</span><span class="t">${t}</span><span class="pm">${i===0?'–':'+'}</span></button>
-        <div class="c"${i===0?'':' hidden'}>${c}</div>
+      <div class="step">
+        <span class="n">${String(i+1).padStart(2,'0')}</span>
+        <h3>${t}</h3><p>${c}</p>
       </div>`).join('')}
     </div>
   </div>
 </section>`;
 
-const guar = `
-<section class="tight">
-  <div class="wrap">
-    ${note('Гарантия и доверие','закрывает последнее возражение перед заявкой')}
-    <div class="guar">
-      <div><h3><i>24</i> месяца гарантии</h3><p>Стандартная гарантия на все изделия. Гарантийные
-        обязательства прописаны в договоре, а не «на словах».</p></div>
-      <div><h3>Мы в Москве,<br>а не в Италии</h3><p>Собственное производство позволяет исправить
-        любую неприятность в кратчайшие сроки — деталь переделываем у себя.</p></div>
-      <div><h3>Работаем<br>с дизайнерами</h3><p>Проекты студий и архитекторов: читаем чертёж
-        и спецификацию, держим сроки объекта, ведём авторский надзор по мебели.</p></div>
-      <div><h3>Участники<br>i Saloni</h3><p>Показывали работы на i Saloni Worldwide Moscow.
-        Делаем штучные предметы по эскизам дизайн-студий.</p></div>
-    </div>
-  </div>
-</section>`;
-
 const form = `
-<section class="alt" id="contact">
+<section class="dark" id="contact">
   <div class="wrap">
-    ${note('Форма заявки','короткая: чем меньше полей, тем больше заявок')}
+    ${note('Форма заявки','минимум полей — больше заявок')}
     <div class="form-w">
       <div>
-        <p class="eyebrow">Заявка на просчёт</p>
-        <h2 style="font-size:clamp(23px,3.4vw,38px)">Пришлите проект — посчитаем</h2>
-        <p style="color:var(--ink-2);font-weight:300;margin:18px 0 26px">Чертёж, визуализация,
-          фото из интернета или просто размеры — этого достаточно, чтобы назвать порядок цены.
-          Перезвоним, уточним детали и пришлём коммерческое предложение.</p>
-        <div class="contacts">
-          <div><div class="k">Телефон и мессенджеры</div><div class="v">+7 495 000-00-00
-            <small>WhatsApp и Telegram — по этому же номеру</small></div></div>
-          <div><div class="k">Почта</div><div class="v">info@mebel20.ru
-            <small>Пришлите чертежи и спецификацию — ответим с расчётом</small></div></div>
-          <div><div class="k">Производство</div><div class="v">Москва, 1500 м²
+        <p class="kicker">Заявка на просчёт</p>
+        <h2 style="font-size:clamp(23px,2.6vw,46px)">Пришлите проект — посчитаем</h2>
+        <p style="margin:20px 0 0;font-size:clamp(15px,1.05vw,18px);max-width:46ch">Чертёж,
+          визуализация, фото из интернета или просто размеры. Этого достаточно, чтобы назвать
+          порядок цены и сроки.</p>
+        <div class="cts">
+          <div><div class="k">Телефон и мессенджеры</div><div class="v">+7 (925) 794-39-10
+            <small>WhatsApp и Telegram по этому же номеру</small></div></div>
+          <div><div class="k">Производство</div><div class="v">Москва, ул. Иркутская 17с4
             <small>Приезжайте посмотреть цех и образцы отделки</small></div></div>
         </div>
       </div>
       <form class="form" onsubmit="return false">
         <div class="fr">
-          <label class="f"><span>Как к вам обращаться</span><input type="text" placeholder="Имя"></label>
+          <label class="f"><span>Имя</span><input type="text" placeholder="Как к вам обращаться"></label>
           <label class="f"><span>Телефон</span><input type="tel" placeholder="+7 ___ ___-__-__"></label>
         </div>
         <label class="f"><span>Что нужно изготовить</span>
-          <textarea placeholder="Например: гардеробная 4 м в ЖК, шпон орех, к марту"></textarea></label>
-        <label class="f"><span>Файлы</span><input type="text" placeholder="Чертёж, визуализация, фото — перетащите сюда"></label>
-        <button class="btn" type="submit" style="justify-self:start;margin-top:4px">Отправить заявку</button>
-        <p class="hint">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.
-          Это прототип — форма ничего не отправляет.</p>
+          <textarea placeholder="Например: гардеробная 4 м, шпон ореха, к марту"></textarea></label>
+        <label class="f"><span>Файлы</span><input type="text" placeholder="Чертёж, визуализация, фото"></label>
+        <button class="btn lg" type="submit" style="justify-self:start;margin-top:4px;background:#F2F1EE;color:#17181A;border-color:#F2F1EE">Отправить заявку</button>
+        <p class="hint">Это прототип — форма ничего не отправляет.</p>
       </form>
     </div>
   </div>
@@ -678,173 +653,172 @@ const form = `
 const foot = `
 <footer>
   <div class="wrap">
-    <div class="f-top">
-      <a class="logo" href="#"><span></span>МЕБЕЛЬ&nbsp;20</a>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a class="btn ghost" href="#contact">Заявка на просчёт</a>
-        <a class="btn" href="#objects">Портфолио</a>
-      </div>
-    </div>
     <div class="f-cols">
+      <div>
+        <a class="logo" href="#">Мебель<i>20</i><span>столярное производство</span></a>
+        <p style="margin-top:18px;max-width:34ch;color:var(--ink-3);font-size:14px">
+          Комплексное изготовление столярных изделий для дизайн-проектов. Москва, с 2005 года.</p>
+      </div>
       <div><h4>Изготовление</h4>
         <a href="#catalog">Кухни</a><a href="#catalog">Гардеробные</a><a href="#catalog">Двери на заказ</a>
         <a href="#catalog">Шкафы</a><a href="#catalog">Стеновые панели</a></div>
       <div><h4>Ещё</h4>
-        <a href="#catalog">Столы</a><a href="#catalog">Комоды и тумбы</a><a href="#catalog">Библиотеки</a>
+        <a href="#catalog">Столы и консоли</a><a href="#catalog">Комоды</a><a href="#catalog">Библиотеки</a>
         <a href="#catalog">Резная мебель</a><a href="#catalog">Копии и реплики</a></div>
-      <div><h4>О компании</h4>
-        <a href="#production">Производство</a><a href="#materials">Материалы</a>
-        <a href="#finish">Отделка</a><a href="#process">Как работаем</a></div>
       <div><h4>Контакты</h4>
-        <p>+7 495 000-00-00</p><p>info@mebel20.ru</p><p>Москва, производство 1500 м²</p></div>
+        <p>+7 (925) 794-39-10</p><p>Москва, ул. Иркутская 17с4</p>
+        <a href="#contact">Прислать проект на расчёт</a></div>
     </div>
     <div class="f-bot">
-      <span>© 2026 Мебель 20 — мебель на заказ для дизайн-проектов</span>
+      <span>© 2026 Мебель 20 — мебель на заказ по дизайн-проектам</span>
       <span>Прототип нового сайта · вариант 2</span>
     </div>
   </div>
 </footer>`;
-
-/* ============ экран «Гардеробные» ============ */
-const GARD = [
-  ['garderob-oreh','Гардеробная с островом «ЗилАрт»','МДФ, шпон орех американский фризе, алькантара, массив орех, вставки анодированный алюминий'],
-  ['shkafy','Гардеробная «Ильинка»','МДФ, массив бук. Классика с элементами резьбы. Эмаль, патина, лак'],
-  [null,'Гардеробная Москва-Сити «Око»','МДФ + шпон бук, массив бук. Тонировка, полуглянцевый лак. Проект дизайнера Анастасии Федосеевой'],
-  [null,'Гардеробная «Ленинский проспект»','МДФ + шпон анегри. Отделка — тонировка, матовый лак'],
-  [null,'Гардеробная «Пилюгина»','МДФ. Отделка — шелковисто-матовая эмаль. Гардеробная с островом'],
-  [null,'Гардеробная «Континенталь»','МДФ. Эмаль, патина серебро, шелковисто-матовый лак'],
-];
-
-const sec = `
-<section class="hero" style="min-height:min(58vh,520px)">
-  <div class="hero-bg"><img src="${I('garderob-oreh')}" alt="Гардеробная" style="object-position:60% 45%"></div>
-  <div class="hero-in wrap">
-    ${note('Страница раздела','пример: так выглядит любое направление изнутри')}
-    <p class="kicker">Изготовление / Гардеробные</p>
-    <h1 style="font-size:clamp(28px,5vw,54px)">Гардеробные комнаты<br>по дизайн-проектам</h1>
-    <p class="lead">Проектируем, производим и устанавливаем премиальные гардеробные по индивидуальным
-      размерам — с учётом всех нюансов помещения и ваших вещей.</p>
-  </div>
-</section>
-
-<section class="tight">
-  <div class="wrap">
-    ${note('Приветственный текст раздела','о чём страница, коротко')}
-    <div class="greet">
-      <div>
-        <p class="eyebrow">Коротко</p>
-        <h2>Гардеробная — не шкаф,<br>а <b>инженерно продуманное пространство</b> хранения.</h2>
-      </div>
-      <div class="body">
-        <p>От того, насколько грамотно спроектирована система, зависит удобство, срок службы
-          и сохранность вещей. Поэтому мы начинаем не с фасадов, а с аудита гардероба.</p>
-        <p>Не работаем с ДСП. МДФ, натуральный шпон, массив, столярная плита, стекло, латунь, кожа.
-          Премиальная фурнитура, эксклюзивные отделки, подбор цвета по вашему образцу.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="alt">
-  <div class="wrap">
-    ${note('Каталог проектов раздела','карточки с материалами — как в спецификации')}
-    <div class="head">
-      <p class="eyebrow">Наши работы</p>
-      <h2>Гардеробные, изготовленные для дизайн-проектов</h2>
-    </div>
-    <div class="objs">
-      ${GARD.map(([k,t,m])=>`
-      <article class="obj">
-        ${k ? `<div class="ph" data-lb="${I(k)}" data-cap="${t}"><img src="${I(k)}" alt="${t}" loading="lazy"></div>`
-            : `<div class="ph empty"><span><b>◈</b>фото объекта<br>из архива производства</span></div>`}
-        <div class="tx"><h3>${t}</h3><p class="mat">${m}</p></div>
-      </article>`).join('')}
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    ${note('Уникальный блок раздела','экспертиза, которой нет у конкурентов — это и есть «больше смыслов»')}
-    <div class="head">
-      <p class="eyebrow">Проектирование</p>
-      <h2>Эргономика: что мы считаем до эскиза</h2>
-      <p>Перед заказом проводим аудит гардероба — считаем количество вещей каждого типа:
-        длинная верхняя одежда, пиджаки, брюки, свитера, рубашки, обувь, аксессуары.
-        Дальше цифры определяют конструкцию.</p>
-    </div>
-    <ul class="specs">
-      <li><span class="k">170<br>190</span><span class="v"><b>Высота штанг для повседневной одежды</b>
-        <span>Доступ без стремянки. Для платьев и пальто — 140–150 см, чтобы низ не касался пола. Для брюк и юбок — 100–120 см</span></span></li>
-      <li><span class="k">125</span><span class="v"><b>Максимальная удобная высота ящиков</b>
-        <span>Ящики — удобное хранение, но заполнять ими шкаф до потолка нельзя</span></span></li>
-      <li><span class="k">50<br>60</span><span class="v"><b>Глубина полок под плечики</b>
-        <span>Для обуви — 35–45 см, чтобы шкаф не был слишком глубоким</span></span></li>
-      <li><span class="k">12<br>15</span><span class="v"><b>Высота ящиков с перегородками</b>
-        <span>Под нижнее бельё и носки. Для джинсов — полки под стопку, для брюк — выдвижная брючница</span></span></li>
-      <li><span class="k">зоны</span><span class="v"><b>Зонирование по частоте использования</b>
-        <span>«Сегодня» — на уровне глаз и рук. Сезонное и редкое — на верхних и нижних полках</span></span></li>
-      <li><span class="k">свет</span><span class="v"><b>Освещение с датчиком движения</b>
-        <span>Светодиодные ленты на каждую секцию — свет включается, когда открываете дверь</span></span></li>
-    </ul>
-  </div>
-</section>
-
-<section class="alt">
-  <div class="wrap">
-    ${note('Материалы, фурнитура, отделка','стандартные блоки раздела — клиент просил их явно')}
-    <div class="mats">
-      <div class="mat-c">
-        <div class="ph"><img src="${I('shpon')}" alt="Шпон" loading="lazy"></div>
-        <div class="tx"><h3>Материалы корпуса и фасадов</h3>
-          <p>МДФ под эмаль, шпон ценных пород, массив. Для внутреннего наполнения —
-            стабильные материалы, которые не поведёт от перепада влажности.</p>
-          <ul><li>МДФ</li><li>шпон орех</li><li>шпон анегри</li><li>массив бук</li><li>алькантара</li><li>зеркало</li></ul></div>
-      </div>
-      <div class="mat-c">
-        <div class="ph"><img src="${I('furnitura')}" alt="Фурнитура" loading="lazy"></div>
-        <div class="tx"><h3>Наполнение и фурнитура</h3>
-          <p>Blum, Häfele, Hettich. Выдвижные штанги, брючницы, обувницы, доводчики
-            и подсветка с датчиком движения на каждую секцию.</p>
-          <ul><li>доводчики</li><li>брючницы</li><li>обувницы</li><li>подсветка</li><li>скрытые петли</li></ul></div>
-      </div>
-      <div class="mat-c">
-        <div class="ph"><img src="${I('otdelka')}" alt="Отделка" loading="lazy"></div>
-        <div class="tx"><h3>Отделка шкафов</h3>
-          <p>Шелковисто-матовая эмаль, патина серебро и золото, тонировка, полуглянцевый
-            и матовый лак. Цвет — по RAL, NCS или вашему образцу.</p>
-          <ul><li>эмаль</li><li>патина</li><li>тонировка</li><li>лак</li><li>браширование</li></ul></div>
-      </div>
-      <div class="mat-c">
-        <div class="ph"><img src="${I('vitrina')}" alt="Декор" loading="lazy"></div>
-        <div class="tx"><h3>Декоративные элементы</h3>
-          <p>Резьба, стёганые вставки из кожи и алькантары, латунные и алюминиевые профили,
-            осветлённое зеркало, стекло с фацетом.</p>
-          <ul><li>резьба</li><li>кожа</li><li>латунь</li><li>алюминий</li><li>зеркало</li></ul></div>
-      </div>
-    </div>
-  </div>
-</section>` + process + form + foot;
 
 /* ============ экран «Объекты» ============ */
 const objScreen = `
 <section class="tight">
   <div class="wrap">
     ${note('Каталог объектов','фильтр по типу — чтобы дизайнер быстро нашёл похожее')}
-    <div class="head">
-      <p class="eyebrow">Портфолио</p>
-      <h2>Объекты</h2>
-      <p>Десятки реализованных проектов премиального уровня под ключ. Фильтр — по типу изделия;
-        у каждой карточки материалы и отделка, как в спецификации к договору.</p>
+    <div class="h-row">
+      <div>
+        <p class="kicker">Портфолио</p>
+        <h2>Объекты</h2>
+      </div>
+      <p class="lead">Десятки реализованных проектов под ключ. Фильтр по типу изделия,
+        у каждой карточки — материалы и отделка.</p>
     </div>
     <div class="filters" id="filters2"></div>
     <div class="objs" id="objgrid2"></div>
   </div>
-</section>` + form + foot;
+</section>` + strip + form + foot;
 
-/* ============ экраны ============ */
+/* ============ экран «Гардеробные» ============ */
+const sec = `
+<section class="hero" style="padding:0">
+  <div class="hero-ph" style="height:clamp(280px,42vh,480px)">
+    <img src="${I('garderob-oreh')}" alt="Гардеробная" style="object-position:58% 45%">
+  </div>
+  <div class="wrap">
+    <div class="hero-txt">
+      <div>
+        ${note('Страница раздела','пример: так выглядит любое направление изнутри')}
+        <p class="kicker">Изготовление / Гардеробные</p>
+        <h1 style="font-size:clamp(27px,3.6vw,60px)">Гардеробные комнаты по дизайн-проектам</h1>
+      </div>
+      <div class="hero-side">
+        <p>Проектируем, производим и устанавливаем гардеробные по индивидуальным размерам —
+          с учётом всех нюансов помещения и ваших вещей.</p>
+        <div class="hero-cta"><a class="btn" href="#contact">Рассчитать гардеробную</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight alt">
+  <div class="wrap">
+    ${note('Приветственный текст раздела','о чём страница')}
+    <div class="intro">
+      <div>
+        <p class="kicker">Коротко</p>
+        <h2>Гардеробная — не шкаф, а <b>инженерно продуманное пространство</b> хранения.</h2>
+      </div>
+      <div class="col">
+        <p>От того, насколько грамотно спроектирована система, зависит удобство, срок службы
+          и сохранность вещей. Поэтому мы начинаем не с фасадов, а с аудита гардероба.</p>
+        <p>Не работаем с ДСП. МДФ, натуральный шпон, массив, столярная плита, стекло, латунь,
+          кожа. Премиальная фурнитура, подбор цвета по вашему образцу.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    ${note('Работы раздела','карточки с материалами — как в спецификации')}
+    <div class="h-row">
+      <div><p class="kicker">Наши работы</p><h2>Гардеробные для дизайн-проектов</h2></div>
+    </div>
+    <div class="objs">
+      ${GARD.map(([k,t,m])=>`
+      <article class="obj">
+        ${ph(k,t,t)}
+        <div class="tx"><h3>${t}</h3><p class="spec">${m}</p></div>
+      </article>`).join('')}
+    </div>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    ${note('Уникальный блок раздела','экспертиза в цифрах — это и есть «больше смыслов»')}
+    <div class="h-row">
+      <div><p class="kicker">Проектирование</p><h2>Эргономика: что считаем до эскиза</h2></div>
+      <p class="lead">Перед заказом проводим аудит гардероба — считаем вещи каждого типа:
+        верхняя одежда, пиджаки, брюки, свитера, рубашки, обувь, аксессуары. Дальше цифры
+        определяют конструкцию.</p>
+    </div>
+    <ul class="lines">
+      <li><span class="k">170–190</span><span><b>Высота штанг для повседневной одежды</b>
+        <span>Доступ без стремянки. Платья и пальто — 140–150 см, брюки и юбки — 100–120 см</span></span></li>
+      <li><span class="k">125</span><span><b>Максимальная удобная высота ящиков</b>
+        <span>Ящики удобны, но заполнять ими шкаф до потолка нельзя</span></span></li>
+      <li><span class="k">50–60</span><span><b>Глубина полок под плечики</b>
+        <span>Для обуви — 35–45 см, чтобы шкаф не был слишком глубоким</span></span></li>
+      <li><span class="k">12–15</span><span><b>Высота ящиков с перегородками</b>
+        <span>Под бельё и носки. Джинсы — стопкой на полке, брюки — на выдвижной брючнице</span></span></li>
+      <li><span class="k">зоны</span><span><b>Зонирование по частоте использования</b>
+        <span>«Сегодня» — на уровне глаз и рук, сезонное — на верхних и нижних полках</span></span></li>
+      <li><span class="k">свет</span><span><b>Освещение с датчиком движения</b>
+        <span>Светодиодные ленты на каждую секцию — свет включается при открывании</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    ${note('Материалы, фурнитура, отделка раздела','клиент просил их явно')}
+    <div class="trio">
+      <div class="duo">
+        <div class="duo-ph"><img src="${I('shpon')}" alt="Материалы" loading="lazy"></div>
+        <div>
+          <p class="kicker">Материалы</p>
+          <h3>Корпус и фасады</h3>
+          <p>МДФ под эмаль, шпон ценных пород, массив. Для внутреннего наполнения — стабильные
+            материалы, которые не поведёт от перепада влажности.</p>
+          <ul class="tags"><li>МДФ</li><li>шпон орех</li><li>шпон анегри</li><li>массив бук</li>
+            <li>алькантара</li><li>осветлённое зеркало</li></ul>
+        </div>
+      </div>
+      <div class="duo rev">
+        <div class="duo-ph"><img src="${I('furnitura')}" alt="Фурнитура" loading="lazy"></div>
+        <div>
+          <p class="kicker">Наполнение</p>
+          <h3>Фурнитура и внутренние системы</h3>
+          <p>Blum, Häfele, Hettich. Выдвижные штанги, брючницы, обувницы, доводчики
+            и подсветка с датчиком движения на каждую секцию.</p>
+          <ul class="tags"><li>доводчики</li><li>брючницы</li><li>обувницы</li>
+            <li>выдвижные штанги</li><li>подсветка</li></ul>
+        </div>
+      </div>
+      <div class="duo">
+        <div class="duo-ph"><img src="${I('otdelka')}" alt="Отделка" loading="lazy"></div>
+        <div>
+          <p class="kicker">Отделка</p>
+          <h3>Как выглядят фасады</h3>
+          <p>Шелковисто-матовая эмаль, патина серебро и золото, тонировка, полуглянцевый
+            и матовый лак. Цвет — по RAL, NCS или вашему образцу.</p>
+          <ul class="tags"><li>эмаль</li><li>патина</li><li>тонировка</li><li>лак</li>
+            <li>браширование</li><li>резьба</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>` + process + form + foot;
+
 const SCREENS = {
-  home: hero + greet + catalog + prod + objects + materials + furn + finish + process + guar + form + foot,
+  home: hero + intro + catalog + prod + objects + strip + materials + process + form + foot,
   obj: objScreen,
   sec: sec,
 };
@@ -864,12 +838,11 @@ function renderObjects(gridId, filtersId, limit){
     const list = OBJ.filter(o => active==='все' || o[3]===active).slice(0, limit || 99);
     grid.innerHTML = list.map(([k,t,p,,m]) => `
       <article class="obj">
-        ${k ? `<div class="ph" data-lb="${I(k)}" data-cap="${t} — ${p}"><img src="${I(k)}" alt="${t}" loading="lazy"></div>`
-            : `<div class="ph empty"><span><b>◈</b>фото объекта<br>из архива производства</span></div>`}
+        ${ph(k, t, `${t} — ${p}`)}
         <div class="tx">
           <span class="place">${p}</span>
           <h3>${t}</h3>
-          <p class="mat"><b>Материалы:</b> ${m}</p>
+          <p class="spec"><b>Материалы:</b> ${m}</p>
         </div>
       </article>`).join('');
     reveal();
@@ -889,14 +862,14 @@ function reveal(){
     if (!e.isIntersecting) return;
     e.target.style.transitionDelay = (e.target.dataset.d || 0) + 's';
     e.target.classList.add('in'); io.unobserve(e.target);
-  }), {rootMargin:'0px 0px -6% 0px', threshold:.05});
+  }), {rootMargin:'0px 0px -6% 0px', threshold:.04});
   host.querySelectorAll('section > .wrap > *').forEach(el => {
     if (el.closest('.hero') || el.classList.contains('rv')) return;
     el.classList.add('rv'); io.observe(el);
   });
-  host.querySelectorAll('.cell, .obj, .mat-c, .sw div').forEach((el,i) => {
+  host.querySelectorAll('.cell,.obj,.step,.tenets li,.duo').forEach((el,i) => {
     if (el.classList.contains('rv')) return;
-    el.classList.add('rv'); el.dataset.d = Math.min(i*.05,.4); io.observe(el);
+    el.classList.add('rv'); el.dataset.d = Math.min(i*.045,.36); io.observe(el);
   });
   setTimeout(() => host.querySelectorAll('.rv:not(.in)').forEach(el => {
     if (el.getBoundingClientRect().top < innerHeight) el.classList.add('in');
@@ -916,27 +889,17 @@ function show(name){
 document.querySelector('.tabs').onclick = e => {
   const t = e.target.closest('.tab'); if (t) show(t.dataset.s);
 };
-
 document.getElementById('notes').onchange = e =>
   document.body.classList.toggle('notes', e.target.checked);
 
-/* аккордеон + карточки каталога + лайтбокс */
 const lb = document.getElementById('lb');
-host.addEventListener('click', e => {
-  const st = e.target.closest('.step > button');
-  if (st){
-    const step = st.parentElement, c = step.querySelector('.c'), open = !c.hidden;
-    c.hidden = open; step.classList.toggle('open', !open);
-    st.setAttribute('aria-expanded', String(!open));
-    st.querySelector('.pm').textContent = open ? '+' : '–';
-    return;
-  }
-  const cell = e.target.closest('[data-open]');
-  if (cell){ e.preventDefault(); show(cell.dataset.open); return; }
-  const ph = e.target.closest('[data-lb]');
-  if (ph){
-    lb.querySelector('img').src = ph.dataset.lb;
-    lb.querySelector('.cap').textContent = ph.dataset.cap || '';
+document.body.addEventListener('click', e => {
+  const open = e.target.closest('[data-open]');
+  if (open){ e.preventDefault(); show(open.dataset.open); return; }
+  const p = e.target.closest('[data-lb]');
+  if (p){
+    lb.querySelector('img').src = p.dataset.lb;
+    lb.querySelector('.cap').textContent = p.dataset.cap || '';
     lb.classList.add('on');
   }
 });
