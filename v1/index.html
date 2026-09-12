@@ -336,9 +336,29 @@ body.anim .rv.in{opacity:1;transform:none}
   .people .txt,.pair .said{padding:34px 28px}
   .foot-in{grid-template-columns:1fr 1fr}
   section{padding:56px 0}
-  .top-in{gap:18px}
+  .top-in{gap:18px;flex-wrap:wrap}
   .nav{order:3;width:100%}
-  .top-contact{margin-left:0}
+  .top-contact{margin-left:auto}
+}
+@media (max-width:600px){
+  .wrap{padding:0 18px}
+  .bar{padding:9px 18px;gap:10px 14px}
+  .bar b{font-size:11px}
+  .tabs{margin-left:0;width:100%;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{padding:8px 12px;font-size:12px;white-space:nowrap}
+  .top-in{gap:10px 16px;padding:14px 0}
+  .logo{font-size:21px}
+  .nav{gap:12px 16px;font-size:11px;letter-spacing:.04em}
+  .top-contact{font-size:12px;line-height:1.45}
+  .top-contact b{font-size:14px}
+  .stage{min-height:0;aspect-ratio:4/3}
+  .hero-img{min-height:230px}
+  .hero-txt{padding:34px 20px}
+  .people .txt,.pair .said,.slab .said{padding:26px 20px}
+  .strip figure{width:158px;height:118px}
+  .foot-in{grid-template-columns:1fr}
+  section{padding:40px 0}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style><div class="bar">
