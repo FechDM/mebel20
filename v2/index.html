@@ -17,8 +17,12 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f);
-  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;color:var(--ink);font:400 16px/1.6 var(--f);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background:var(--bg);
+  background-image:radial-gradient(90% 55% at 88% 4%,rgba(51,80,63,.045) 0%,transparent 62%),
+    radial-gradient(70% 45% at 4% 42%,rgba(165,140,96,.05) 0%,transparent 60%);
+  background-attachment:fixed}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
@@ -75,6 +79,9 @@ body.notes section{outline:1px dashed rgba(51,80,63,.22);outline-offset:-1px}
 .hero{position:relative}
 .hero-ph{position:relative;height:clamp(340px,54vh,640px);overflow:hidden;background:var(--bg-3)}
 .hero-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+/* фото не обрывается линией, а растворяется в бумаге */
+.hero-ph::after{content:"";position:absolute;inset:auto 0 0 0;height:34%;pointer-events:none;
+  background:linear-gradient(180deg,rgba(251,250,248,0) 0%,rgba(251,250,248,.22) 62%,rgba(251,250,248,.72) 100%)}
 .hero-tag{position:absolute;left:0;bottom:0;background:var(--bg);
   padding:clamp(14px,1.5vw,22px) clamp(18px,2vw,30px);max-width:min(92vw,440px)}
 .hero-tag b{display:block;font:500 11px/1 var(--fm);letter-spacing:.14em;
@@ -87,20 +94,27 @@ body.notes section{outline:1px dashed rgba(51,80,63,.22);outline-offset:-1px}
 .hero-side p{margin:0 0 20px;font-size:clamp(15px,1.05vw,18px);color:var(--ink-2)}
 .hero-cta{display:flex;gap:10px;flex-wrap:wrap}
 
-/* ——— строка цифр ——— */
-.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line)}
-.fact{padding:clamp(18px,2.2vw,34px) clamp(14px,1.6vw,28px);border-right:1px solid var(--line)}
-.fact:last-child{border-right:0}
-.fact b{display:block;font-size:clamp(24px,2.6vw,46px);font-weight:600;letter-spacing:-.04em;line-height:1}
-.fact b i{font-style:normal;font-size:.46em;color:var(--acc);margin-left:4px;letter-spacing:-.01em}
-.fact span{display:block;margin-top:10px;font-size:13.5px;color:var(--ink-3);line-height:1.4}
+/* ——— паспорт производства: выходные данные, а не плашка ——— */
+.passport{margin:clamp(26px,3vw,42px) 0 0;padding:0;display:grid;
+  gap:clamp(9px,.9vw,13px);max-width:520px}
+.passport div{display:flex;align-items:baseline;gap:10px;font-size:14.5px}
+.passport dt{flex:none;color:var(--ink-2);margin:0}
+.passport .dots{flex:1;height:1px;transform:translateY(-3px);
+  background:radial-gradient(circle,var(--ink-3) .9px,transparent .9px) repeat-x;
+  background-size:5px 1px;opacity:.5}
+.passport dd{flex:none;margin:0;font:500 15px/1 var(--fm);letter-spacing:-.01em;color:var(--ink)}
+.passport dd em{font-style:normal;color:var(--ink-3);font-size:12.5px;margin-left:3px}
 
 /* ——— секции ——— */
-section{padding:clamp(52px,5.6vw,110px) 0}
+section{padding:clamp(52px,5.6vw,110px) 0;position:relative}
 section.tight{padding:clamp(38px,4vw,72px) 0}
-.alt{background:var(--bg-2)}
-.dark{background:var(--ink);color:#F2F1EE}
+/* тональная подложка: бумага, а не заливка — очень мягкий перепад по вертикали */
+.alt{background:linear-gradient(178deg,#F5F3EE 0%,#F1EFE9 52%,#EFECE5 100%)}
+.alt::before,.alt::after{content:"";position:absolute;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--line) 14%,var(--line) 86%,transparent)}
+.alt::before{top:0}.alt::after{bottom:0}
+.dark{color:#F2F1EE;
+  background:radial-gradient(120% 90% at 18% 0%,#212328 0%,#17181A 58%,#141517 100%)}
 .dark .kicker{color:#9FBBA9}
 .dark .lead,.dark p{color:#B9B9B6}
 .kicker{font:500 11px/1 var(--fm);letter-spacing:.18em;text-transform:uppercase;
@@ -118,15 +132,14 @@ section.tight{padding:clamp(38px,4vw,72px) 0}
 .intro h2{font-size:clamp(22px,2.5vw,44px);font-weight:500;line-height:1.2;letter-spacing:-.028em}
 .intro h2 b{font-weight:600;color:var(--acc)}
 .intro .col p{color:var(--ink-2);font-size:clamp(15px,1vw,17px)}
-.tenets{list-style:none;margin:clamp(26px,3vw,44px) 0 0;padding:0;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
-  border:1px solid var(--line)}
-.tenets li{background:var(--bg);padding:clamp(18px,1.8vw,26px)}
-.alt .tenets li{background:var(--bg-2)}
-.tenets b{display:block;font-size:15.5px;margin-bottom:8px}
-.tenets span{font-size:13.5px;color:var(--ink-3);line-height:1.55}
-.tenets .n{display:block;font:500 10.5px/1 var(--fm);color:var(--acc);
-  letter-spacing:.1em;margin-bottom:14px}
+.tenets{list-style:none;margin:clamp(34px,4vw,64px) 0 0;padding:0;
+  display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(30px,4vw,84px)}
+.tenets li{display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,1.6vw,26px);
+  padding:clamp(18px,1.8vw,26px) 0;border-top:1px solid var(--line);align-items:baseline}
+.tenets li:nth-child(-n+2){border-top:0}
+.tenets b{display:block;font-size:clamp(16px,1.15vw,19px);margin-bottom:7px;letter-spacing:-.015em}
+.tenets span{font-size:14px;color:var(--ink-3);line-height:1.55}
+.tenets .n{font:500 10.5px/1.6 var(--fm);color:var(--acc);letter-spacing:.1em}
 
 /* ——— каталог ——— */
 .cat{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.7vw,32px)}
@@ -403,7 +416,7 @@ const hero = `
     <div class="hero-txt">
       <div>
         ${note('Первый экран','что за компания и что она делает')}
-        <p class="kicker">Столярное производство · Москва · 20 лет</p>
+        <p class="kicker">Столярное производство · Москва · Иркутская 17с4</p>
         <h1>Мебель под дизайн-проект: <i>от чертежа до монтажа</i></h1>
       </div>
       <div class="hero-side">
@@ -416,13 +429,7 @@ const hero = `
       </div>
     </div>
   </div>
-</section>
-<div class="facts">
-  <div class="fact"><b>1500<i>м²</i></b><span>собственное производство в Москве</span></div>
-  <div class="fact"><b>20<i>лет</i></b><span>работаем с архитекторами и студиями</span></div>
-  <div class="fact"><b>100<i>+сортов</i></b><span>натурального шпона в подборе</span></div>
-  <div class="fact"><b>24<i>мес</i></b><span>гарантия на каждое изделие</span></div>
-</div>`;
+</section>`;
 
 const intro = `
 <section class="tight">
@@ -439,17 +446,24 @@ const intro = `
           комоды, столы, стулья, кресла и кровати — любой формы и размера.</p>
         <p>В портфолио десятки объектов премиального уровня под ключ: квартиры в московских ЖК,
           загородные дома, кабинеты руководителей, офисы.</p>
+        <dl class="passport">
+          <div><dt>Производство</dt><span class="dots"></span><dd>1500<em>м²</em></dd></div>
+          <div><dt>В мастерской на Иркутской</dt><span class="dots"></span><dd>20<em>лет</em></dd></div>
+          <div><dt>Сортов шпона в подборе</dt><span class="dots"></span><dd>100<em>+</em></dd></div>
+          <div><dt>Гарантия на изделия</dt><span class="dots"></span><dd>24<em>мес</em></dd></div>
+          <div><dt>Работаем с ЛДСП</dt><span class="dots"></span><dd>нет</dd></div>
+        </dl>
       </div>
     </div>
     <ul class="tenets">
-      <li><span class="n">01</span><b>Своё производство</b>
-        <span>Цех 1500 м²: конструкторы, фанеровка, ЧПУ, покраска, монтаж. Ничего не отдаём на сторону.</span></li>
-      <li><span class="n">02</span><b>Комплект под проект</b>
-        <span>Двери, панели и шкафы делаем вместе — в одном материале, с совпадением рисунка шпона.</span></li>
-      <li><span class="n">03</span><b>Выкрасы до запуска</b>
-        <span>Цвет согласуете на материале своего изделия, а не по картинке на экране.</span></li>
-      <li><span class="n">04</span><b>Свои монтажники</b>
-        <span>Ставят те же люди, что отвечают за изделие. Не подрядчик подрядчика.</span></li>
+      <li><span class="n">01</span><div><b>Своё производство</b>
+        <span>Цех 1500 м²: конструкторский отдел, фанеровка, ЧПУ, покраска, монтаж. Ничего не отдаём на сторону, поэтому берём нестандарт и отвечаем за сроки.</span></div></li>
+      <li><span class="n">02</span><div><b>Комплект под один проект</b>
+        <span>Двери, стеновые панели и встроенные шкафы делаем вместе — в одном материале, с совпадением рисунка шпона по всей квартире.</span></div></li>
+      <li><span class="n">03</span><div><b>Выкрасы до запуска в работу</b>
+        <span>Цвет согласуете на материале своего изделия, а не по картинке на экране. Работаем по RAL, NCS или вашему образцу.</span></div></li>
+      <li><span class="n">04</span><div><b>Свои монтажники</b>
+        <span>Ставят те же люди, что отвечают за изделие. Не подрядчик подрядчика, поэтому спрашивать за результат есть с кого.</span></div></li>
     </ul>
   </div>
 </section>`;
@@ -657,7 +671,7 @@ const foot = `
       <div>
         <a class="logo" href="#">Мебель<i>20</i><span>столярное производство</span></a>
         <p style="margin-top:18px;max-width:34ch;color:var(--ink-3);font-size:14px">
-          Комплексное изготовление столярных изделий для дизайн-проектов. Москва, с 2005 года.</p>
+          Комплексное изготовление столярных изделий для дизайн-проектов. Москва, двадцать лет в работе.</p>
       </div>
       <div><h4>Изготовление</h4>
         <a href="#catalog">Кухни</a><a href="#catalog">Гардеробные</a><a href="#catalog">Двери на заказ</a>
