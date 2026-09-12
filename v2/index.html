@@ -162,7 +162,19 @@ section.tight{padding:clamp(38px,4vw,72px) 0}
 @media (max-width:600px){.cat{grid-template-columns:1fr}}
 
 /* ——— производство ——— */
-.prod{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,3vw,64px);align-items:center}
+.prod{display:grid;gap:clamp(26px,3vw,52px)}
+.shots{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,.9vw,16px)}
+.shots figure{margin:0;position:relative;overflow:hidden;background:#1E2024}
+.shots img{width:100%;aspect-ratio:5/4;object-fit:cover;
+  transition:transform .8s cubic-bezier(.2,.7,.25,1)}
+.shots figure:hover img{transform:scale(1.045)}
+.shots figcaption{position:absolute;left:0;bottom:0;right:0;padding:16px 14px 11px;
+  font:400 11.5px/1.4 var(--fm);letter-spacing:.03em;color:#E6E4DF;
+  background:linear-gradient(0deg,rgba(15,16,18,.88),transparent)}
+@media (max-width:900px){.shots{grid-template-columns:repeat(2,1fr)}}
+.prod .lines{columns:2;column-gap:clamp(28px,3.4vw,70px)}
+.prod .lines li{break-inside:avoid}
+@media (max-width:820px){.prod .lines{columns:1}}
 .prod-ph{position:relative;overflow:hidden;background:var(--bg-3)}
 .prod-ph img{width:100%;aspect-ratio:16/11;object-fit:cover}
 .lines{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
@@ -346,18 +358,18 @@ footer{border-top:1px solid var(--line);padding:clamp(34px,3.5vw,60px) 0 28px}
 <script>
 /* ============ данные ============ */
 const CAT = [
-  [null,'Кухни','Корпус, фасады, столешница по проекту. Шпон, эмаль, массив.'],
-  ['garderob-oreh','Гардеробные','Проектируем под аудит гардероба: штанги, брючницы, обувь, свет.'],
-  [null,'Двери на заказ','Межкомнатные, входные, раздвижные. Скрытые петли и доводчики.'],
-  ['shkafy','Шкафы','Встроенные и корпусные, под потолок, заодно со стеновыми панелями.'],
-  ['paneli','Стеновые панели','Шпон, 3D-фрезеровка, латунные профили, интеграция ТВ и света.'],
+  ['kuhni-3','Кухни','Корпус, фасады, столешница по проекту. Шпон, эмаль, массив.'],
+  ['garderob-6','Гардеробные','Проектируем под аудит гардероба: штанги, брючницы, обувь, свет.'],
+  ['dveri-3','Двери на заказ','Межкомнатные, входные, раздвижные. Скрытые петли и доводчики.'],
+  ['shkafy-6','Шкафы','Встроенные и корпусные, под потолок, заодно со стеновыми панелями.'],
+  ['stenovye-6','Стеновые панели','Шпон, 3D-фрезеровка, латунные профили, интеграция ТВ и света.'],
   ['konsol-steklo','Столы и консоли','Обеденные, письменные, консоли. Массив, шпон, стекло, металл.'],
   ['komod-ardeko','Комоды и тумбы','Штучные предметы: стёганая кожа, латунь, глянцевый лак.'],
   ['kabinet','Библиотеки и кабинеты','Стеллажи, стол, панели и двери — в одном материале.'],
-  ['stul','Резная мебель','Ручная резьба по массиву, стулья и кресла с каретной стяжкой.'],
-  ['vitrina','Резные панно и 3D-панели','Резьба, золочение, патина. Штучная декоративная работа.'],
+  ['reznaya-3','Резная мебель','Ручная резьба по массиву, наличники, карнизы, панно.'],
+  ['panno-6','Резные панно и 3D-панели','Резьба, золочение, патина. Штучная декоративная работа.'],
   ['kopii','Копии и реплики','Повторяем итальянские модели по фото и каталогу.'],
-  ['spalnya','Мебель на заказ','Кровати, тумбы, гардеробные — комплектом под один проект.'],
+  ['portfolio-6','Мебель на заказ','Кровати, тумбы, стеллажи — комплектом под один проект.'],
 ];
 
 const OBJ = [
@@ -372,7 +384,9 @@ const OBJ = [
   ['tv-zona-2','ТВ-зона в стиле ар-деко','Частная квартира','гостиные','МДФ, шпон, латунь, стекло. Отделка — глянцевый лак'],
   ['komod-ardeko','Комод из термоясеня и ореха','Частный заказ','штучное','Массив орех, термоясень, кожа стёганая, латунные ручки'],
   ['kopii','Реплика консоли Roberta Ventura','Частный заказ','штучное','Массив, МДФ. Золочение, чёрный глянцевый лак'],
-  [null,'Двери ЖК «Итальянский квартал»','ЖК Итальянский квартал','двери','МДФ, столярная плита, шпон корень тополя. Поталь, тонировка, полуглянцевый лак'],
+  ['dveri-3','Двери ЖК «Итальянский квартал»','ЖК Итальянский квартал','двери','МДФ, столярная плита, шпон корень тополя. Поталь, тонировка, полуглянцевый лак']
+  ,['dveri-2','Межкомнатные двери в современном интерьере','Частная квартира','двери','Столярная плита, шпон дуб. Скрытые петли, выпадающий порог']
+  ,['stenovye-1','Стеновые панели с интеграцией ТВ','Частная квартира','панели','Шпон, МДФ. 3D-фрезеровка, латунные вставки'],
 ];
 
 const STEPS = [
@@ -386,15 +400,15 @@ const STEPS = [
 
 const GARD = [
   ['garderob-oreh','Гардеробная с островом «ЗилАрт»','МДФ, шпон орех американский фризе, алькантара, массив орех, вставки анодированный алюминий'],
-  ['shkafy','Гардеробная «Ильинка»','МДФ, массив бук. Классика с элементами резьбы. Эмаль, патина, лак'],
-  [null,'Гардеробная Москва-Сити «Око»','МДФ + шпон бук, массив бук. Тонировка, полуглянцевый лак. Проект дизайнера Анастасии Федосеевой'],
-  [null,'Гардеробная «Ленинский проспект»','МДФ + шпон анегри. Отделка — тонировка, матовый лак'],
-  [null,'Гардеробная «Пилюгина»','МДФ. Отделка — шелковисто-матовая эмаль. Гардеробная с островом'],
-  [null,'Гардеробная «Континенталь»','МДФ. Эмаль, патина серебро, шелковисто-матовый лак'],
+  ['garderob-6','Гардеробная «Пилюгина»','МДФ. Отделка — шелковисто-матовая эмаль. Гардеробная с островом'],
+  ['garderob-5','Гардеробная «Континенталь»','МДФ. Эмаль, патина серебро, шелковисто-матовый лак'],
+  ['garderob-4','Гардеробная «Ильинка»','МДФ, массив бук. Классика с элементами резьбы. Эмаль, патина, лак'],
+  ['garderob-2','Гардеробная «Ленинский проспект»','МДФ + шпон анегри. Отделка — тонировка, матовый лак'],
+  ['garderob-3','Гардеробная Москва-Сити «Око»','МДФ + шпон бук, массив бук. Тонировка, полуглянцевый лак. Проект дизайнера Анастасии Федосеевой'],
 ];
 
-const STRIP = ['garderob-oreh','tv-zona','stolovaya','komod-ardeko','paneli','vitrina',
-  'kabinet','spalnya','konsol-steklo','shkafy','kopii','stul'];
+const STRIP = ['garderob-6','dveri-3','kuhni-3','stenovye-6','reznaya-3','garderob-5',
+  'panno-6','kabinet','tv-zona','garderob-2','shkafy-6','kuhni-4','portfolio-4','dveri-2'];
 
 const I = k => 'i/' + k + '.webp';
 const note = (t,s) => `<div class="note">${t}${s?` <em>— ${s}</em>`:''}</div>`;
@@ -504,7 +518,16 @@ const prod = `
         Мы делаем всё у себя — поэтому берём нестандарт и отвечаем за сроки.</p>
     </div>
     <div class="prod">
-      <div class="prod-ph"><img src="${I('masterskaya')}" alt="Столярная мастерская" loading="lazy"></div>
+      <div class="shots">
+        <figure><img src="${I('garderob-1')}" alt="Чертёж гардеробной" loading="lazy">
+          <figcaption>Чертёж и спецификация</figcaption></figure>
+        <figure><img src="${I('shkafy-2')}" alt="Столярка в цехе" loading="lazy">
+          <figcaption>Столярный участок</figcaption></figure>
+        <figure><img src="${I('rezba-1')}" alt="Резные заготовки" loading="lazy">
+          <figcaption>Резьба и декоры</figcaption></figure>
+        <figure><img src="${I('reznaya-6')}" alt="Изделие в работе" loading="lazy">
+          <figcaption>Сборка и подгонка</figcaption></figure>
+      </div>
       <ul class="lines">
         <li><span class="k">01</span><span><b>Конструкторский отдел</b>
           <span>Чертежи, 3D-модель и спецификации до запуска в работу</span></span></li>
@@ -557,7 +580,7 @@ const materials = `
     ${note('Материалы, фурнитура, отделка','стандартные блоки — но с конкретикой')}
     <div class="trio">
       <div class="duo">
-        <div class="duo-ph"><img src="${I('shpon')}" alt="Натуральный шпон" loading="lazy"></div>
+        <div class="duo-ph"><img src="${I('materialy-3')}" alt="Натуральный шпон" loading="lazy"></div>
         <div>
           <p class="kicker">Материалы</p>
           <h3>Шпон, массив, МДФ<br>и столярная плита</h3>
@@ -586,7 +609,7 @@ const materials = `
         </div>
       </div>
       <div class="duo">
-        <div class="duo-ph"><img src="${I('otdelka')}" alt="Отделка" loading="lazy"></div>
+        <div class="duo-ph"><img src="${I('otdelka-1')}" alt="Отделка" loading="lazy"></div>
         <div>
           <p class="kicker">Отделка</p>
           <h3>Десяток видов отделки<br>и спецэффектов</h3>
@@ -795,7 +818,7 @@ const sec = `
     ${note('Материалы, фурнитура, отделка раздела','клиент просил их явно')}
     <div class="trio">
       <div class="duo">
-        <div class="duo-ph"><img src="${I('shpon')}" alt="Материалы" loading="lazy"></div>
+        <div class="duo-ph"><img src="${I('materialy-5')}" alt="Материалы" loading="lazy"></div>
         <div>
           <p class="kicker">Материалы</p>
           <h3>Корпус и фасады</h3>
@@ -817,7 +840,7 @@ const sec = `
         </div>
       </div>
       <div class="duo">
-        <div class="duo-ph"><img src="${I('otdelka')}" alt="Отделка" loading="lazy"></div>
+        <div class="duo-ph"><img src="${I('otdelka-1')}" alt="Отделка" loading="lazy"></div>
         <div>
           <p class="kicker">Отделка</p>
           <h3>Как выглядят фасады</h3>
