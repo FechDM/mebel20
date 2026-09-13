@@ -78,7 +78,8 @@ body.notes section{outline:1px dashed rgba(51,80,63,.22);outline-offset:-1px}
 /* ——— hero: фото во всю ширину, текст под ним ——— */
 .hero{position:relative}
 .hero-ph{position:relative;height:clamp(340px,54vh,640px);overflow:hidden;background:var(--bg-3)}
-.hero-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+.hero-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;
+  will-change:transform;transition:transform .18s linear}
 /* фото не обрывается линией, а растворяется в бумаге */
 .hero-ph::after{content:"";position:absolute;inset:auto 0 0 0;height:34%;pointer-events:none;
   background:linear-gradient(180deg,rgba(251,250,248,0) 0%,rgba(251,250,248,.22) 62%,rgba(251,250,248,.72) 100%)}
@@ -343,6 +344,7 @@ footer{border-top:1px solid var(--line);padding:clamp(34px,3.5vw,60px) 0 28px}
     <a href="#objects">Объекты</a>
     <a href="#materials">Материалы</a>
     <a href="#process">Как работаем</a>
+    <a href="#pro">Дизайнерам</a>
     <a href="#contact">Контакты</a>
   </nav>
   <div class="nav-r">
@@ -405,6 +407,9 @@ const GARD = [
   ['garderob-4','Гардеробная «Ильинка»','МДФ, массив бук. Классика с элементами резьбы. Эмаль, патина, лак'],
   ['garderob-2','Гардеробная «Ленинский проспект»','МДФ + шпон анегри. Отделка — тонировка, матовый лак'],
   ['garderob-3','Гардеробная Москва-Сити «Око»','МДФ + шпон бук, массив бук. Тонировка, полуглянцевый лак. Проект дизайнера Анастасии Федосеевой'],
+  ['garderob-4','Гардеробная «Зил Арт» 1','МДФ. Отделка — матовая эмаль'],
+  ['garderob-2','Гардеробная «Пилюгина» 2','МДФ, осветлённое зеркало. Отделка — шелковисто-матовая эмаль'],
+  ['garderob-5','Гардеробная «Шмитовский проезд»','МДФ. Отделка — шелковисто-матовая эмаль'],
 ];
 
 const STRIP = ['garderob-6','dveri-3','kuhni-3','stenovye-6','reznaya-3','garderob-5',
@@ -654,6 +659,31 @@ const process = `
   </div>
 </section>`;
 
+const designers = `
+<section class="tight" id="pro">
+  <div class="wrap">
+    ${note('Дизайнерам и архитекторам','отдельная аудитория — производство живёт их проектами')}
+    <div class="h-row">
+      <div>
+        <p class="kicker">Сотрудничество</p>
+        <h2>Дизайнерам и архитекторам</h2>
+      </div>
+      <p class="lead">Приглашаем к работе дизайнеров, архитекторов и студии. Читаем чертёж
+        и спецификацию, держим сроки объекта, ведём авторский надзор по мебели.</p>
+    </div>
+    <ul class="tenets">
+      <li><span class="n">01</span><div><b>Техподдержка на стадии разработки</b>
+        <span>Подскажем по конструктиву, узлам и фурнитуре до того, как проект уйдёт в работу: что реализуемо, что дорого без причины, где лучше поменять материал.</span></div></li>
+      <li><span class="n">02</span><div><b>Прозрачность на стадии изготовления</b>
+        <span>Показываем чертежи и 3D до запуска, выкрасы на материале изделия, фото с производства по ходу. Вы понимаете, что получите, до монтажа.</span></div></li>
+      <li><span class="n">03</span><div><b>Комплект по одному проекту</b>
+        <span>Двери, панели, гардеробные и кухня из одного цеха — рисунок шпона и оттенок эмали совпадают по всей квартире.</span></div></li>
+      <li><span class="n">04</span><div><b>Образцы и выкрасы по запросу</b>
+        <span>Отправим образцы шпона и выкрасы для согласования с заказчиком — вживую, а не по фотографии на экране.</span></div></li>
+    </ul>
+  </div>
+</section>`;
+
 const form = `
 <section class="dark" id="contact">
   <div class="wrap">
@@ -680,7 +710,8 @@ const form = `
         </div>
         <label class="f"><span>Что нужно изготовить</span>
           <textarea placeholder="Например: гардеробная 4 м, шпон ореха, к марту"></textarea></label>
-        <label class="f"><span>Файлы</span><input type="text" placeholder="Чертёж, визуализация, фото"></label>
+        <label class="f"><span>Почта</span><input type="email" placeholder="для коммерческого предложения"></label>
+        <label class="f"><span>Файлы</span><input type="text" placeholder="Чертёж, визуализация, фото — до 20 МБ"></label>
         <button class="btn lg" type="submit" style="justify-self:start;margin-top:4px;background:#F2F1EE;color:#17181A;border-color:#F2F1EE">Отправить заявку</button>
         <p class="hint">Это прототип — форма ничего не отправляет.</p>
       </form>
@@ -730,7 +761,7 @@ const objScreen = `
     <div class="filters" id="filters2"></div>
     <div class="objs" id="objgrid2"></div>
   </div>
-</section>` + strip + form + foot;
+</section>` + strip + designers + form + foot;
 
 /* ============ экран «Гардеробные» ============ */
 const sec = `
@@ -810,6 +841,33 @@ const sec = `
         <span>«Сегодня» — на уровне глаз и рук, сезонное — на верхних и нижних полках</span></span></li>
       <li><span class="k">свет</span><span><b>Освещение с датчиком движения</b>
         <span>Светодиодные ленты на каждую секцию — свет включается при открывании</span></span></li>
+      <li><span class="k">1,5–2</span><span><b>Зазор под глухой дверью, см</b>
+        <span>Закрытая гардеробная без притока — это грибок и запах затхлости. Нужна решётка внизу двери или зазор над полом</span></span></li>
+      <li><span class="k">40–50</span><span><b>Канальный вентилятор, м³/час</b>
+        <span>Для комнаты больше 3 м² без окна прячем в потолок вытяжку в общую вентиляцию дома</span></span></li>
+      <li><span class="k">10–15</span><span><b>Запас места под будущие покупки, %</b>
+        <span>Схему с размерами всех зон делаем на этапе замера — с запасом, а не впритык</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    ${note('Хранение обуви','отдельный блок — самая частая боль в гардеробной')}
+    <div class="h-row">
+      <div><p class="kicker">Обувь</p><h2>Отдельная система хранения</h2></div>
+      <p class="lead">Обувь тяжёлая, объёмная и деформируется при неправильном хранении.
+        Поэтому её зону считаем отдельно от одежды.</p>
+    </div>
+    <ul class="lines">
+      <li><span class="k">10–15°</span><span><b>Наклонные и выдвижные полки</b>
+        <span>Пара ставится на одну «волну» с упором для каблука. Выдвигается вся секция — видно все пары сразу</span></span></li>
+      <li><span class="k">30–50</span><span><b>Рейлинги для сапог, см голенища</b>
+        <span>Крепятся к штанге или стене, фиксация зажимами за подошву или голенище — предотвращает заломы</span></span></li>
+      <li><span class="k">20–30</span><span><b>Поворотная карусель, пар</b>
+        <span>Бесшумное вращение на подшипниках с фиксацией положения, металл с порошковым покрытием, велюр на полках</span></span></li>
+      <li><span class="k">30</span><span><b>Ящики для коллекции, глубина см</b>
+        <span>Неглубокие ящики с разделителями и прозрачными крышками, для шпилек — узкие полки с прорезями под каблук</span></span></li>
     </ul>
   </div>
 </section>
@@ -834,10 +892,24 @@ const sec = `
         <div>
           <p class="kicker">Наполнение</p>
           <h3>Фурнитура и внутренние системы</h3>
-          <p>Blum, Häfele, Hettich. Выдвижные штанги, брючницы, обувницы, доводчики
-            и подсветка с датчиком движения на каждую секцию.</p>
-          <ul class="tags"><li>доводчики</li><li>брючницы</li><li>обувницы</li>
-            <li>выдвижные штанги</li><li>подсветка</li></ul>
+          <p>Blum, Häfele, Hettich. Системы плавного закрывания Blumotion и Silent System,
+            нагрузка до 50–65 кг на ящик, полное выдвижение. Электрические пантографы —
+            штанга с приводом, опускающаяся до уровня груди.</p>
+          <ul class="tags"><li>Blumotion</li><li>Silent System</li><li>50–65 кг на ящик</li>
+            <li>полное выдвижение</li><li>пантографы</li><li>брючницы</li><li>подсветка</li></ul>
+        </div>
+      </div>
+      <div class="duo rev">
+        <div class="duo-ph"><img src="${I('panno-6')}" alt="Декоративные элементы" loading="lazy"></div>
+        <div>
+          <p class="kicker">Декор</p>
+          <h3>Латунь, камень, стекло, кожа</h3>
+          <p>Латунь полированная, сатинированная или патинированная — настоящая со временем
+            темнеет, если не покрыта лаком. Вставки из мрамора, гранита и кварца на столешницах
+            зоны «вход». Стекло закалённое от 6 мм: матовое, бронза, графит, рифлёное. Кожа Nappa
+            во вставках ящиков и обивке внутренних панелей.</p>
+          <ul class="tags"><li>латунь</li><li>мрамор</li><li>кварц</li><li>стекло от 6 мм</li>
+            <li>кожа Nappa</li><li>резьба и фрезеровка</li></ul>
         </div>
       </div>
       <div class="duo">
@@ -853,10 +925,10 @@ const sec = `
       </div>
     </div>
   </div>
-</section>` + process + form + foot;
+</section>` + process + designers + form + foot;
 
 const SCREENS = {
-  home: hero + intro + catalog + prod + objects + strip + materials + process + form + foot,
+  home: hero + intro + catalog + prod + objects + strip + materials + process + designers + form + foot,
   obj: objScreen,
   sec: sec,
 };
@@ -907,11 +979,37 @@ function reveal(){
   });
   host.querySelectorAll('.cell,.obj,.step,.tenets li,.duo').forEach((el,i) => {
     if (el.classList.contains('rv')) return;
-    el.classList.add('rv'); el.dataset.d = Math.min(i*.045,.36); io.observe(el);
+    el.classList.add('rv'); el.dataset.d = Math.min((i % 6) * .08, .4); io.observe(el);
   });
   setTimeout(() => host.querySelectorAll('.rv:not(.in)').forEach(el => {
     if (el.getBoundingClientRect().top < innerHeight) el.classList.add('in');
   }), 40);
+}
+
+function parallax(){
+  if (reduced) return;
+  const img = host.querySelector('.hero-ph img');
+  if (!img) return;
+  const box = img.parentElement;
+  let raf = null;
+  function frame(){
+    raf = null;
+    const r = box.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) return;
+    // не больше 28 пикселей за весь проход экрана: это глубина, а не эффект
+    const p = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+    img.style.transform = 'scale(1.05) translate3d(0,' + (p * 28).toFixed(1) + 'px,0)';
+  }
+  const onScroll = () => { if (raf === null) raf = requestAnimationFrame(frame); };
+  if (!parallax.bound) {
+    // экраны переключаются без перезагрузки, поэтому подписываемся один раз,
+    // а кадр берём заново при каждом показе
+    addEventListener('scroll', () => { if (parallax.frame) parallax.frame(); }, {passive: true});
+    addEventListener('resize', () => { if (parallax.frame) parallax.frame(); }, {passive: true});
+    parallax.bound = true;
+  }
+  parallax.frame = onScroll;
+  frame();
 }
 
 function show(name){
@@ -922,6 +1020,7 @@ function show(name){
   if (name === 'obj') renderObjects('objgrid2','filters2');
   scrollTo({top:0});
   reveal();
+  parallax();
 }
 
 document.querySelector('.tabs').onclick = e => {
