@@ -264,10 +264,43 @@ section.tight{padding:clamp(38px,4vw,72px) 0}
 .f span{display:block;font:500 10.5px/1 var(--fm);letter-spacing:.12em;text-transform:uppercase;
   color:var(--ink-3);margin-bottom:9px}
 .f input,.f textarea,.f select{width:100%;background:var(--bg);border:1px solid var(--line);
-  color:var(--ink);padding:14px 15px;font:400 15px var(--f);transition:.16s}
-.dark .f input,.dark .f textarea,.dark .f select{background:#212327;border-color:#33353A;color:#F2F1EE}
-.f input:focus,.f textarea:focus,.f select:focus{outline:none;border-color:var(--acc)}
-.f textarea{min-height:108px;resize:vertical}
+  color:var(--ink);padding:15px 16px;font:400 16px var(--f);transition:.18s}
+.dark .f input,.dark .f textarea,.dark .f select{background:#212327;border-color:#3A3D42;color:#F2F1EE}
+.dark .f input::placeholder,.dark .f textarea::placeholder{color:#75787D}
+.dark .f input:hover,.dark .f textarea:hover{border-color:#4E5257}
+.f input:focus,.f textarea:focus,.f select:focus{outline:none;border-color:var(--acc-2);
+  background:#1B1D21}
+.f textarea{min-height:112px;resize:vertical}
+
+/* ——— свой выпадающий список: системный в тёмной форме выглядит инородно ——— */
+.sel{position:relative}
+.sel>select{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+.sel-btn{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;
+  padding:15px 16px;font:400 16px/1.4 var(--f);text-align:left;background:#212327;
+  border:1px solid #3A3D42;color:#F2F1EE;cursor:pointer;transition:.18s}
+.sel-btn:hover{border-color:#4E5257}
+.sel-btn::after{content:"";flex:none;width:8px;height:8px;margin-right:2px;
+  border-right:1.5px solid #9FBBA9;border-bottom:1.5px solid #9FBBA9;
+  transform:translateY(-3px) rotate(45deg);transition:transform .22s}
+.sel.open .sel-btn{border-color:var(--acc-2);background:#1B1D21}
+.sel.open .sel-btn::after{transform:translateY(1px) rotate(225deg)}
+.sel-list{position:absolute;z-index:30;top:calc(100% + 6px);left:0;right:0;background:#1B1D21;
+  border:1px solid #3A3D42;box-shadow:0 20px 44px rgba(0,0,0,.5);padding:6px;display:none;
+  max-height:290px;overflow:auto}
+.sel.open .sel-list{display:block;animation:selin .18s ease both}
+@keyframes selin{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.sel-list button{display:block;width:100%;text-align:left;padding:12px 14px;
+  font:400 15px/1.35 var(--f);color:#C8CBCF;background:none;border:0;cursor:pointer;transition:.14s}
+.sel-list button:hover{background:rgba(159,187,169,.13);color:#F2F1EE}
+.sel-list button[aria-selected="true"]{color:#9FBBA9}
+.sel-list button[aria-selected="true"]::before{content:"— ";color:#9FBBA9}
+
+/* ——— что будет после отправки ——— */
+.after{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:10px;counter-reset:a}
+.after li{counter-increment:a;display:flex;gap:13px;align-items:baseline;font-size:14.5px;
+  color:#A9ACB0}
+.after li::before{content:counter(a,decimal-leading-zero);flex:none;
+  font:500 10.5px/1 var(--fm);color:#9FBBA9;letter-spacing:.08em}
 .hint{font-size:12.5px;color:var(--ink-3);margin:0}
 .dark .hint{color:#84868A}
 .cts{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:26px}
@@ -695,6 +728,11 @@ const form = `
         <p style="margin:20px 0 0;font-size:clamp(15px,1.05vw,18px);max-width:46ch">Чертёж,
           визуализация, фото из интернета или просто размеры. Этого достаточно, чтобы назвать
           порядок цены и сроки.</p>
+        <ol class="after">
+          <li>Смотрим проект и задаём уточняющие вопросы</li>
+          <li>Считаем и связываемся в течение рабочего дня</li>
+          <li>Присылаем коммерческое предложение со спецификацией</li>
+        </ol>
         <div class="cts">
           <div><div class="k">Телефон и мессенджеры</div><div class="v">+7 (925) 794-39-10
             <small>Парфёнов Андрей Вячеславович, звонить с 10 до 22.
@@ -708,11 +746,23 @@ const form = `
           <label class="f"><span>Имя</span><input type="text" placeholder="Как к вам обращаться"></label>
           <label class="f"><span>Телефон</span><input type="tel" placeholder="+7 ___ ___-__-__"></label>
         </div>
-        <label class="f"><span>Что нужно изготовить</span>
+        <div class="f"><span>Что нужно изготовить</span>
+          <select>
+            <option>Кухня</option>
+            <option>Гардеробная или шкаф</option>
+            <option>Межкомнатные двери</option>
+            <option>Стеновые панели</option>
+            <option>Стол, консоль, комод</option>
+            <option>Комплект на квартиру</option>
+          </select>
+        </div>
+        <label class="f"><span>Детали проекта</span>
           <textarea placeholder="Например: гардеробная 4 м, шпон ореха, к марту"></textarea></label>
-        <label class="f"><span>Почта</span><input type="email" placeholder="для коммерческого предложения"></label>
-        <label class="f"><span>Файлы</span><input type="text" placeholder="Чертёж, визуализация, фото — до 20 МБ"></label>
-        <button class="btn lg" type="submit" style="justify-self:start;margin-top:4px;background:#F2F1EE;color:#17181A;border-color:#F2F1EE">Отправить заявку</button>
+        <div class="fr">
+          <label class="f"><span>Почта</span><input type="email" placeholder="для коммерческого предложения"></label>
+          <label class="f"><span>Файлы</span><input type="text" placeholder="чертёж, фото — до 20 МБ"></label>
+        </div>
+        <button class="btn lg" type="submit" style="margin-top:6px;background:#9FBBA9;color:#17181A;border-color:#9FBBA9;width:100%">Отправить заявку</button>
         <p class="hint">Это прототип — форма ничего не отправляет.</p>
       </form>
     </div>
@@ -1012,6 +1062,69 @@ function parallax(){
   frame();
 }
 
+function selects(){
+  host.querySelectorAll('.form select').forEach(sel => {
+    if (sel.parentElement.classList.contains('sel')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'sel';
+    sel.parentNode.insertBefore(wrap, sel);
+    wrap.appendChild(sel);
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'sel-btn';
+    btn.setAttribute('aria-haspopup', 'listbox');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.textContent = sel.options[sel.selectedIndex].text;
+    wrap.appendChild(btn);
+
+    const list = document.createElement('div');
+    list.className = 'sel-list';
+    list.setAttribute('role', 'listbox');
+    [...sel.options].forEach((o, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'option');
+      b.setAttribute('aria-selected', String(i === sel.selectedIndex));
+      b.textContent = o.text;
+      b.onclick = () => {
+        sel.selectedIndex = i;
+        btn.textContent = o.text;
+        list.querySelectorAll('button').forEach((x, xi) =>
+          x.setAttribute('aria-selected', String(xi === i)));
+        wrap.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      };
+      list.appendChild(b);
+    });
+    wrap.appendChild(list);
+
+    btn.onclick = e => {
+      e.stopPropagation();
+      const open = wrap.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    };
+    btn.onkeydown = e => {
+      if (e.key === 'Escape') { wrap.classList.remove('open'); }
+      if (e.key === 'ArrowDown') { e.preventDefault(); wrap.classList.add('open'); }
+    };
+  });
+
+  if (!selects.bound) {
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.sel.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.sel-btn')?.setAttribute('aria-expanded', 'false');
+      });
+    });
+    addEventListener('keydown', e => {
+      if (e.key === 'Escape')
+        document.querySelectorAll('.sel.open').forEach(o => o.classList.remove('open'));
+    });
+    selects.bound = true;
+  }
+}
+
 function show(name){
   host.innerHTML = SCREENS[name];
   document.querySelectorAll('.tab').forEach(t =>
@@ -1021,6 +1134,7 @@ function show(name){
   scrollTo({top:0});
   reveal();
   parallax();
+  selects();
 }
 
 document.querySelector('.tabs').onclick = e => {
