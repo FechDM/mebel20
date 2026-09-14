@@ -235,6 +235,16 @@ section.tight{padding:clamp(38px,4vw,72px) 0}
 .swatches b{display:block;font-size:13.5px;font-weight:500}
 .swatches span{font-size:12px;color:var(--ink-3);line-height:1.4}
 
+/* ——— палитра шпона: образцы в своём размере, без растягивания ——— */
+.veneer{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(8px,.8vw,14px);margin-top:22px}
+.veneer figure{margin:0}
+.veneer .sw-img{aspect-ratio:4/5;overflow:hidden;background:var(--bg-3);border:1px solid var(--line)}
+.veneer img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.25,1)}
+.veneer figure:hover img{transform:scale(1.06)}
+.veneer figcaption{margin-top:9px;font:400 12.5px/1.35 var(--f);color:var(--ink-3)}
+@media (max-width:900px){.veneer{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:520px){.veneer{grid-template-columns:repeat(2,1fr)}}
+
 /* ——— лента ——— */
 .strip{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
   background:var(--bg-2)}
@@ -617,17 +627,24 @@ const materials = `
     ${note('Материалы, фурнитура, отделка','стандартные блоки — но с конкретикой')}
     <div class="trio">
       <div class="duo">
-        <div class="duo-ph"><img src="${I('materialy-3')}" alt="Натуральный шпон" loading="lazy"></div>
+        <div class="duo-ph"><img src="${I('shpon-big-1')}" alt="Натуральный шпон" loading="lazy"></div>
         <div>
           <p class="kicker">Материалы</p>
           <h3>Шпон, массив, МДФ<br>и столярная плита</h3>
           <p>Сотни сортов шпона: экзотика, корневые срезы, файн-лайн. Рисунок подбираем
             в раскладку, чтобы двери и панели читались как одно изделие. Массив — по канонам
             столярного дела, со своими наработками против деформации полотна.</p>
+          <div class="veneer">
+            <figure><div class="sw-img"><img src="${I('sh-3')}" alt="Шпон дуба" loading="lazy"></div><figcaption>Дуб</figcaption></figure>
+            <figure><div class="sw-img"><img src="${I('sh-2')}" alt="Шпон бука" loading="lazy"></div><figcaption>Бук</figcaption></figure>
+            <figure><div class="sw-img"><img src="${I('sh-4')}" alt="Шпон ореха американского" loading="lazy"></div><figcaption>Орех американский</figcaption></figure>
+            <figure><div class="sw-img"><img src="${I('sh-5')}" alt="Шпон вишни" loading="lazy"></div><figcaption>Вишня</figcaption></figure>
+            <figure><div class="sw-img"><img src="${I('sh-6')}" alt="Шпон ясеня" loading="lazy"></div><figcaption>Ясень</figcaption></figure>
+            <figure><div class="sw-img"><img src="${I('sh-9')}" alt="Шпон эвкалипта" loading="lazy"></div><figcaption>Эвкалипт</figcaption></figure>
+          </div>
           <ul class="tags">
-            <li>орех</li><li>дуб</li><li>бук</li><li>ясень</li><li>эбен-макасар</li>
-            <li>бубинга</li><li>сикамора</li><li>корень тополя</li><li>анегри</li>
-            <li>термоясень</li><li>файн-лайн</li>
+            <li>эбен-макасар</li><li>бубинга</li><li>сикамора</li><li>корень тополя</li>
+            <li>анегри</li><li>термоясень</li><li>файн-лайн</li><li>и ещё сотни</li>
           </ul>
         </div>
       </div>
@@ -646,7 +663,7 @@ const materials = `
         </div>
       </div>
       <div class="duo">
-        <div class="duo-ph"><img src="${I('otdelka-1')}" alt="Отделка" loading="lazy"></div>
+        <div class="duo-ph"><img src="${I('otdelka')}" alt="Отделка" loading="lazy"></div>
         <div>
           <p class="kicker">Отделка</p>
           <h3>Десяток видов отделки<br>и спецэффектов</h3>
@@ -786,7 +803,7 @@ const foot = `
         <a href="#catalog">Резная мебель</a><a href="#catalog">Копии и реплики</a></div>
       <div><h4>Контакты</h4>
         <p>+7 (925) 794-39-10</p><p>Москва, ул. Иркутская, д. 17, стр. 9</p>
-        <a href="#contact">Прислать проект на расчёт</a></div>
+        <a href="#contact">Прислать проект на просчёт</a></div>
     </div>
     <div class="f-bot">
       <span>© 2026 Мебель 20 — мебель на заказ по дизайн-проектам</span>
@@ -927,7 +944,7 @@ const sec = `
     ${note('Материалы, фурнитура, отделка раздела','клиент просил их явно')}
     <div class="trio">
       <div class="duo">
-        <div class="duo-ph"><img src="${I('materialy-5')}" alt="Материалы" loading="lazy"></div>
+        <div class="duo-ph"><img src="${I('shpon-big-1')}" alt="Материалы" loading="lazy"></div>
         <div>
           <p class="kicker">Материалы</p>
           <h3>Корпус и фасады</h3>
@@ -963,7 +980,7 @@ const sec = `
         </div>
       </div>
       <div class="duo">
-        <div class="duo-ph"><img src="${I('otdelka-1')}" alt="Отделка" loading="lazy"></div>
+        <div class="duo-ph"><img src="${I('otdelka')}" alt="Отделка" loading="lazy"></div>
         <div>
           <p class="kicker">Отделка</p>
           <h3>Как выглядят фасады</h3>
@@ -1105,7 +1122,7 @@ function selects(){
       btn.setAttribute('aria-expanded', String(open));
     };
     btn.onkeydown = e => {
-      if (e.key === 'Escape') { wrap.classList.remove('open'); }
+      if (e.key === 'Escape') { wrap.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
       if (e.key === 'ArrowDown') { e.preventDefault(); wrap.classList.add('open'); }
     };
   });
@@ -1119,7 +1136,10 @@ function selects(){
     });
     addEventListener('keydown', e => {
       if (e.key === 'Escape')
-        document.querySelectorAll('.sel.open').forEach(o => o.classList.remove('open'));
+        document.querySelectorAll('.sel.open').forEach(o => {
+          o.classList.remove('open');
+          o.querySelector('.sel-btn')?.setAttribute('aria-expanded', 'false');
+        });
     });
     selects.bound = true;
   }
