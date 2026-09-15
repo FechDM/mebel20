@@ -43,6 +43,11 @@ p{margin:0 0 1em}
 .toggle input{accent-color:var(--acc);width:15px;height:15px}
 .tabs{display:flex;gap:3px;margin-left:auto;flex-wrap:wrap}
 .tab{padding:7px 14px;font-size:13px;color:var(--ink-3);border:1px solid transparent;transition:.16s}
+@media (max-width:760px){
+  .tab{min-height:44px;display:inline-flex;align-items:center;padding:8px 16px;font-size:14px}
+  .toggle{min-height:44px}
+  .menu a{padding:6px 0}
+}
 .tab:hover{color:var(--ink)}
 .tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
 
@@ -101,8 +106,10 @@ body.notes section{outline:1px dashed rgba(51,80,63,.22);outline-offset:-1px}
 .shelf figcaption{padding:11px 4px 13px;font:400 12.5px/1.35 var(--f);color:var(--ink-2);
   text-align:center}
 @media (max-width:640px){
-  .shelf figure{width:clamp(170px,58vw,230px)}
-  .shelf-in{animation-duration:40s}
+  .shelf{padding:18px 0 22px}
+  .shelf figure{width:clamp(150px,46vw,200px);padding:8px 8px 0}
+  .shelf figcaption{padding:9px 3px 10px;font-size:11.5px}
+  .shelf-in{animation-duration:40s;gap:12px}
 }
 .hero-ph{position:relative;height:clamp(340px,54vh,640px);overflow:hidden;background:var(--bg-3)}
 .hero-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;
@@ -297,7 +304,19 @@ section.tight{padding:clamp(38px,4vw,72px) 0}
 .pin:hover span,.pin:focus-visible span{opacity:1;transform:translateY(-50%) translateX(0)}
 .pin.right span{left:auto;right:34px;transform:translateY(-50%) translateX(6px)}
 .pin.right:hover span{transform:translateY(-50%) translateX(0)}
-@media (max-width:700px){.pin span{display:none}}
+.pin-note{display:none}
+@media (max-width:700px){
+  /* Наведения на телефоне нет, а всплывашка у крайних меток вылезает за экран,
+     поэтому подпись выводим строкой под кадром. */
+  .pin{width:30px;height:30px}
+  .pin span{display:none}
+  .pin.on{background:var(--acc)}
+  .pin.on::before{background:#fff}
+  .pin-note{display:block;margin-top:12px;padding:14px 16px;background:var(--ink);
+    color:#F2F1EE;font-size:14.5px;line-height:1.5;min-height:52px}
+  .pin-note:empty::before{content:"Нажмите точку на фото, чтобы увидеть материал";
+    color:#9A9C9F}
+}
 .pinned-cap{margin-top:14px;font-size:14.5px;color:var(--ink-3)}
 
 /* ——— сомнения и ответы ——— */
@@ -723,6 +742,7 @@ const pinned = `
       <button class="pin right" style="left:80%;top:72%"><span>Подсветка каждой секции с датчиком движения</span></button>
       <button class="pin" style="left:16%;top:84%"><span>Остров с алькантарой, массив ореха</span></button>
     </div>
+    <div class="pin-note" id="pinnote"></div>
     <p class="pinned-cap">Частная квартира, ЖК ЗилАрт. МДФ, шпон орех американский фризе,
       алькантара, массив ореха, вставки анодированный алюминий.</p>
   </div>
@@ -1263,6 +1283,31 @@ function parallax(){
   frame();
 }
 
+function pins(){
+  host.querySelectorAll('.pin').forEach(btn => {
+    btn.onclick = e => {
+      e.stopPropagation();
+      const open = btn.classList.contains('on');
+      host.querySelectorAll('.pin.on').forEach(x => x.classList.remove('on'));
+      const note = host.querySelector('#pinnote');
+      if (open) {
+        if (note) note.textContent = '';
+      } else {
+        btn.classList.add('on');
+        if (note) note.textContent = btn.querySelector('span')?.textContent || '';
+      }
+    };
+  });
+  if (!pins.bound) {
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.pin.on').forEach(x => x.classList.remove('on'));
+      const n = document.querySelector('#pinnote');
+      if (n) n.textContent = '';
+    });
+    pins.bound = true;
+  }
+}
+
 function selects(){
   host.querySelectorAll('.form select').forEach(sel => {
     if (sel.parentElement.classList.contains('sel')) return;
@@ -1339,6 +1384,7 @@ function show(name){
   reveal();
   parallax();
   selects();
+  pins();
 }
 
 document.querySelector('.tabs').onclick = e => {
