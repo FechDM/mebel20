@@ -28,6 +28,7 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .wrap{width:min(1680px,94vw);margin:0 auto;padding:0 var(--pad)}
 h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.025em;line-height:1.08}
+body{font-size:17px}
 p{margin:0 0 1em}
 
 /* ——— панель прототипа ——— */
@@ -57,7 +58,8 @@ body.notes section{outline:1px dashed rgba(51,80,63,.22);outline-offset:-1px}
 /* ——— шапка ——— */
 .nav{position:relative;z-index:40;display:flex;align-items:center;gap:clamp(20px,2.6vw,44px);
   padding:clamp(16px,1.6vw,26px) var(--pad);border-bottom:1px solid var(--line)}
-.logo{font-weight:700;font-size:clamp(17px,1.3vw,22px);letter-spacing:-.03em;line-height:1}
+.logo{line-height:1;display:block}
+.logo img{width:clamp(160px,14vw,214px);height:auto;display:block}
 .logo i{font-style:normal;color:var(--acc)}
 .logo span{display:block;font:400 9.5px/1.4 var(--fm);letter-spacing:.16em;
   text-transform:uppercase;color:var(--ink-3);margin-top:5px}
@@ -77,6 +79,31 @@ body.notes section{outline:1px dashed rgba(51,80,63,.22);outline-offset:-1px}
 
 /* ——— hero: фото во всю ширину, текст под ним ——— */
 .hero{position:relative}
+/* Лента снимков внахлёст с лёгким наклоном — приём с текущего сайта клиента,
+   он про него отдельно попросил. Едет сама, останавливается под курсором. */
+.shelf{position:relative;overflow:hidden;padding:clamp(26px,3.4vw,54px) 0 clamp(30px,3.8vw,60px);
+  background:linear-gradient(178deg,#F3F1EC 0%,#EFEDE7 100%);border-bottom:1px solid var(--line)}
+.shelf::before,.shelf::after{content:"";position:absolute;top:0;bottom:0;width:clamp(40px,8vw,140px);
+  z-index:3;pointer-events:none}
+.shelf::before{left:0;background:linear-gradient(90deg,#F3F1EC,rgba(243,241,236,0))}
+.shelf::after{right:0;background:linear-gradient(270deg,#EFEDE7,rgba(239,237,231,0))}
+.shelf-in{display:flex;gap:clamp(16px,2vw,34px);width:max-content;
+  animation:shelfmove 54s linear infinite;padding:0 clamp(20px,3vw,52px)}
+.shelf:hover .shelf-in{animation-play-state:paused}
+@keyframes shelfmove{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+.shelf figure{margin:0;flex:none;width:clamp(210px,20vw,320px);background:#fff;
+  padding:10px 10px 0;box-shadow:0 14px 34px rgba(31,28,24,.16);transition:transform .5s cubic-bezier(.2,.7,.25,1)}
+.shelf figure:nth-child(odd){transform:rotate(-1.6deg)}
+.shelf figure:nth-child(even){transform:rotate(1.3deg) translateY(10px)}
+.shelf figure:hover{transform:rotate(0) translateY(-6px) scale(1.03);z-index:4}
+.shelf .ph{aspect-ratio:3/4;overflow:hidden;background:var(--bg-3)}
+.shelf img{width:100%;height:100%;object-fit:cover}
+.shelf figcaption{padding:11px 4px 13px;font:400 12.5px/1.35 var(--f);color:var(--ink-2);
+  text-align:center}
+@media (max-width:640px){
+  .shelf figure{width:clamp(170px,58vw,230px)}
+  .shelf-in{animation-duration:40s}
+}
 .hero-ph{position:relative;height:clamp(340px,54vh,640px);overflow:hidden;background:var(--bg-3)}
 .hero-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;
   will-change:transform;transition:transform .18s linear}
@@ -90,9 +117,9 @@ body.notes section{outline:1px dashed rgba(51,80,63,.22);outline-offset:-1px}
 .hero-tag span{font-size:14px;color:var(--ink-2);line-height:1.5}
 .hero-txt{display:grid;grid-template-columns:1.35fr .65fr;gap:clamp(24px,3.5vw,64px);
   align-items:end;padding:clamp(34px,4vw,64px) 0 clamp(30px,3.5vw,52px)}
-.hero h1{font-size:clamp(30px,4.6vw,80px);letter-spacing:-.035em;max-width:19ch}
+.hero h1{font-size:clamp(34px,5.2vw,92px);letter-spacing:-.035em;max-width:19ch}
 .hero h1 i{font-style:normal;color:var(--acc)}
-.hero-side p{margin:0 0 20px;font-size:clamp(15px,1.05vw,18px);color:var(--ink-2)}
+.hero-side p{margin:0 0 20px;font-size:clamp(16px,1.2vw,21px);color:var(--ink-2)}
 .hero-cta{display:flex;gap:10px;flex-wrap:wrap}
 
 /* ——— паспорт производства: выходные данные, а не плашка ——— */
@@ -122,8 +149,8 @@ section.tight{padding:clamp(38px,4vw,72px) 0}
   color:var(--acc);margin:0 0 18px}
 .h-row{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(20px,3vw,60px);
   align-items:end;margin-bottom:clamp(28px,3.2vw,52px)}
-.h-row h2{font-size:clamp(24px,3vw,54px)}
-.h-row .lead{margin:0;color:var(--ink-2);font-size:clamp(15px,1.05vw,18px);max-width:52ch}
+.h-row h2{font-size:clamp(27px,3.4vw,62px)}
+.h-row .lead{margin:0;color:var(--ink-2);font-size:clamp(16px,1.2vw,21px);max-width:52ch}
 .more{font:500 12.5px/1 var(--f);letter-spacing:.03em;color:var(--acc);
   border-bottom:1px solid currentColor;padding-bottom:4px;white-space:nowrap;
   justify-self:start;align-self:end}
@@ -244,6 +271,34 @@ section.tight{padding:clamp(38px,4vw,72px) 0}
 .veneer figcaption{margin-top:9px;font:400 12.5px/1.35 var(--f);color:var(--ink-3)}
 @media (max-width:900px){.veneer{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:520px){.veneer{grid-template-columns:repeat(2,1fr)}}
+
+/* ——— портфолио: крупные вертикальные кадры, максимум три колонки ——— */
+.objgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2vw,40px)}
+@media (max-width:1100px){.objgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.objgrid{grid-template-columns:1fr}}
+.obj .ph{aspect-ratio:3/4;overflow:hidden;background:var(--bg-3);position:relative}
+.obj .ph img{width:100%;height:100%;object-fit:cover;
+  transition:transform .8s cubic-bezier(.2,.7,.25,1)}
+.obj:hover .ph img{transform:scale(1.04)}
+
+/* ——— метки на изделии: точка на фото, подпись по наведению ——— */
+.pinned{position:relative;overflow:hidden;background:var(--bg-3)}
+.pinned>img{width:100%;display:block}
+.pin{position:absolute;width:26px;height:26px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(255,255,255,.92);box-shadow:0 3px 14px rgba(0,0,0,.3);
+  transform:translate(-50%,-50%);display:grid;place-items:center;padding:0;z-index:2}
+.pin::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acc)}
+.pin::after{content:"";position:absolute;inset:-7px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.55);animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.85);opacity:.9}70%{transform:scale(1.5);opacity:0}100%{opacity:0}}
+.pin span{position:absolute;left:34px;top:50%;transform:translateY(-50%) translateX(-6px);
+  white-space:nowrap;background:rgba(20,21,23,.94);color:#F2F1EE;padding:9px 13px;
+  font:400 13.5px/1.2 var(--f);opacity:0;pointer-events:none;transition:.2s}
+.pin:hover span,.pin:focus-visible span{opacity:1;transform:translateY(-50%) translateX(0)}
+.pin.right span{left:auto;right:34px;transform:translateY(-50%) translateX(6px)}
+.pin.right:hover span{transform:translateY(-50%) translateX(0)}
+@media (max-width:700px){.pin span{display:none}}
+.pinned-cap{margin-top:14px;font-size:14.5px;color:var(--ink-3)}
 
 /* ——— лента ——— */
 .strip{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
@@ -381,7 +436,7 @@ footer{border-top:1px solid var(--line);padding:clamp(34px,3.5vw,60px) 0 28px}
 </div>
 
 <header class="nav">
-  <a class="logo" href="#">Мебель<i>20</i><span>столярное производство</span></a>
+  <a class="logo" href="#"><img src="i/logo.webp" alt="Мебель 2.0 — столярное производство" width="214" height="55"></a>
   <nav class="menu">
     <a href="#catalog">Изготовление</a>
     <a href="#objects">Объекты</a>
@@ -467,11 +522,25 @@ const ph = (k,alt,cap) => k
 /* ============ главная ============ */
 const hero = `
 <section class="hero" style="padding:0">
-  <div class="hero-ph">
-    <img src="${I('garderob-oreh')}" alt="Гардеробная из ореха с подсветкой" fetchpriority="high">
-    <div class="hero-tag">
-      <b>Объект в работе</b>
-      <span>Гардеробная с островом, ЖК ЗилАрт — шпон ореха, алькантара, анодированный алюминий</span>
+  ${note('Заглавная лента','снимки внахлёст, как на текущем сайте — едет сама, стоп под курсором')}
+  <div class="shelf">
+    <div class="shelf-in">
+      ${[['sl-1','Эскиз комода: тонированный корень шпона, стёганая кожа, латунь'],
+         ['sl-3','Комод по этому эскизу, готовое изделие'],
+         ['garderob-oreh','Гардеробная с островом, ЖК ЗилАрт'],
+         ['dveri-3','Двери ЖК «Итальянский квартал», шпон корень тополя'],
+         ['sl-5','Письменный стол с кожаной вставкой'],
+         ['kuhni-3','Кухня в шпоне с латунными вставками'],
+         ['sl-2','Эскиз витрины ар-деко'],
+         ['vitrina','Витрина по эскизу, серебряная поталь и золотая патина'],
+         ['stenovye-6','Стеновые панели со скрытой подсветкой'],
+         ['garderob-6','Гардеробная «Пилюгина», шелковисто-матовая эмаль']]
+        .concat([['sl-1','Эскиз комода'],['sl-3','Готовый комод'],['garderob-oreh','Гардеробная ЗилАрт'],
+                 ['dveri-3','Двери Итальянский квартал'],['sl-5','Письменный стол'],['kuhni-3','Кухня в шпоне'],
+                 ['sl-2','Эскиз витрины'],['vitrina','Витрина ар-деко'],['stenovye-6','Стеновые панели'],
+                 ['garderob-6','Гардеробная Пилюгина']])
+        .map(([k,c]) => `<figure><div class="ph"><img src="${I(k)}" alt="${c}" loading="lazy"></div>
+          <figcaption>${c}</figcaption></figure>`).join('')}
     </div>
   </div>
   <div class="wrap">
@@ -610,6 +679,29 @@ const objects = `
     <div style="margin-top:clamp(26px,3vw,44px)">
       <a class="btn ghost" href="#" data-open="obj">Все объекты →</a>
     </div>
+  </div>
+</section>`;
+
+const pinned = `
+<section class="alt">
+  <div class="wrap">
+    ${note('Объект с метками','крупный кадр, на котором подписано, из чего он сделан')}
+    <div class="h-row">
+      <div><p class="kicker">Разбор объекта</p>
+        <h2>Гардеробная «ЗилАрт»<br>из чего она собрана</h2></div>
+      <p class="lead">Наведите на точку, чтобы увидеть материал и решение.
+        На объекте так же: каждый узел согласуется до запуска в цех.</p>
+    </div>
+    <div class="pinned">
+      <img src="${I('garderob-oreh')}" alt="Гардеробная с островом, ЖК ЗилАрт" loading="lazy">
+      <button class="pin" style="left:22%;top:26%"><span>Шпон ореха американского фризе</span></button>
+      <button class="pin right" style="left:74%;top:38%"><span>Вставки анодированный алюминий</span></button>
+      <button class="pin" style="left:34%;top:62%"><span>Ящики с доводчиками Blum, нагрузка до 65 кг</span></button>
+      <button class="pin right" style="left:80%;top:72%"><span>Подсветка каждой секции с датчиком движения</span></button>
+      <button class="pin" style="left:16%;top:84%"><span>Остров с алькантарой, массив ореха</span></button>
+    </div>
+    <p class="pinned-cap">Частная квартира, ЖК ЗилАрт. МДФ, шпон орех американский фризе,
+      алькантара, массив ореха, вставки анодированный алюминий.</p>
   </div>
 </section>`;
 
@@ -791,7 +883,7 @@ const foot = `
   <div class="wrap">
     <div class="f-cols">
       <div>
-        <a class="logo" href="#">Мебель<i>20</i><span>столярное производство</span></a>
+        <a class="logo" href="#"><img src="${I('logo')}" alt="Мебель 2.0" width="214" height="55"></a>
         <p style="margin-top:18px;max-width:34ch;color:var(--ink-3);font-size:14px">
           Комплексное изготовление столярных изделий для дизайн-проектов. Москва, больше десяти лет в работе.</p>
       </div>
@@ -995,7 +1087,7 @@ const sec = `
 </section>` + process + designers + form + foot;
 
 const SCREENS = {
-  home: hero + intro + catalog + prod + objects + strip + materials + process + designers + form + foot,
+  home: hero + intro + catalog + prod + pinned + objects + strip + materials + process + designers + form + foot,
   obj: objScreen,
   sec: sec,
 };
