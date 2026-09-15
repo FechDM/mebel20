@@ -84,33 +84,54 @@ body.notes section{outline:1px dashed rgba(51,80,63,.22);outline-offset:-1px}
 
 /* ——— hero: фото во всю ширину, текст под ним ——— */
 .hero{position:relative}
-/* Лента снимков внахлёст с лёгким наклоном — приём с текущего сайта клиента,
-   он про него отдельно попросил. Едет сама, останавливается под курсором. */
-.shelf{position:relative;overflow:hidden;padding:clamp(26px,3.4vw,54px) 0 clamp(30px,3.8vw,60px);
-  background:linear-gradient(178deg,#F3F1EC 0%,#EFEDE7 100%);border-bottom:1px solid var(--line)}
-.shelf::before,.shelf::after{content:"";position:absolute;top:0;bottom:0;width:clamp(40px,8vw,140px);
-  z-index:3;pointer-events:none}
-.shelf::before{left:0;background:linear-gradient(90deg,#F3F1EC,rgba(243,241,236,0))}
-.shelf::after{right:0;background:linear-gradient(270deg,#EFEDE7,rgba(239,237,231,0))}
-.shelf-in{display:flex;gap:clamp(16px,2vw,34px);width:max-content;
-  animation:shelfmove 54s linear infinite;padding:0 clamp(20px,3vw,52px)}
-.shelf:hover .shelf-in{animation-play-state:paused}
-@keyframes shelfmove{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
-.shelf figure{margin:0;flex:none;width:clamp(210px,20vw,320px);background:#fff;
-  padding:10px 10px 0;box-shadow:0 14px 34px rgba(31,28,24,.16);transition:transform .5s cubic-bezier(.2,.7,.25,1)}
-.shelf figure:nth-child(odd){transform:rotate(-1.6deg)}
-.shelf figure:nth-child(even){transform:rotate(1.3deg) translateY(10px)}
-.shelf figure:hover{transform:rotate(0) translateY(-6px) scale(1.03);z-index:4}
-.shelf .ph{aspect-ratio:3/4;overflow:hidden;background:var(--bg-3)}
-.shelf img{width:100%;height:100%;object-fit:cover}
-.shelf figcaption{padding:11px 4px 13px;font:400 12.5px/1.35 var(--f);color:var(--ink-2);
-  text-align:center}
-@media (max-width:640px){
-  .shelf{padding:18px 0 22px}
-  .shelf figure{width:clamp(150px,46vw,200px);padding:8px 8px 0}
-  .shelf figcaption{padding:9px 3px 10px;font-size:11.5px}
-  .shelf-in{animation-duration:40s;gap:12px}
+/* Первый экран собран по образцу текущего сайта: сверху полоса процесса
+   (руки, инструмент, резьба), под ней композиция «источник → изделие».
+   Логика клиента: принесите эскиз, чертёж или фото из каталога, сделаем. */
+.strip-work{height:clamp(120px,15vw,220px);overflow:hidden;position:relative;background:#2A2320}
+.strip-work img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;
+  filter:sepia(.22) saturate(.9) contrast(1.04)}
+.strip-work::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(20,17,15,.12),rgba(20,17,15,.32))}
+
+.turn{position:relative;background:linear-gradient(178deg,#F4F2ED 0%,#EFEDE7 100%);
+  border-bottom:1px solid var(--line);overflow:hidden}
+.turn-in{position:relative;display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(16px,2.4vw,48px);align-items:center;
+  padding:clamp(26px,3.4vw,58px) 0;min-height:clamp(300px,38vw,470px)}
+.turn-side{display:grid;gap:clamp(10px,1.2vw,20px);grid-auto-flow:column;justify-content:start}
+.turn-side figure{margin:0;background:#fff;padding:9px 9px 0;
+  box-shadow:0 16px 38px rgba(31,28,24,.17);transition:transform .6s cubic-bezier(.2,.7,.25,1)}
+.turn-side figure:nth-child(1){transform:rotate(-1.8deg)}
+.turn-side figure:nth-child(2){transform:rotate(1.4deg) translateY(14px)}
+.turn-side figure:hover{transform:rotate(0) translateY(-4px)}
+.turn-side .ph{width:clamp(140px,15vw,240px);aspect-ratio:4/5;overflow:hidden;background:var(--bg-3)}
+.turn-side img{width:100%;height:100%;object-fit:cover}
+.turn-side figcaption{padding:9px 3px 11px;font:400 11.5px/1.3 var(--fm);
+  letter-spacing:.02em;color:var(--ink-3);text-align:center}
+.turn-done{justify-self:end}
+.turn-done figure{transform:rotate(1.2deg)}
+.turn-done .ph{width:clamp(180px,20vw,320px);aspect-ratio:3/4}
+.turn-word{position:absolute;left:50%;top:clamp(18px,4vw,60px);transform:translateX(-50%);
+  z-index:3;font-weight:700;letter-spacing:-.035em;white-space:nowrap;
+  font-size:clamp(26px,4.4vw,64px);color:var(--ink);pointer-events:none;
+  text-shadow:0 2px 24px rgba(244,242,237,.85)}
+.turn-word i{font-style:normal;color:var(--acc)}
+.turn-dots{position:absolute;left:50%;bottom:clamp(12px,1.6vw,24px);transform:translateX(-50%);
+  display:flex;gap:9px;z-index:4}
+.turn-dots button{width:9px;height:9px;border-radius:50%;border:1px solid var(--ink-3);
+  background:transparent;padding:0;cursor:pointer;transition:.2s}
+.turn-dots button[aria-current="true"]{background:var(--acc);border-color:var(--acc);transform:scale(1.25)}
+.turn-state{display:none}
+.turn-state.on{display:contents}
+@media (max-width:860px){
+  .turn-in{grid-template-columns:1fr;gap:18px;padding-top:clamp(58px,15vw,90px)}
+  .turn-done{justify-self:center}
+  .turn-side{justify-content:center}
+  .turn-side .ph{width:clamp(118px,32vw,160px)}
+  .turn-done .ph{width:clamp(150px,42vw,210px)}
+  .turn-word{top:16px;font-size:clamp(22px,7vw,34px)}
 }
+
 .hero-ph{position:relative;height:clamp(340px,54vh,640px);overflow:hidden;background:var(--bg-3)}
 .hero-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;
   will-change:transform;transition:transform .18s linear}
@@ -564,25 +585,55 @@ const ph = (k,alt,cap) => k
 /* ============ главная ============ */
 const hero = `
 <section class="hero" style="padding:0">
-  ${note('Заглавная лента','снимки внахлёст, как на текущем сайте — едет сама, стоп под курсором')}
-  <div class="shelf">
-    <div class="shelf-in">
-      ${[['sl-1','Эскиз комода: тонированный корень шпона, стёганая кожа, латунь'],
-         ['sl-3','Комод по этому эскизу, готовое изделие'],
-         ['garderob-oreh','Гардеробная с островом, ЖК ЗилАрт'],
-         ['dveri-3','Двери ЖК «Итальянский квартал», шпон корень тополя'],
-         ['sl-5','Письменный стол с кожаной вставкой'],
-         ['kuhni-3','Кухня в шпоне с латунными вставками'],
-         ['sl-2','Эскиз витрины ар-деко'],
-         ['vitrina','Витрина по эскизу, серебряная поталь и золотая патина'],
-         ['stenovye-6','Стеновые панели со скрытой подсветкой'],
-         ['garderob-6','Гардеробная «Пилюгина», шелковисто-матовая эмаль']]
-        .concat([['sl-1','Эскиз комода'],['sl-3','Готовый комод'],['garderob-oreh','Гардеробная ЗилАрт'],
-                 ['dveri-3','Двери Итальянский квартал'],['sl-5','Письменный стол'],['kuhni-3','Кухня в шпоне'],
-                 ['sl-2','Эскиз витрины'],['vitrina','Витрина ар-деко'],['stenovye-6','Стеновые панели'],
-                 ['garderob-6','Гардеробная Пилюгина']])
-        .map(([k,c]) => `<figure><div class="ph"><img src="${I(k)}" alt="${c}" loading="lazy"></div>
-          <figcaption>${c}</figcaption></figure>`).join('')}
+  ${note('Первый экран','полоса процесса и превращение эскиза в изделие — логика с текущего сайта')}
+  <div class="strip-work">
+    <img src="${I('process-strip')}" alt="Резьба, кессоны, работа в цехе" fetchpriority="high">
+  </div>
+  <div class="turn">
+    <div class="wrap">
+      <div class="turn-in" id="turn">
+        <div class="turn-state on" data-word="По вашим <i>эскизам</i>">
+          <div class="turn-side">
+            <figure><div class="ph"><img src="${I('eskiz-vitrina')}" alt="Эскиз витрины" loading="eager"></div>
+              <figcaption>эскиз</figcaption></figure>
+            <figure><div class="ph"><img src="${I('sl-1')}" alt="Чертёж комода с размерами" loading="eager"></div>
+              <figcaption>чертёж</figcaption></figure>
+          </div>
+          <div class="turn-done">
+            <figure><div class="ph"><img src="${I('sl-3')}" alt="Готовый комод" loading="eager"></div>
+              <figcaption>изделие</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="turn-state" data-word="По <i>фотографии</i> из каталога">
+          <div class="turn-side">
+            <figure><div class="ph"><img src="${I('kopii')}" alt="Страница каталога" loading="lazy"></div>
+              <figcaption>образец</figcaption></figure>
+            <figure><div class="ph"><img src="${I('tv-zona')}" alt="ТВ-зона в интерьере" loading="lazy"></div>
+              <figcaption>в интерьере</figcaption></figure>
+          </div>
+          <div class="turn-done">
+            <figure><div class="ph"><img src="${I('tv-gotovo')}" alt="Готовая ТВ-зона" loading="lazy"></div>
+              <figcaption>изделие</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="turn-state" data-word="По вашим <i>размерам</i>">
+          <div class="turn-side">
+            <figure><div class="ph"><img src="${I('garderob-1')}" alt="Чертёж гардеробной" loading="lazy"></div>
+              <figcaption>проект</figcaption></figure>
+            <figure><div class="ph"><img src="${I('shkafy-2')}" alt="Столярный участок" loading="lazy"></div>
+              <figcaption>в цехе</figcaption></figure>
+          </div>
+          <div class="turn-done">
+            <figure><div class="ph"><img src="${I('garderob-oreh')}" alt="Готовая гардеробная" loading="lazy"></div>
+              <figcaption>изделие</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="turn-word" id="turnword">По вашим <i>эскизам</i></div>
+        <div class="turn-dots" id="turndots"></div>
+      </div>
     </div>
   </div>
   <div class="wrap">
@@ -1283,6 +1334,37 @@ function parallax(){
   frame();
 }
 
+function turn(){
+  const box = host.querySelector('#turn');
+  if (!box) return;
+  const states = [...box.querySelectorAll('.turn-state')];
+  const word = box.querySelector('#turnword');
+  const dots = box.querySelector('#turndots');
+  if (!states.length || !dots) return;
+
+  let cur = 0, timer = null;
+  dots.innerHTML = states.map((_, i) =>
+    `<button type="button" aria-label="Кадр ${i + 1}" aria-current="${i === 0}"></button>`).join('');
+  const btns = [...dots.querySelectorAll('button')];
+
+  function show(n){
+    cur = (n + states.length) % states.length;
+    states.forEach((st, i) => st.classList.toggle('on', i === cur));
+    btns.forEach((b, i) => b.setAttribute('aria-current', String(i === cur)));
+    word.innerHTML = states[cur].dataset.word || '';
+    word.animate([{opacity:0, transform:'translateX(-50%) translateY(8px)'},
+                  {opacity:1, transform:'translateX(-50%) translateY(0)'}],
+                 {duration:420, easing:'cubic-bezier(.2,.7,.25,1)'});
+  }
+  function play(){ stop(); if (!reduced) timer = setInterval(() => show(cur + 1), 6000); }
+  function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+
+  btns.forEach((b, i) => b.onclick = () => { show(i); play(); });
+  box.addEventListener('mouseenter', stop);
+  box.addEventListener('mouseleave', play);
+  play();
+}
+
 function pins(){
   host.querySelectorAll('.pin').forEach(btn => {
     btn.onclick = e => {
@@ -1385,6 +1467,7 @@ function show(name){
   parallax();
   selects();
   pins();
+  turn();
 }
 
 document.querySelector('.tabs').onclick = e => {
