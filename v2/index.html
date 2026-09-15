@@ -310,8 +310,11 @@ section.tight{padding:clamp(38px,4vw,72px) 0}
 .obj:hover .ph img{transform:scale(1.04)}
 
 /* ——— метки на изделии: точка на фото, подпись по наведению ——— */
-.pinned{position:relative;overflow:hidden;background:var(--bg-3)}
-.pinned>img{width:100%;display:block}
+/* Соотношение под сам кадр 1500x1120, иначе кроп сдвинет метки.
+   Ширину ограничиваем, чтобы фото было крупным, но влезало в экран. */
+.pinned{position:relative;overflow:hidden;background:var(--bg-3);
+  width:min(100%,1020px);aspect-ratio:1500/1120;margin:0 auto}
+.pinned>img{width:100%;height:100%;object-fit:cover;display:block}
 .pin{position:absolute;width:26px;height:26px;border-radius:50%;border:0;cursor:pointer;
   background:rgba(255,255,255,.92);box-shadow:0 3px 14px rgba(0,0,0,.3);
   transform:translate(-50%,-50%);display:grid;place-items:center;padding:0;z-index:2}
@@ -781,21 +784,22 @@ const pinned = `
     ${note('Объект с метками','крупный кадр, на котором подписано, из чего он сделан')}
     <div class="h-row">
       <div><p class="kicker">Разбор объекта</p>
-        <h2>Гардеробная «ЗилАрт»<br>из чего она собрана</h2></div>
+        <h2>Гардеробная «Континенталь»<br>из чего она собрана</h2></div>
       <p class="lead">Наведите на точку, чтобы увидеть материал и решение.
         На объекте так же: каждый узел согласуется до запуска в цех.</p>
     </div>
     <div class="pinned">
-      <img src="${I('garderob-oreh')}" alt="Гардеробная с островом, ЖК ЗилАрт" loading="lazy">
-      <button class="pin" style="left:22%;top:26%"><span>Шпон ореха американского фризе</span></button>
-      <button class="pin right" style="left:74%;top:38%"><span>Вставки анодированный алюминий</span></button>
-      <button class="pin" style="left:34%;top:62%"><span>Ящики с доводчиками Blum, нагрузка до 65 кг</span></button>
-      <button class="pin right" style="left:80%;top:72%"><span>Подсветка каждой секции с датчиком движения</span></button>
-      <button class="pin" style="left:16%;top:84%"><span>Остров с алькантарой, массив ореха</span></button>
+      <img src="${I('garderob-5')}" alt="Гардеробная «Континенталь»" loading="lazy">
+      <button class="pin" style="left:17%;top:44%"><span>Штанга для длинной одежды, 170–190 см от пола</span></button>
+      <button class="pin" style="left:34%;top:41%"><span>Вторая штанга для рубашек: доступ без стремянки</span></button>
+      <button class="pin right" style="left:49%;top:24%"><span>Светодиодная подсветка каждой секции с датчиком движения</span></button>
+      <button class="pin right" style="left:66%;top:37%"><span>Наклонные полки для обуви с упором под каблук</span></button>
+      <button class="pin" style="left:57%;top:66%"><span>Ящики с доводчиками Blum, нагрузка до 65 кг</span></button>
+      <button class="pin right" style="left:88%;top:24%"><span>Полки под трикотаж, глубина 50–60 см</span></button>
     </div>
     <div class="pin-note" id="pinnote"></div>
-    <p class="pinned-cap">Частная квартира, ЖК ЗилАрт. МДФ, шпон орех американский фризе,
-      алькантара, массив ореха, вставки анодированный алюминий.</p>
+    <p class="pinned-cap">Гардеробная «Континенталь», частная квартира. МДФ, отделка эмалью
+      с патиной серебро и шелковисто-матовым лаком.</p>
   </div>
 </section>`;
 
