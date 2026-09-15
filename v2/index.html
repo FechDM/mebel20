@@ -84,52 +84,58 @@ body.notes section{outline:1px dashed rgba(51,80,63,.22);outline-offset:-1px}
 
 /* ——— hero: фото во всю ширину, текст под ним ——— */
 .hero{position:relative}
-/* Первый экран собран по образцу текущего сайта: сверху полоса процесса
-   (руки, инструмент, резьба), под ней композиция «источник → изделие».
-   Логика клиента: принесите эскиз, чертёж или фото из каталога, сделаем. */
-.strip-work{height:clamp(120px,15vw,220px);overflow:hidden;position:relative;background:#2A2320}
-.strip-work img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;
+/* Первый экран повторяет механику слайдера с текущего сайта клиента.
+   Снято с его настроек: слои выезжают по очереди, направления чередуются,
+   один переворачивается по оси Y как лист, сверху параллакс от мыши. */
+.strip-work{height:clamp(110px,13vw,190px);overflow:hidden;position:relative;background:#2A2320}
+.strip-work img{width:100%;height:100%;object-fit:cover;
   filter:sepia(.22) saturate(.9) contrast(1.04)}
 .strip-work::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(20,17,15,.12),rgba(20,17,15,.32))}
+  background:linear-gradient(180deg,rgba(20,17,15,.10),rgba(20,17,15,.30))}
 
-.turn{position:relative;background:linear-gradient(178deg,#F4F2ED 0%,#EFEDE7 100%);
-  border-bottom:1px solid var(--line);overflow:hidden}
-.turn-in{position:relative;display:grid;grid-template-columns:1fr 1fr;
-  gap:clamp(16px,2.4vw,48px);align-items:center;
-  padding:clamp(26px,3.4vw,58px) 0;min-height:clamp(300px,38vw,470px)}
-.turn-side{display:grid;gap:clamp(10px,1.2vw,20px);grid-auto-flow:column;justify-content:start}
-.turn-side figure{margin:0;background:#fff;padding:9px 9px 0;
-  box-shadow:0 16px 38px rgba(31,28,24,.17);transition:transform .6s cubic-bezier(.2,.7,.25,1)}
-.turn-side figure:nth-child(1){transform:rotate(-1.8deg)}
-.turn-side figure:nth-child(2){transform:rotate(1.4deg) translateY(14px)}
-.turn-side figure:hover{transform:rotate(0) translateY(-4px)}
-.turn-side .ph{width:clamp(140px,15vw,240px);aspect-ratio:4/5;overflow:hidden;background:var(--bg-3)}
-.turn-side img{width:100%;height:100%;object-fit:cover}
-.turn-side figcaption{padding:9px 3px 11px;font:400 11.5px/1.3 var(--fm);
-  letter-spacing:.02em;color:var(--ink-3);text-align:center}
-.turn-done{justify-self:end}
-.turn-done figure{transform:rotate(1.2deg)}
-.turn-done .ph{width:clamp(180px,20vw,320px);aspect-ratio:3/4}
-.turn-word{position:absolute;left:50%;top:clamp(18px,4vw,60px);transform:translateX(-50%);
-  z-index:3;font-weight:700;letter-spacing:-.035em;white-space:nowrap;
-  font-size:clamp(26px,4.4vw,64px);color:var(--ink);pointer-events:none;
-  text-shadow:0 2px 24px rgba(244,242,237,.85)}
-.turn-word i{font-style:normal;color:var(--acc)}
-.turn-dots{position:absolute;left:50%;bottom:clamp(12px,1.6vw,24px);transform:translateX(-50%);
-  display:flex;gap:9px;z-index:4}
-.turn-dots button{width:9px;height:9px;border-radius:50%;border:1px solid var(--ink-3);
-  background:transparent;padding:0;cursor:pointer;transition:.2s}
-.turn-dots button[aria-current="true"]{background:var(--acc);border-color:var(--acc);transform:scale(1.25)}
-.turn-state{display:none}
-.turn-state.on{display:contents}
+.stage{position:relative;overflow:hidden;
+  background:linear-gradient(178deg,#F4F2ED 0%,#EFEDE7 100%);
+  border-bottom:1px solid var(--line);
+  height:clamp(400px,50vw,680px);perspective:1400px}
+.lay{position:absolute;margin:0;background:#fff;padding:10px 10px 0;
+  box-shadow:0 20px 46px rgba(31,28,24,.20);opacity:0;
+  transform-style:preserve-3d;will-change:transform,opacity}
+.lay .ph{overflow:hidden;background:var(--bg-3)}
+.lay img{width:100%;height:100%;object-fit:cover;display:block}
+.lay figcaption{padding:9px 3px 11px;font:400 11px/1.3 var(--fm);
+  letter-spacing:.04em;color:var(--ink-3);text-align:center;text-transform:lowercase}
+
+/* въезд справа, слева, снизу и переворот листом */
+@keyframes layRight{from{opacity:0;transform:translate3d(400px,0,0) rotate(var(--rot,0deg))}
+  to{opacity:1;transform:translate3d(0,0,0) rotate(var(--rot,0deg))}}
+@keyframes layLeft{from{opacity:0;transform:translate3d(-400px,0,0) rotate(var(--rot,0deg))}
+  to{opacity:1;transform:translate3d(0,0,0) rotate(var(--rot,0deg))}}
+@keyframes layUp{from{opacity:0;transform:translate3d(0,400px,0) rotate(var(--rot,0deg))}
+  to{opacity:1;transform:translate3d(0,0,0) rotate(var(--rot,0deg))}}
+@keyframes layFlip{from{opacity:0;transform:rotateY(-90deg) rotate(var(--rot,0deg))}
+  to{opacity:1;transform:rotateY(0) rotate(var(--rot,0deg))}}
+.stage.run .lay{animation-duration:1.3s;animation-fill-mode:both;
+  animation-timing-function:cubic-bezier(.25,.46,.45,.94)}
+.stage.run .lay[data-from="right"]{animation-name:layRight}
+.stage.run .lay[data-from="left"]{animation-name:layLeft}
+.stage.run .lay[data-from="up"]{animation-name:layUp}
+.stage.run .lay[data-from="flip"]{animation-name:layFlip;transform-origin:0 50%}
+
+.stage-word{position:absolute;z-index:6;pointer-events:none;
+  font-weight:700;letter-spacing:-.035em;line-height:1.02;
+  font-size:clamp(24px,3.9vw,58px);color:var(--ink);
+  text-shadow:0 2px 26px rgba(244,242,237,.9)}
+.stage-word i{font-style:normal;color:var(--acc)}
+.stage-word span{display:inline-block;opacity:0}
+.stage.run .stage-word span{animation:wordIn .8s cubic-bezier(.33,1,.68,1) both}
+@keyframes wordIn{from{opacity:0;transform:translateX(100px)}to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  .stage.run .lay,.stage.run .stage-word span{animation:none;opacity:1;transform:none}
+}
 @media (max-width:860px){
-  .turn-in{grid-template-columns:1fr;gap:18px;padding-top:clamp(58px,15vw,90px)}
-  .turn-done{justify-self:center}
-  .turn-side{justify-content:center}
-  .turn-side .ph{width:clamp(118px,32vw,160px)}
-  .turn-done .ph{width:clamp(150px,42vw,210px)}
-  .turn-word{top:16px;font-size:clamp(22px,7vw,34px)}
+  .stage{height:clamp(330px,88vw,430px)}
+  .lay figcaption{font-size:10px;padding:7px 2px 8px}
 }
 
 .hero-ph{position:relative;height:clamp(340px,54vh,640px);overflow:hidden;background:var(--bg-3)}
@@ -588,56 +594,36 @@ const ph = (k,alt,cap) => k
 /* ============ главная ============ */
 const hero = `
 <section class="hero" style="padding:0">
-  ${note('Первый экран','полоса процесса и превращение эскиза в изделие — логика с текущего сайта')}
+  ${note('Первый экран','слои выезжают по очереди и реагируют на мышь — механика слайдера с текущего сайта')}
   <div class="strip-work">
     <img src="${I('process-strip')}" alt="Резьба, кессоны, работа в цехе" fetchpriority="high">
   </div>
-  <div class="turn">
-    <div class="wrap">
-      <div class="turn-in" id="turn">
-        <div class="turn-state on" data-word="По вашим <i>эскизам</i>">
-          <div class="turn-side">
-            <figure><div class="ph"><img src="${I('eskiz-vitrina')}" alt="Эскиз витрины" loading="eager"></div>
-              <figcaption>эскиз</figcaption></figure>
-            <figure><div class="ph"><img src="${I('sl-1')}" alt="Чертёж комода с размерами" loading="eager"></div>
-              <figcaption>чертёж</figcaption></figure>
-          </div>
-          <div class="turn-done">
-            <figure><div class="ph"><img src="${I('sl-3')}" alt="Готовый комод" loading="eager"></div>
-              <figcaption>изделие</figcaption></figure>
-          </div>
-        </div>
-
-        <div class="turn-state" data-word="По <i>фотографии</i> из каталога">
-          <div class="turn-side">
-            <figure><div class="ph"><img src="${I('kopii')}" alt="Страница каталога" loading="lazy"></div>
-              <figcaption>образец</figcaption></figure>
-            <figure><div class="ph"><img src="${I('tv-zona')}" alt="ТВ-зона в интерьере" loading="lazy"></div>
-              <figcaption>в интерьере</figcaption></figure>
-          </div>
-          <div class="turn-done">
-            <figure><div class="ph"><img src="${I('tv-gotovo')}" alt="Готовая ТВ-зона" loading="lazy"></div>
-              <figcaption>изделие</figcaption></figure>
-          </div>
-        </div>
-
-        <div class="turn-state" data-word="По вашим <i>размерам</i>">
-          <div class="turn-side">
-            <figure><div class="ph"><img src="${I('garderob-1')}" alt="Чертёж гардеробной" loading="lazy"></div>
-              <figcaption>проект</figcaption></figure>
-            <figure><div class="ph"><img src="${I('shkafy-2')}" alt="Столярный участок" loading="lazy"></div>
-              <figcaption>в цехе</figcaption></figure>
-          </div>
-          <div class="turn-done">
-            <figure><div class="ph"><img src="${I('garderob-oreh')}" alt="Готовая гардеробная" loading="lazy"></div>
-              <figcaption>изделие</figcaption></figure>
-          </div>
-        </div>
-
-        <div class="turn-word" id="turnword">По вашим <i>эскизам</i></div>
-        <div class="turn-dots" id="turndots"></div>
-      </div>
-    </div>
+  <div class="stage" id="stage">
+      <figure class="lay" data-from="right" style="left:2%;top:30%;width:15%;--rot:-2.0deg;animation-delay:0.0s">
+        <div class="ph" style="aspect-ratio:4/5"><img src="${I('eskiz-vitrina')}" alt="эскиз" loading="eager"></div>
+        <figcaption>эскиз</figcaption>
+      </figure>
+      <figure class="lay" data-from="left" style="left:19%;top:40%;width:16%;--rot:1.6deg;animation-delay:1.0s">
+        <div class="ph" style="aspect-ratio:4/5"><img src="${I('sl-3')}" alt="изделие" loading="eager"></div>
+        <figcaption>изделие</figcaption>
+      </figure>
+      <figure class="lay" data-from="right" style="left:37%;top:20%;width:14.5%;--rot:-1.4deg;animation-delay:2.5s">
+        <div class="ph" style="aspect-ratio:4/5"><img src="${I('sl-1')}" alt="чертёж" loading="eager"></div>
+        <figcaption>чертёж</figcaption>
+      </figure>
+      <figure class="lay" data-from="left" style="left:53%;top:36%;width:16.5%;--rot:2.0deg;animation-delay:3.5s">
+        <div class="ph" style="aspect-ratio:4/5"><img src="${I('vitrina')}" alt="изделие" loading="eager"></div>
+        <figcaption>изделие</figcaption>
+      </figure>
+      <figure class="lay" data-from="up" style="left:79%;top:24%;width:18%;--rot:-1.2deg;animation-delay:5.1s">
+        <div class="ph" style="aspect-ratio:4/5"><img src="${I('garderob-1')}" alt="проект" loading="eager"></div>
+        <figcaption>проект</figcaption>
+      </figure>
+      <figure class="lay" data-from="flip" style="left:33%;top:8%;width:13.5%;--rot:1.2deg;animation-delay:6.15s">
+        <div class="ph" style="aspect-ratio:4/5"><img src="${I('sl-5')}" alt="изделие" loading="eager"></div>
+        <figcaption>изделие</figcaption>
+      </figure>
+    <div class="stage-word" id="stageword" style="right:3%;top:64%;text-align:right">Эскиз, чертёж, фотография<br><i>и мы это сделаем</i></div>
   </div>
   <div class="wrap">
     <div class="hero-txt">
@@ -1338,35 +1324,50 @@ function parallax(){
   frame();
 }
 
-function turn(){
-  const box = host.querySelector('#turn');
+function stage(){
+  const box = host.querySelector('#stage');
   if (!box) return;
-  const states = [...box.querySelectorAll('.turn-state')];
-  const word = box.querySelector('#turnword');
-  const dots = box.querySelector('#turndots');
-  if (!states.length || !dots) return;
 
-  let cur = 0, timer = null;
-  dots.innerHTML = states.map((_, i) =>
-    `<button type="button" aria-label="Кадр ${i + 1}" aria-current="${i === 0}"></button>`).join('');
-  const btns = [...dots.querySelectorAll('button')];
-
-  function show(n){
-    cur = (n + states.length) % states.length;
-    states.forEach((st, i) => st.classList.toggle('on', i === cur));
-    btns.forEach((b, i) => b.setAttribute('aria-current', String(i === cur)));
-    word.innerHTML = states[cur].dataset.word || '';
-    word.animate([{opacity:0, transform:'translateX(-50%) translateY(8px)'},
-                  {opacity:1, transform:'translateX(-50%) translateY(0)'}],
-                 {duration:420, easing:'cubic-bezier(.2,.7,.25,1)'});
+  // текст появляется по словам, как в его слайдере: сдвиг вправо и ступенька
+  const word = box.querySelector('#stageword');
+  if (word && !word.dataset.split) {
+    word.dataset.split = '1';
+    word.innerHTML = word.innerHTML.split('<br>').map(line =>
+      line.split(' ').map(w => `<span>${w}</span>`).join(' ')).join('<br>');
+    const last = [...box.querySelectorAll('.lay')].pop();
+    const base = last ? parseFloat(last.style.animationDelay) + 1 : 6;
+    box.querySelectorAll('.stage-word span').forEach((sp, i) =>
+      sp.style.animationDelay = (base + i * 0.2) + 's');
   }
-  function play(){ stop(); if (!reduced) timer = setInterval(() => show(cur + 1), 6000); }
-  function stop(){ if (timer) { clearInterval(timer); timer = null; } }
 
-  btns.forEach((b, i) => b.onclick = () => { show(i); play(); });
-  box.addEventListener('mouseenter', stop);
-  box.addEventListener('mouseleave', play);
-  play();
+  // запускаем, когда экран показался
+  const start = () => box.classList.add('run');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((e, o) => {
+      if (e[0].isIntersecting) { start(); o.disconnect(); }
+    }, {threshold: .15}).observe(box);
+  } else start();
+
+  // параллакс от мыши: у него слои разнесены по глубине
+  if (reduced || matchMedia('(hover:none)').matches) return;
+  const lays = [...box.querySelectorAll('.lay')];
+  let raf = null, mx = 0, my = 0;
+  box.addEventListener('mousemove', e => {
+    const r = box.getBoundingClientRect();
+    mx = (e.clientX - r.left) / r.width - .5;
+    my = (e.clientY - r.top) / r.height - .5;
+    if (raf === null) raf = requestAnimationFrame(move);
+  });
+  box.addEventListener('mouseleave', () => { mx = my = 0; if (raf === null) raf = requestAnimationFrame(move); });
+  function move(){
+    raf = null;
+    lays.forEach((l, i) => {
+      const depth = 10 + (i % 3) * 7;
+      l.style.setProperty('--px', (-mx * depth).toFixed(1) + 'px');
+      l.style.setProperty('--py', (-my * depth * .6).toFixed(1) + 'px');
+      l.style.translate = `var(--px, 0) var(--py, 0)`;
+    });
+  }
 }
 
 function pins(){
@@ -1471,7 +1472,7 @@ function show(name){
   parallax();
   selects();
   pins();
-  turn();
+  stage();
 }
 
 document.querySelector('.tabs').onclick = e => {
