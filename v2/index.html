@@ -379,6 +379,59 @@ section.tight{padding:clamp(38px,4vw,72px) 0}
 @media (max-width:760px){.rare div{border-right:0;border-bottom:1px solid var(--line)}
   .rare div:last-child{border-bottom:0}}
 
+/* ——— шторка: эскиз против готового изделия ——— */
+.slabs{display:grid;gap:clamp(18px,2vw,30px)}
+.slab-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.slab-tabs button{padding:11px 20px;font:400 14.5px/1 var(--f);border:1px solid var(--line);
+  background:var(--bg);color:var(--ink-2);cursor:pointer;transition:.18s}
+.slab-tabs button:hover{border-color:var(--ink-3);color:var(--ink)}
+.slab-tabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.slab{display:grid;grid-template-columns:1.3fr .7fr;background:var(--bg);border:1px solid var(--line)}
+.slab[hidden]{display:none}
+.stage-cmp{position:relative;overflow:hidden;aspect-ratio:3/2;min-height:300px;background:var(--bg-3);
+  cursor:ew-resize;user-select:none;touch-action:none}
+.stage-cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  -webkit-user-drag:none;user-select:none}
+.st-front{position:absolute;inset:0;width:50%;overflow:hidden;will-change:width}
+.st-front img{width:var(--sw,760px);max-width:none}
+.st-bar{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;
+  transform:translateX(-1px);box-shadow:0 0 0 1px rgba(0,0,0,.22);will-change:left}
+.st-knob{position:absolute;top:50%;left:50%;width:46px;height:46px;margin:-23px 0 0 -23px;
+  border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;
+  box-shadow:0 6px 20px rgba(20,20,20,.3);font:500 13px/1 var(--fm);color:var(--ink);will-change:left}
+.st-knob::before{content:"‹ ›";letter-spacing:.06em}
+.st-lab{position:absolute;top:14px;font:500 10px/1 var(--fm);letter-spacing:.13em;
+  text-transform:uppercase;padding:7px 11px;background:rgba(20,21,23,.74);color:#F2F1EE}
+.st-lab.l{left:14px}.st-lab.r{right:14px}
+.slab .said{padding:clamp(24px,2.4vw,38px);display:flex;flex-direction:column;
+  justify-content:center;gap:13px}
+.slab h3{font-size:clamp(19px,1.5vw,25px);letter-spacing:-.02em}
+.slab .said p{margin:0;color:var(--ink-2);font-size:15.5px;line-height:1.6}
+.slab dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:4px 0 0;font-size:14px}
+.slab dt{color:var(--ink-3);font:400 12px/1.6 var(--fm)}
+.slab dd{margin:0;color:var(--ink-2)}
+.slab .tip{font:400 12.5px/1.5 var(--fm);color:var(--acc)}
+@media (max-width:860px){
+  .slab{grid-template-columns:1fr}
+  /* min-height вместе с aspect-ratio распирал блок шире экрана */
+  .stage-cmp{min-height:0;aspect-ratio:4/3}
+}
+
+/* Слайдер клиента настроен не показываться на телефоне (его же правило
+   прячет секцию при ширине до 700px), поэтому там своя заставка. */
+.hero-mob{display:none}
+@media (orientation:landscape) and (max-width:900px),(orientation:portrait) and (max-width:700px){
+  .hero-mob{display:block;position:relative;background:var(--bg-3)}
+  .hero-mob img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+  .hero-mob .cap{position:absolute;left:0;right:0;bottom:0;padding:20px 18px 18px;
+    background:linear-gradient(0deg,rgba(18,19,21,.88),rgba(18,19,21,.45) 62%,transparent);
+    color:#F4F3F0}
+  .hero-mob b{display:block;font-size:clamp(21px,6.4vw,28px);font-weight:700;
+    letter-spacing:-.03em;line-height:1.1}
+  .hero-mob b i{font-style:normal;color:#9FBBA9}
+  .hero-mob span{display:block;margin-top:9px;font-size:14px;line-height:1.45;color:#C9CBCD}
+}
+
 /* ——— лента ——— */
 .strip{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
   background:var(--bg-2)}
@@ -603,6 +656,13 @@ const ph = (k,alt,cap) => k
 const hero = `
 <section class="hero" style="padding:0">
   ${note('Первый экран','слайдер взят с текущего сайта как есть: та же вёрстка, те же анимации слоёв')}
+  <div class="hero-mob">
+    <img src="${I('garderob-oreh')}" alt="Гардеробная с островом, ЖК ЗилАрт" fetchpriority="high">
+    <div class="cap">
+      <b>Эскиз, чертёж, фотография<br><i>и мы это сделаем</i></b>
+      <span>Столярное производство полного цикла. Москва, ул. Иркутская, д. 17, стр. 9</span>
+    </div>
+  </div>
   <div class="strip-work">
     <img src="${I('process-strip')}" alt="Резьба, кессоны, работа в цехе" fetchpriority="high">
   </div>
@@ -918,6 +978,61 @@ const doubts = `
       <div><b>Корпуса для акустики</b><span>Несколько заказов для партнёров, которые делают акустические системы на заказ</span></div>
       <div><b>Тележки для Ladurée</b><span>Есть в портфолио и такое: витринные тележки для кондитерской</span></div>
       <div><b>Кабинет руководителя Росрезерва</b><span>Двери и панели, шпон бубинга, массив сапели</span></div>
+    </div>
+  </div>
+</section>`;
+
+const compare = `
+<section class="tight">
+  <div class="wrap">
+    ${note('Эскиз против изделия','посетитель сам тянет разделитель и видит, что получилось из чертежа')}
+    <div class="h-row">
+      <div><p class="kicker">Как это работает</p>
+        <h2>Из чертежа<br>в готовую вещь</h2></div>
+      <p class="lead">Каждый проект начинается с эскиза от руки: размеры, отделка, фурнитура.
+        Потяните разделитель, чтобы сравнить чертёж и результат.</p>
+    </div>
+    <div class="slabs">
+      <div class="slab-tabs" id="slabtabs">
+        <button type="button" aria-selected="true">Письменный стол</button>
+        <button type="button" aria-selected="false">Комод с кассетными фасадами</button>
+      </div>
+
+      <div class="slab" data-slab="0">
+        <div class="stage-cmp" data-stage>
+          <img src="${I('v1-stol')}" style="object-position:38% 46%" alt="Готовый письменный стол" loading="lazy">
+          <div class="st-front"><img src="${I('v1-sketch1')}" style="object-position:45% 50%" alt="Эскиз письменного стола"></div>
+          <div class="st-bar"></div><div class="st-knob"></div>
+          <div class="st-lab l">Эскиз</div><div class="st-lab r">Изделие</div>
+        </div>
+        <div class="said">
+          <h3>Письменный стол с кожаной вставкой</h3>
+          <p>Тонированный шпон корня, столешница со стёганой кожей, латунные ручки и башмачки.
+            Габариты и высоту считали под конкретный кабинет.</p>
+          <dl><dt>Материалы</dt><dd>Шпон корня, массив, кожа</dd>
+              <dt>Отделка</dt><dd>Тонировка, полированный лак</dd>
+              <dt>Объект</dt><dd>Частный кабинет</dd></dl>
+          <p class="tip">Потяните разделитель мышкой</p>
+        </div>
+      </div>
+
+      <div class="slab" data-slab="1" hidden>
+        <div class="stage-cmp" data-stage>
+          <img src="${I('v1-komod')}" style="object-position:42% 55%" alt="Готовый комод" loading="lazy">
+          <div class="st-front"><img src="${I('v1-sketch2')}" style="object-position:50% 55%" alt="Эскиз комода с размерами"></div>
+          <div class="st-bar"></div><div class="st-knob"></div>
+          <div class="st-lab l">Эскиз</div><div class="st-lab r">Изделие</div>
+        </div>
+        <div class="said">
+          <h3>Комод с кассетными фасадами</h3>
+          <p>На чертеже от руки указаны отделка, стёганая кожа на фасадах и латунные ручки.
+            По нему и делали: тонированный корень шпона, глянцевый лак.</p>
+          <dl><dt>Материалы</dt><dd>Корень шпона, массив, кожа</dd>
+              <dt>Отделка</dt><dd>Тонировка, глянцевый лак</dd>
+              <dt>Объект</dt><dd>Загородный дом</dd></dl>
+          <p class="tip">Потяните разделитель мышкой</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>`;
@@ -1304,7 +1419,7 @@ const sec = `
 </section>` + process + designers + form + foot;
 
 const SCREENS = {
-  home: hero + intro + catalog + prod + pinned + objects + strip + materials + process + doubts + designers + form + foot,
+  home: hero + intro + catalog + compare + prod + pinned + objects + strip + materials + process + doubts + designers + form + foot,
   obj: objScreen,
   sec: sec,
 };
@@ -1386,6 +1501,53 @@ function parallax(){
   }
   parallax.frame = onScroll;
   frame();
+}
+
+function slabs(){
+  host.querySelectorAll('[data-stage]').forEach(st => {
+    const front = st.querySelector('.st-front'),
+          bar = st.querySelector('.st-bar'),
+          knob = st.querySelector('.st-knob');
+    const size = () => st.style.setProperty('--sw', st.clientWidth + 'px');
+    const put = p => {
+      p = Math.max(4, Math.min(96, p));
+      front.style.width = p + '%'; bar.style.left = p + '%'; knob.style.left = p + '%';
+    };
+    size();
+    if (window.ResizeObserver) new ResizeObserver(size).observe(st);
+    put(50);
+    let drag = false;
+    const at = e => {
+      const r = st.getBoundingClientRect();
+      put(((e.clientX - r.left) / r.width) * 100);
+    };
+    st.addEventListener('pointerdown', e => { drag = true; st.setPointerCapture(e.pointerId); at(e); });
+    st.addEventListener('pointermove', e => { if (drag) at(e); });
+    st.addEventListener('pointerup', () => drag = false);
+    st.addEventListener('pointercancel', () => drag = false);
+    // показываем механику сама собой, когда блок появился на экране
+    if (!reduced && 'IntersectionObserver' in window) {
+      new IntersectionObserver((es, o) => {
+        if (!es[0].isIntersecting) return;
+        o.disconnect();
+        let t = 0;
+        const tick = () => {
+          t += 16;
+          const p = 50 + Math.sin(t / 320) * 26 * Math.max(0, 1 - t / 2200);
+          put(p);
+          if (t < 2200) requestAnimationFrame(tick); else put(50);
+        };
+        requestAnimationFrame(tick);
+      }, {threshold: .4}).observe(st);
+    }
+  });
+
+  const tabs = host.querySelector('#slabtabs');
+  if (!tabs) return;
+  [...tabs.children].forEach((b, i) => b.onclick = () => {
+    [...tabs.children].forEach((x, xi) => x.setAttribute('aria-selected', String(xi === i)));
+    host.querySelectorAll('.slab').forEach(sl => sl.hidden = +sl.dataset.slab !== i);
+  });
 }
 
 function pins(){
@@ -1490,6 +1652,7 @@ function show(name){
   parallax();
   selects();
   pins();
+  slabs();
 }
 
 document.querySelector('.tabs').onclick = e => {
